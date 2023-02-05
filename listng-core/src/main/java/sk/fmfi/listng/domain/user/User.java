@@ -2,15 +2,16 @@ package sk.fmfi.listng.domain.user;
 
 import sk.fmfi.listng.domain.course.Course;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
- * Trieda reprezentujúca úživateľa.
+ * Trieda reprezentujúca užívateľa.
  */
 
-public class User {
+public class User implements Serializable {
+    private Long id;
 
     private String name;
 
@@ -18,13 +19,24 @@ public class User {
 
     private String password;
 
+    private Role role;
+
     private List<Permission> permissions;
 
-    public User (String name, String email, String password) {
+    public User(String name, String email, String password, int role) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.role = Role.of(role);
         this.permissions = new ArrayList<>();
+    }
+
+    public User() {
+        this.permissions = new ArrayList<>();
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -61,5 +73,21 @@ public class User {
 
     public Permission getPermissionByCourse(Course course) {
         return permissions.stream().filter(p -> p.getCourse().equals(course)).findFirst().orElse(null);
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public boolean isRoot() {
+        return role == Role.ROOT;
+    }
+
+    public boolean isTeacher() {
+        return role == Role.TEACHER;
+    }
+
+    public boolean isStudent() {
+        return role == Role.STUDENT;
     }
 }

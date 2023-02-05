@@ -1,6 +1,6 @@
 package sk.fmfi.listng.domain.course;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 /**

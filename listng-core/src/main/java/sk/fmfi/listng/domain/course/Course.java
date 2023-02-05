@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public class Course {
 
+    private Long id;
     private String name;
 
     private Period period;
@@ -15,6 +16,14 @@ public class Course {
     public Course(String name, Period period) {
         this.name = name;
         this.period = period;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

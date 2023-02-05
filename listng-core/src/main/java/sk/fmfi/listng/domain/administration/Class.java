@@ -7,7 +7,6 @@ import java.time.LocalTime;
  * Vyučovanie je opakované nejaký deň (Pon.-Ned. teda 0-6 v číselnej interpretácii),
  * každý týždeň v určenom čase a v určenej miestnosti.
  */
-
 public class Class {
 
     private Room room;

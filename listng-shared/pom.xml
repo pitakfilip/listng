@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>sk.fmfi.listng</groupId>
+    <artifactId>listng-shared</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <description>Management of dependency versions and shared configurations and properties</description>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!--   LIST-NG MODULE VERSIONS   -->
+        <listng-core.version>1.0.0-SNAPSHOT</listng-core.version>
+        <listng-infrastructure.version>1.0.0</listng-infrastructure.version>
+        <listng-user.version>1.0.0-SNAPSHOT</listng-user.version>
+        <listng-course.version>1.0.0-SNAPSHOT</listng-course.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>sk.fmfi.listng</groupId>
+            <artifactId>listng-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>sk.fmfi.listng</groupId>
+            <artifactId>listng-infrastructure</artifactId>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--      LIST-NG MODULES     -->
+            <dependency>
+                <groupId>sk.fmfi.listng</groupId>
+                <artifactId>listng-core</artifactId>
+                <version>${listng-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng</groupId>
+                <artifactId>listng-infrastructure</artifactId>
+                <version>${listng-infrastructure.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng</groupId>
+                <artifactId>listng-user</artifactId>
+                <version>${listng-user.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng</groupId>
+                <artifactId>listng-course</artifactId>
+                <version>${listng-course.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
