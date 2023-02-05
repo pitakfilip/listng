@@ -1,4 +1,4 @@
-package sk.fmfi.listng.course.entity;
+package sk.fmfi.listng.course.api.entity;
 
 import sk.fmfi.listng.infrastructure.common.BaseEntity;
 

@@ -32,5 +32,9 @@ public class UserController implements UserApi {
         return response.orElse(null);
     }
 
+    @GetMapping
+    public String testing (){
+        return courseApiProxy.dummy() + " ako sa dari?";
+    }
 
 }

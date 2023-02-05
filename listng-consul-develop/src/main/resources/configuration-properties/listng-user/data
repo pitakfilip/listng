@@ -1,0 +1,6 @@
+spring.application.name=listng-user
+server.servlet.context-path=/user
+spring.datasource.url=jdbc:postgresql://localhost:5432/listng
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.username=postgres
+spring.datasource.password=a

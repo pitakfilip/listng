@@ -51,6 +51,10 @@
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+        </dependency>
     </dependencies>
 
 
@@ -72,13 +76,12 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-consul-all</artifactId>
+                <artifactId>spring-cloud-starter-consul-config</artifactId>
                 <version>${spring-cloud.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-consul-config</artifactId>
+                <artifactId>spring-cloud-starter-consul-discovery</artifactId>
                 <version>${spring-cloud.version}</version>
             </dependency>
             <dependency>
