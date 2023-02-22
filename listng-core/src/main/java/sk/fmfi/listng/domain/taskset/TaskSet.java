@@ -1,7 +1,6 @@
 package sk.fmfi.listng.domain.taskset;
 
 import sk.fmfi.listng.domain.administration.Language;
-import sk.fmfi.listng.domain.course.Course;
 import sk.fmfi.listng.domain.task.TaskConfiguration;
 
 import java.sql.Timestamp;
@@ -10,9 +9,11 @@ import java.util.List;
 
 public class TaskSet {
 
-    private Course course;
+    private Long id;
 
-    private Type type;
+    private Long courseId;
+
+    private CourseTaskSetType type;
 
     private String name;
 
@@ -30,8 +31,8 @@ public class TaskSet {
 
     private List<Language> languages;
 
-    public TaskSet(Course course, Type type, String name, String description, Timestamp published, Timestamp deadline, int totalPoints, boolean finalSum) {
-        this.course = course;
+    public TaskSet(Long course, CourseTaskSetType type, String name, String description, Timestamp published, Timestamp deadline, int totalPoints, boolean finalSum) {
+        this.courseId = course;
         this.type = type;
         this.name = name;
         this.description = description;
@@ -43,19 +44,19 @@ public class TaskSet {
         this.languages = new ArrayList<>();
     }
 
-    public Course getCourse() {
-        return course;
+    public Long getCourse() {
+        return courseId;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourse(Long course) {
+        this.courseId = course;
     }
 
-    public Type getType() {
+    public CourseTaskSetType getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(CourseTaskSetType type) {
         this.type = type;
     }
 

@@ -1,12 +1,19 @@
 package sk.fmfi.listng.domain.task;
 
+// hierarchia typov uloh e.g.:
+// Java
+//   - Collections
+//        - List
+//   - Stream
 public class Category {
+
+    private Long id;
 
     private String name;
 
     private Category parent;
 
-    private int level;
+    private int level; // je toto treba?
 
     public Category(String name) {
         this.name = name;
@@ -17,6 +24,14 @@ public class Category {
         this.name = name;
         this.parent = parent;
         this.level = parent.level + 1;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

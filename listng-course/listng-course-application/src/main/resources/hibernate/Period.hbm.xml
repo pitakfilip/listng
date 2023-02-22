@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="sk.fmfi.listng.domain.course.Period" table="PERIOD">
+
+        <cache usage="read-write"/>
+
+        <id name="id"
+            column="PERIOD_ID"
+            type="long">
+            <generator class="identity"/>
+        </id>
+
+        <property
+                name="name"
+                column="NAME"
+        />
+
+        <property
+                name="start"
+                column="START"
+        />
+    </class>
+
+</hibernate-mapping>

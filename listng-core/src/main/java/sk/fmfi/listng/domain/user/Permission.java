@@ -1,6 +1,6 @@
 package sk.fmfi.listng.domain.user;
 
-import sk.fmfi.listng.domain.course.*;
+import sk.fmfi.listng.domain.enums.CourseRole;
 
 /**
  * Trieda reprezentujúca študentské prístupové práva do kurzu.
@@ -8,21 +8,34 @@ import sk.fmfi.listng.domain.course.*;
 
 public class Permission {
 
-    private Course course;
+    private long id;
+
+    private long courseId;
 
     private CourseRole role;
 
-    public Permission(Course course, CourseRole role) {
-        this.course = course;
+    public Permission(long userId, long courseId, CourseRole role) {
+        this.id = userId;
+        this.courseId = courseId;
         this.role = role;
     }
 
-    public Course getCourse() {
-        return course;
+    public Permission(){}
+
+    public long getId() {
+        return id;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(long courseId) {
+        this.courseId = courseId;
     }
 
     public CourseRole getRole() {

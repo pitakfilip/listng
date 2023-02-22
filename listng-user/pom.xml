@@ -7,17 +7,27 @@
     <parent>
         <groupId>sk.fmfi.listng</groupId>
         <artifactId>listng-shared</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.0</version><!--    TAG:listng-shared Version    -->
     </parent>
 
+    <groupId>sk.fmfi.listng.user</groupId>
     <artifactId>listng-user</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version><!--    TAG:listng-user Version    -->
     <packaging>pom</packaging>
 
     <modules>
-        <module>listng-user-app</module>
         <module>listng-user-api</module>
-        <module>listng-user-db</module>
+        <module>listng-user-application</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>sk.fmfi.listng.user</groupId>
+                <artifactId>listng-user-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

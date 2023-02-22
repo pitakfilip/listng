@@ -8,6 +8,8 @@ import java.util.List;
 
 public class Task {
 
+    private Long id;
+
     private String name;
 
     private String description;
@@ -27,6 +29,14 @@ public class Task {
         this.files = new ArrayList<>();
         this.categories = new ArrayList<>();
         this.tests = new ArrayList<>();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

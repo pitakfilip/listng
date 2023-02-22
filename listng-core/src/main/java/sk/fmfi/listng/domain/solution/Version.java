@@ -7,6 +7,8 @@ import java.sql.Timestamp;
 
 public class Version {
 
+    private Long id;
+
     private Timestamp submitted;
 
     private String comment;
@@ -17,10 +19,20 @@ public class Version {
 
     private Result result;
 
+    private int order = -1;
+
     public Version(Timestamp submitted, String comment, Attachement attachement) {
         this.submitted = submitted;
         this.comment = comment;
         this.attachement = attachement;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Timestamp getSubmitted() {
@@ -61,5 +73,13 @@ public class Version {
 
     public void setResult(Result result) {
         this.result = result;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 }

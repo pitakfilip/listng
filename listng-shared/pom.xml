@@ -3,7 +3,7 @@
 
     <groupId>sk.fmfi.listng</groupId>
     <artifactId>listng-shared</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0</version><!--    TAG:listng-shared Version    -->
     <packaging>pom</packaging>
 
     <description>Management of dependency versions and shared configurations and properties</description>
@@ -14,10 +14,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!--   LIST-NG MODULE VERSIONS   -->
-        <listng-core.version>1.0.0-SNAPSHOT</listng-core.version>
-        <listng-infrastructure.version>1.0.0</listng-infrastructure.version>
-        <listng-user.version>1.0.0-SNAPSHOT</listng-user.version>
-        <listng-course.version>1.0.0-SNAPSHOT</listng-course.version>
+        <listng-core.version>1.0.0-SNAPSHOT</listng-core.version><!--    TAG:listng-core Version    -->
+        <listng-infrastructure.version>1.0.0</listng-infrastructure.version><!--    TAG:listng-infrastructure Version    -->
+        <listng-user.version>1.0.0-SNAPSHOT</listng-user.version><!--    TAG:listng-user Version    -->
+        <listng-course.version>1.0.0-SNAPSHOT</listng-course.version><!--    TAG:listng-course Version    -->
+        <listng-task.version>1.0.0-SNAPSHOT</listng-task.version><!--    TAG:listng-task Version    -->
+        <listng-solution.version>1.0.0-SNAPSHOT</listng-solution.version><!--    TAG:listng-solution Version    -->
+        <listng-test.version>1.0.0-SNAPSHOT</listng-test.version><!--    TAG:listng-test Version    -->
+        <listng-log.version>1.0.0-SNAPSHOT</listng-log.version><!--    TAG:listng-log Version    -->
     </properties>
 
     <dependencies>
@@ -45,14 +49,34 @@
                 <version>${listng-infrastructure.version}</version>
             </dependency>
             <dependency>
-                <groupId>sk.fmfi.listng</groupId>
+                <groupId>sk.fmfi.listng.user</groupId>
                 <artifactId>listng-user</artifactId>
                 <version>${listng-user.version}</version>
             </dependency>
             <dependency>
-                <groupId>sk.fmfi.listng</groupId>
+                <groupId>sk.fmfi.listng.course</groupId>
                 <artifactId>listng-course</artifactId>
                 <version>${listng-course.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng.task</groupId>
+                <artifactId>listng-task</artifactId>
+                <version>${listng-task.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng.solution</groupId>
+                <artifactId>listng-solution</artifactId>
+                <version>${listng-solution.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng.test</groupId>
+                <artifactId>listng-test</artifactId>
+                <version>${listng-test.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng.log</groupId>
+                <artifactId>listng-log</artifactId>
+                <version>${listng-log.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

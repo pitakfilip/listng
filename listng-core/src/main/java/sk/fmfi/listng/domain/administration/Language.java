@@ -1,5 +1,6 @@
 package sk.fmfi.listng.domain.administration;
 
+// Programatorsky jazyk
 public class Language {
 
     private String name;

@@ -1,0 +1,10 @@
+#
+# Common properties cross all services
+#
+
+spring.cloud.consul.host=${CONSUL_HOST:127.0.0.1}
+spring.cloud.consul.port=${CONSUL_PORT:8500}
+spring.cloud.consul.discovery.healthCheckPath=${server.servlet.context-path}/actuator/health
+spring.cloud.consul.discovery.healthCheckInterval=30s
+spring.cloud.consul.discovery.tags= management.context-path=${server.servlet.context-path}/actuator
+spring.cloud.consul.discovery.instanceId=${spring.application.name}-${server.port}

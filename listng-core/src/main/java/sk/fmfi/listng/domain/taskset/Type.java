@@ -1,33 +1,21 @@
 package sk.fmfi.listng.domain.taskset;
 
-import sk.fmfi.listng.domain.course.Course;
-
 public class Type {
 
-    private Course course;
+    private Long id;
 
     private String name;
 
-    private boolean uploads;
-
-    public Type(Course course, String name) {
-        this.course = course;
+    public Type(String name) {
         this.name = name;
-        this.uploads = false;
     }
 
-    public Type(Course course, String name, boolean uploads) {
-        this.course = course;
-        this.name = name;
-        this.uploads = uploads;
+    public Long getId() {
+        return id;
     }
 
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -36,13 +24,5 @@ public class Type {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public boolean isUploads() {
-        return uploads;
-    }
-
-    public void setUploads(boolean uploads) {
-        this.uploads = uploads;
     }
 }

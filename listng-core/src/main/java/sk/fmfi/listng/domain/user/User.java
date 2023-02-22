@@ -1,10 +1,11 @@
 package sk.fmfi.listng.domain.user;
 
-import sk.fmfi.listng.domain.course.Course;
+import sk.fmfi.listng.domain.enums.Role;
+import sk.fmfi.listng.domain.utils.Encryption;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Trieda reprezentujúca užívateľa.
@@ -21,18 +22,32 @@ public class User implements Serializable {
 
     private Role role;
 
-    private List<Permission> permissions;
+    private Set<Permission> permissions;
 
-    public User(String name, String email, String password, int role) {
+    public User(String name, String email, String password, int role) throws Exception {
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.password = Encryption.encrypt(password);
         this.role = Role.of(role);
-        this.permissions = new ArrayList<>();
+        this.permissions = new HashSet<>();
     }
 
+
+    /** @deprecated use implicit constructor instead.
+     * This constructor shall be used only by spring JPA.
+     * By using this constructor we bypass the password encryption.
+     * */
+    @Deprecated
     public User() {
-        this.permissions = new ArrayList<>();
+        this.permissions = new HashSet<>();
+    }
+
+    private boolean validatePass (String test) throws Exception {
+        return Encryption.validate(test, this.password);
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -63,16 +78,20 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public List<Permission> getPermissions() {
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Set<Permission> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(List<Permission> permissions) {
+    public void setPermissions(Set<Permission> permissions) {
         this.permissions = permissions;
     }
 
-    public Permission getPermissionByCourse(Course course) {
-        return permissions.stream().filter(p -> p.getCourse().equals(course)).findFirst().orElse(null);
+    public Permission getPermissionByCourse(long courseId) {
+        return permissions.stream().filter(p -> p.getCourseId() == courseId).findFirst().orElse(null);
     }
 
     public Role getRole() {

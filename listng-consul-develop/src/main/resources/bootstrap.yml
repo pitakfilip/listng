@@ -1,0 +1,7 @@
+#spring:
+#  cloud:
+#    consul:
+#      config:
+#        enabled: true
+#        prefix: config
+#        data-key: data

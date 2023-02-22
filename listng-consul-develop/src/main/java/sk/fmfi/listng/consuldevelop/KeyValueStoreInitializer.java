@@ -44,7 +44,6 @@ public class KeyValueStoreInitializer {
     public void initialize() throws IOException {
         for (Path microserviceDirectory : getMicroservicesDirectories()) {
             String key = configurationPrefix + microserviceDirectory.getFileName() + "/" + propertiesFilename;
-
             Path propertiesFile = microserviceDirectory.resolve(propertiesFilename);
             byte[] value = Files.readAllBytes(propertiesFile);
 

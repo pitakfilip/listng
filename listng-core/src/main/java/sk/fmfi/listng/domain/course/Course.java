@@ -9,6 +9,7 @@ import java.util.Objects;
 public class Course {
 
     private Long id;
+
     private String name;
 
     private Period period;

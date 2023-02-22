@@ -2,6 +2,8 @@ package sk.fmfi.listng.domain.test;
 
 public class Result {
 
+    private Long id;
+
     private Long executionTime; //ms
 
     private boolean success;
@@ -15,6 +17,14 @@ public class Result {
         this.success = success;
         this.points = points;
         this.output = output;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getExecutionTime() {

@@ -5,12 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>sk.fmfi.listng</groupId>
+        <groupId>sk.fmfi.listng.user</groupId>
         <artifactId>listng-user</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version><!--    TAG:listng-user Version    -->
     </parent>
 
     <artifactId>listng-user-api</artifactId>
-
 
 </project>

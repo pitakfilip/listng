@@ -8,7 +8,12 @@ import java.util.List;
 
 public class Solution {
 
-    private TaskSet taskSet;
+    // TODO pridanie version -> priradenie jej order value
+    // TODO getovanie najlepsej verzie (jej vysledok bude zobrazovany na FE a zaratany do suctu bodov)
+
+    private Long id;
+
+    private Long taskSetId;
 
     private User owner;
 
@@ -24,18 +29,26 @@ public class Solution {
 
     private List<Version> versions;
 
-    public Solution(TaskSet taskSet, User owner) {
-        this.taskSet = taskSet;
+    public Solution(Long taskSetId, User owner) {
+        this.taskSetId = taskSetId;
         this.owner = owner;
         this.versions = new ArrayList<>();
     }
 
-    public TaskSet getTaskSet() {
-        return taskSet;
+    public Long getId() {
+        return id;
     }
 
-    public void setTaskSet(TaskSet taskSet) {
-        this.taskSet = taskSet;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getTaskSetId() {
+        return taskSetId;
+    }
+
+    public void setTaskSetId(Long taskSetId) {
+        this.taskSetId = taskSetId;
     }
 
     public User getOwner() {

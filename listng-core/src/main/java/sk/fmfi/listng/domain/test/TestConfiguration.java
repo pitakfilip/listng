@@ -2,6 +2,7 @@ package sk.fmfi.listng.domain.test;
 
 import sk.fmfi.listng.domain.task.TaskConfiguration;
 
+// nema id, je spojeny cez nastavenie ulohy v specifickej zostave
 public class TestConfiguration {
 
     private Test test;
