@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+<!--    <parent>-->
+<!--        <groupId>sk.fmfi.listng</groupId>-->
+<!--        <artifactId>listng-shared</artifactId>-->
+<!--        <version>1.0.0</version>&lt;!&ndash;    TAG:listng-shared Version    &ndash;&gt;-->
+<!--    </parent>-->
+
+    <groupId>sk.fmfi.listng.rest</groupId>
+    <artifactId>listng-rest</artifactId>
+    <version>1.0.0-SNAPSHOT</version><!--    TAG:listng-rest Version    -->
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!--   LIST-NG MODULE VERSIONS   -->
+        <listng-core.version>1.0.0-SNAPSHOT</listng-core.version><!--    TAG:listng-core Version    -->
+        <listng-infrastructure.version>1.0.0</listng-infrastructure.version><!--    TAG:listng-infrastructure Version    -->
+        <listng-user.version>1.0.0-SNAPSHOT</listng-user.version><!--    TAG:listng-user Version    -->
+        <listng-course.version>1.0.0-SNAPSHOT</listng-course.version><!--    TAG:listng-course Version    -->
+        <listng-task.version>1.0.0-SNAPSHOT</listng-task.version><!--    TAG:listng-task Version    -->
+        <listng-solution.version>1.0.0-SNAPSHOT</listng-solution.version><!--    TAG:listng-solution Version    -->
+        <listng-test.version>1.0.0-SNAPSHOT</listng-test.version><!--    TAG:listng-test Version    -->
+        <listng-log.version>1.0.0-SNAPSHOT</listng-log.version><!--    TAG:listng-log Version    -->
+
+        <!--    Dependency versions    -->
+        <springboot.version>2.5.12</springboot.version>
+        <spring-cloud.version>3.0.4</spring-cloud.version>
+        <springfox.version>3.0.0</springfox.version>
+        <javax-xml.version>2.3.0</javax-xml.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>sk.fmfi.listng</groupId>
+            <artifactId>listng-infrastructure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>sk.fmfi.listng.user</groupId>
+            <artifactId>listng-user-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-consul-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--      LIST-NG MODULES     -->
+            <dependency>
+                <groupId>sk.fmfi.listng</groupId>
+                <artifactId>listng-infrastructure</artifactId>
+                <version>${listng-infrastructure.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng.user</groupId>
+                <artifactId>listng-user-api</artifactId>
+                <version>${listng-user.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng.course</groupId>
+                <artifactId>listng-course</artifactId>
+                <version>${listng-course.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng.task</groupId>
+                <artifactId>listng-task</artifactId>
+                <version>${listng-task.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng.solution</groupId>
+                <artifactId>listng-solution</artifactId>
+                <version>${listng-solution.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng.test</groupId>
+                <artifactId>listng-test</artifactId>
+                <version>${listng-test.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng.log</groupId>
+                <artifactId>listng-log</artifactId>
+                <version>${listng-log.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${javax-xml.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${springboot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-consul-config</artifactId>
+                <version>${spring-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+                <version>${spring-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-bootstrap</artifactId>
+                <version>${spring-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${spring-cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${springfox.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

@@ -1,0 +1,15 @@
+$buttonBorderRadius: 2px !default;
+$backgroundFormColor: #ffffff !default;
+
+.btn {
+    border: none;
+    background: #ffffff;
+
+    &.btn-dropdown {
+        border-radius: $buttonBorderRadius;
+        background-color: $backgroundFormColor;
+        box-shadow: none;
+        border: 1px solid transparent;
+    }
+
+}

@@ -1,0 +1,20 @@
+
+.list-pager {
+    display: block;
+}
+.pager-content {
+    display: table;
+    width:100%;
+}
+.pager-section {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+.pager-pages {
+    display: flex;
+    justify-content: center;
+}
+.pager-pages > ul {
+    margin: 0;
+}

@@ -1,0 +1,1 @@
+# Build all projects and deploy on localhost

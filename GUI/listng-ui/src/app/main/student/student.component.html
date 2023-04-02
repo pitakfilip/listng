@@ -1,0 +1,56 @@
+<div *ngIf="students">
+    <app-table-paging [totalItems]="101"></app-table-paging>
+
+
+    <table class="table list-table fixed-table-head">
+        <thead>
+        <tr>
+            <th></th>
+            <th>{{'student.name' | translate }}</th>
+            <th>{{'student.email' | translate}}</th>
+            <th>{{'student.course.count' | translate }}</th>
+            <th></th>
+        </tr>
+        <tr class="table-filters">
+            <th></th>
+            <th class="filter"></th>
+            <th class="filter"></th>
+            <th class="filter"></th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngIf="students.length === 0">
+                <td colspan="100%" class="empty-row">{{'table.no.record' | translate}}</td>
+            </tr>
+
+            <ng-container *ngFor="let student of students">
+                <tr class="navigatable clickable" (click)="openDetail(student.id)">
+                    <td>
+                        <input type="checkbox" (change)="select(student)" [checked]="isSelected(student.id)">
+                    </td>
+                    <td>{{student.name}}</td>
+                    <td>{{student.email}}</td>
+                    <td>{{student.courseCount}}</td>
+                    <td></td>
+                </tr>
+
+                <tr class="student-detail" *ngIf="toggledStudent === student.id">
+                    <td colspan="5">
+                        <app-student-detail [id]="student.id"></app-student-detail>
+                    </td>
+                </tr>
+            </ng-container>
+
+
+
+        </tbody>
+        <tfoot *ngIf="students.length === 0"></tfoot>
+    </table>
+
+
+    <app-table-paging [totalItems]="42"></app-table-paging>
+</div>
+
+

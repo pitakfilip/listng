@@ -1,0 +1,40 @@
+<div class="container login-body">
+    <main class="login-form m-auto">
+        <form [formGroup]="loginForm" (ngSubmit)="submit()">
+            <section class="login-logo">
+                <img class="mb-4" src="../../../../assets/img/logo.png" alt="" width="72" height="57">
+            </section>
+
+            <h1 class="h3 mb-3 pull-middle">{{ 'labels.welcome' | translate }}</h1>
+
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control rounded-3" id="floatingInput" name="email"
+                placeholder="email"  [formControl]="emailControl" autocomplete="email"
+                [ngClass]="{'invalid-field' : invalidCredentials()}">
+
+                <label for="floatingInput">
+                    {{'labels.email' | translate}}</label>
+            </div>
+
+            <div class="form-floating">
+                <input type="password" class="form-control rounded-3" id="floatingPassword" name="password"
+                placeholder="password" [formControl]="passwordControl" autocomplete="on"
+                [ngClass]="{'invalid-field' : invalidCredentials()}">
+
+                <label for="floatingPassword">
+                    {{'labels.password' | translate}}</label>
+            </div>
+
+            <div class="form-error">
+                <span class="invalid" *ngIf="invalidCredentials()">
+                    <fa-icon [icon]="faError"></fa-icon>
+                        {{'login.invalid-credentials' | translate }}
+                </span>
+            </div>
+
+            <button class="mt-2 login-btn w-100 btn btn-lg btn-primary" type="submit">
+                {{ 'labels.login.submit' | translate }}</button>
+            <p class="mt-4 mb-2 text-muted pull-middle">&copy; 2022 - {{year}}</p>
+        </form>
+    </main>
+</div>

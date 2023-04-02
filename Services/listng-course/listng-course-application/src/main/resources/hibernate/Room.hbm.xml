@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="sk.fmfi.listng.domain.administration.Room" table="ROOM">
+
+        <cache usage="read-write"/>
+
+        <id name="id"
+            column="ROOM_ID"
+            type="long">
+            <generator class="identity"/>
+        </id>
+
+        <property
+                name="name"
+                column="NAME"
+        />
+
+        <property
+                name="capacity"
+                column="CAPACITY"
+        />
+
+    </class>
+
+</hibernate-mapping>

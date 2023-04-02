@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="sk.fmfi.listng.domain.administration.Class" table="CLASS">
+
+        <cache usage="read-write"/>
+
+        <id name="id"
+            column="CLASS_ID"
+            type="long">
+            <generator class="identity"/>
+        </id>
+
+        <component
+                name="room"
+                class="sk.fmfi.listng.domain.administration.Room">
+            <property
+                    name="id"
+                    column="ROOM_ID"
+                    type="long"
+            />
+        </component>
+
+        <component
+                name="group"
+                class="sk.fmfi.listng.domain.administration.Group">
+            <property
+                    name="id"
+                    column="GROUP_ID"
+                    type="long"
+            />
+        </component>
+        
+        <property
+                name="day"
+                column="DAY"
+        />
+        
+        <property 
+                name="time" 
+                column="TIME"
+        />
+
+        <property
+                name="duration"
+                column="DURATION"
+        />
+        
+    </class>
+
+</hibernate-mapping>

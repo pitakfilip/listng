@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="sk.fmfi.listng.domain.user.Permission" table="USER_COURSE_PERMISSION">
+
+        <cache usage="read-write"/>
+
+        <id name="id"
+            column="USER_ID"
+            type="long">
+        </id>
+
+        <property
+                name="courseId"
+                column="COURSE_ID"
+        />
+
+        <property
+                name="role"
+                column="COURSE_ROLE">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">sk.fmfi.listng.domain.enums.CourseRole</param>
+                <param name="useNamed">true</param>
+            </type>
+        </property>
+
+        <property
+                name="status"
+                column="STATUS">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">sk.fmfi.listng.domain.enums.CourseStatus</param>
+                <param name="useNamed">true</param>
+            </type>
+        </property>
+
+        <property
+                name="groupId"
+                column="GROUP_ID"
+        />
+        
+    </class>
+
+</hibernate-mapping>
