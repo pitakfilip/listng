@@ -16,7 +16,23 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+.idea/libraries/*
+
+GUI/*/*.idea
+GUI/*/*.iws
+GUI/*/*.iml
+GUI/*/*.ipr
+
+Infrastructure/*/.idea
+Infrastructure/*/*.iws
+Infrastructure/*/*.iml
+Infrastructure/*/*.ipr
+
+/Services/*/.idea
+/Services/**/*.iws
+/Services/**/*.iml
+/Services/**/*.ipr
+
+/_development/*/.idea/libraries/
+/_development/*/.idea/sonarlint/
+/.idea/

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="listng-task-api" />
+        <module name="listng-course-api" />
+        <module name="listng-course-application" />
+        <module name="listng-user-api" />
+        <module name="listng-infrastructure" />
+        <module name="listng-task-application" />
+        <module name="listng-user-application" />
+        <module name="listng-core" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="listng-consul-develop" target="17" />
+      <module name="listng-core" target="17" />
+      <module name="listng-course" target="17" />
+      <module name="listng-course-api" target="17" />
+      <module name="listng-course-application" target="17" />
+      <module name="listng-infrastructure" target="17" />
+      <module name="listng-rest" target="17" />
+      <module name="listng-shared" target="17" />
+      <module name="listng-task" target="17" />
+      <module name="listng-task-api" target="17" />
+      <module name="listng-task-application" target="17" />
+      <module name="listng-user" target="17" />
+      <module name="listng-user-api" target="17" />
+      <module name="listng-user-application" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="listng-consul-develop" options="-parameters" />
+    </option>
+  </component>
+</project>
