@@ -3,7 +3,7 @@ package sk.fmfi.listng.user.application.assembler;
 import sk.fmfi.listng.domain.enums.CourseRole;
 import sk.fmfi.listng.domain.enums.CourseStatus;
 import sk.fmfi.listng.domain.user.Permission;
-import sk.fmfi.listng.user.api.dto.PermissionDto;
+import sk.fmfi.listng.user.dto.PermissionDto;
 
 import java.util.List;
 import java.util.Set;

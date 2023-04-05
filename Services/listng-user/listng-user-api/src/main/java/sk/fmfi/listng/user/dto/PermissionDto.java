@@ -1,4 +1,4 @@
-package sk.fmfi.listng.user.api.dto;
+package sk.fmfi.listng.user.dto;
 
 import sk.fmfi.listng.infrastructure.common.BaseDto;
 

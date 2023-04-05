@@ -16,5 +16,9 @@
             <groupId>sk.fmfi.listng.course</groupId>
             <artifactId>listng-course-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>sk.fmfi.listng.user</groupId>
+            <artifactId>listng-user-api</artifactId>
+        </dependency>
     </dependencies>
 </project>

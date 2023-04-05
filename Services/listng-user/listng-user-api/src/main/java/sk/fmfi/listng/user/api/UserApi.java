@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import sk.fmfi.listng.infrastructure.common.Response;
-import sk.fmfi.listng.user.api.dto.UserAuthDto;
-import sk.fmfi.listng.user.api.dto.UserDto;
+import sk.fmfi.listng.user.dto.UserAuthDto;
+import sk.fmfi.listng.user.dto.UserDto;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ public interface UserApi {
     
     @GetMapping("/auth")
     Response<UserAuthDto> getAuthUserByEmail(@RequestParam String email);
-    
-    @GetMapping("")
+
+    @GetMapping("/email")
     Response<UserDto> getUserByEmail(@RequestParam String email);
 
     @GetMapping(value = "/all")
@@ -24,4 +24,7 @@ public interface UserApi {
     
     @PostMapping("/new")
     Response newUser(@RequestBody UserAuthDto user);
+    
+    @GetMapping("/test")
+    Response dummy();
 }

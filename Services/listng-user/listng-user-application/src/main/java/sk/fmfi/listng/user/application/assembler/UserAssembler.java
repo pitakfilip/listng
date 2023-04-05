@@ -1,9 +1,8 @@
 package sk.fmfi.listng.user.application.assembler;
 
-import sk.fmfi.listng.domain.enums.SystemRole;
 import sk.fmfi.listng.domain.user.User;
-import sk.fmfi.listng.user.api.dto.UserAuthDto;
-import sk.fmfi.listng.user.api.dto.UserDto;
+import sk.fmfi.listng.user.dto.UserAuthDto;
+import sk.fmfi.listng.user.dto.UserDto;
 
 import java.util.List;
 

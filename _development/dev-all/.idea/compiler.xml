@@ -12,6 +12,7 @@
         <module name="listng-user-api" />
         <module name="listng-infrastructure" />
         <module name="listng-task-application" />
+        <module name="listng-rest" />
         <module name="listng-user-application" />
         <module name="listng-core" />
       </profile>
@@ -36,6 +37,8 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="listng-consul-develop" options="-parameters" />
+      <module name="listng-course-application" options="" />
+      <module name="listng-user-application" options="" />
     </option>
   </component>
 </project>

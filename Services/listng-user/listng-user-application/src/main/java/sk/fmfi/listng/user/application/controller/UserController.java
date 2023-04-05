@@ -1,13 +1,14 @@
 package sk.fmfi.listng.user.application.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RestController;
 import sk.fmfi.listng.domain.user.User;
 import sk.fmfi.listng.infrastructure.common.BaseController;
 import sk.fmfi.listng.infrastructure.common.Response;
 import sk.fmfi.listng.user.api.UserApi;
-import sk.fmfi.listng.user.api.dto.UserAuthDto;
-import sk.fmfi.listng.user.api.dto.UserDto;
+import sk.fmfi.listng.user.dto.UserAuthDto;
+import sk.fmfi.listng.user.dto.UserDto;
 import sk.fmfi.listng.user.application.assembler.UserAssembler;
 import sk.fmfi.listng.user.application.service.UserService;
 
@@ -65,5 +66,13 @@ public class UserController extends BaseController implements UserApi {
         } catch (Exception e) {
             return error();
         }
+    }
+    
+    @Value("${server.port}")
+    String port;
+    
+    @Override
+    public Response dummy() {
+        return success(port);
     }
 }
