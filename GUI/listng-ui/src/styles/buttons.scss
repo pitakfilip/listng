@@ -2,8 +2,8 @@ $buttonBorderRadius: 2px !default;
 $backgroundFormColor: #ffffff !default;
 
 .btn {
-    border: none;
-    background: #ffffff;
+    //border: none;
+    //background: #ffffff;
 
     &.btn-dropdown {
         border-radius: $buttonBorderRadius;
@@ -12,4 +12,25 @@ $backgroundFormColor: #ffffff !default;
         border: 1px solid transparent;
     }
 
+}
+
+section.button-group {
+    margin: 1em 0;
+    display: flex;
+
+    > button.btn {
+        flex: 1;
+        font-size: 0.75em;
+        margin: 0 0.5em;
+    }
+}
+
+button.btn.btn-confirm {
+    border-color: $confirm;
+}
+button.btn.btn-clear {
+    border-color: $warn;
+}
+button.btn.btn-cancel {
+    border-color: $cancel;
 }

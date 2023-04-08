@@ -1,6 +1,8 @@
+
+<app-filter-block [filters]="filters" (onFilterChange)="onFilterChange($event)"></app-filter-block>
+
 <div *ngIf="students">
     <app-table-paging [totalItems]="101"></app-table-paging>
-
 
     <table class="table list-table fixed-table-head">
         <thead>
@@ -43,14 +45,10 @@
                 </tr>
             </ng-container>
 
-
-
         </tbody>
         <tfoot *ngIf="students.length === 0"></tfoot>
     </table>
 
 
-    <app-table-paging [totalItems]="42"></app-table-paging>
+    <app-table-paging [totalItems]="101"></app-table-paging>
 </div>
-
-

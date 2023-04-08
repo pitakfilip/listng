@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Paging} from '../../model/paging.model';
+import {Paging} from '../../../core/model/paging.model';
 
 const FILTER_PAG_REGEX = /[^0-9]/g;
 

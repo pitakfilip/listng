@@ -18,3 +18,23 @@
 .pager-pages > ul {
     margin: 0;
 }
+
+// FILTERS
+.remove-caret::after {
+    display: none !important;
+}
+
+div.table-filter {
+    display: inline;
+}
+
+.filter-menu.dropdown-menu.show {
+    margin-top: 1em;
+}
+.filter-buttons {
+    max-width: 60%;
+}
+
+table.list-table > tr > th {
+    display: inline;
+}

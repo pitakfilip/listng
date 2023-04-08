@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StudentComponent } from './student.component';
-import {NgbCollapseModule, NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbCollapseModule, NgbModule, NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 import {SharedModule} from '../../shared/shared.module';
 import {TranslateModule} from '@ngx-translate/core';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 
@@ -20,7 +20,9 @@ import {ReactiveFormsModule} from '@angular/forms';
         SharedModule,
         TranslateModule,
         NgbCollapseModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FormsModule,
+        NgbModule
     ]
 })
 export class StudentModule { }

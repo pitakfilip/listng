@@ -106,29 +106,29 @@
             </dependency>
             <dependency>
                 <groupId>sk.fmfi.listng.course</groupId>
-                <artifactId>listng-course</artifactId>
+                <artifactId>listng-course-api</artifactId>
                 <version>${listng-course.version}</version>
             </dependency>
-            <dependency>
-                <groupId>sk.fmfi.listng.task</groupId>
-                <artifactId>listng-task</artifactId>
-                <version>${listng-task.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>sk.fmfi.listng.solution</groupId>
-                <artifactId>listng-solution</artifactId>
-                <version>${listng-solution.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>sk.fmfi.listng.test</groupId>
-                <artifactId>listng-test</artifactId>
-                <version>${listng-test.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>sk.fmfi.listng.log</groupId>
-                <artifactId>listng-log</artifactId>
-                <version>${listng-log.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>sk.fmfi.listng.task</groupId>-->
+<!--                <artifactId>listng-task</artifactId>-->
+<!--                <version>${listng-task.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>sk.fmfi.listng.solution</groupId>-->
+<!--                <artifactId>listng-solution</artifactId>-->
+<!--                <version>${listng-solution.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>sk.fmfi.listng.test</groupId>-->
+<!--                <artifactId>listng-test</artifactId>-->
+<!--                <version>${listng-test.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>sk.fmfi.listng.log</groupId>-->
+<!--                <artifactId>listng-log</artifactId>-->
+<!--                <version>${listng-log.version}</version>-->
+<!--            </dependency>-->
 
             <dependency>
                 <groupId>javax.xml.bind</groupId>

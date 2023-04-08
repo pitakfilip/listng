@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/dev-FE.iml" filepath="$PROJECT_DIR$/dev-FE.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../Services/listng-consul-develop/listng-consul-develop.iml" filepath="$PROJECT_DIR$/../../Services/listng-consul-develop/listng-consul-develop.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../GUI/listng-rest/listng-rest.iml" filepath="$PROJECT_DIR$/../../GUI/listng-rest/listng-rest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../GUI/listng-ui/listng-ui.iml" filepath="$PROJECT_DIR$/../../GUI/listng-ui/listng-ui.iml" />
     </modules>
   </component>
 </project>

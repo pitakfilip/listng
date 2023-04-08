@@ -10,6 +10,7 @@
 @import 'forms';
 @import 'card';
 @import 'home';
+@import 'filters';
 
 .login-body {
     position: relative;
@@ -57,4 +58,8 @@ button.list-btn {
 
 .clickable {
     cursor: pointer;
+}
+
+.half-width {
+    width: 50%;
 }

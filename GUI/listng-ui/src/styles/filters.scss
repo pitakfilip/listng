@@ -1,0 +1,18 @@
+
+.filter-text > p {
+    margin-bottom: 0.2em;
+}
+
+.filter-checkbox {
+    display:table;
+
+    > .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background{
+        border-color: #d51414 !important;
+        background-color: #EA3131FF!important;
+    }
+    > span {
+        display:table-cell;
+        vertical-align:middle;
+        margin-left: 1em;
+    }
+}

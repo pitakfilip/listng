@@ -13,6 +13,7 @@ import {MissingTranslationHandler, TranslateLoader, TranslateModule} from '@ngx-
 import {DEFAULT_LANG} from './core/consts/translate.consts';
 import {CustomTranslateLoader} from './core/service/translate/custom-translate-loader.service';
 import {CustomMissingTranslationHandler} from './core/service/translate/custom-missing-translation.handler';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -38,7 +39,8 @@ import {CustomMissingTranslationHandler} from './core/service/translate/custom-m
                 useClass: CustomMissingTranslationHandler
             }
         }),
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        BrowserAnimationsModule
 
     ],
     providers: [

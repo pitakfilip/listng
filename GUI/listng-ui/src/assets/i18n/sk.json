@@ -1,4 +1,7 @@
 {
+    "header": {
+        "filter": "Filtrovanie tabuľky"
+    },
     "dummy" : "debil debil debil debil debil debil debil debil debil debil debil ",
     "login" : {
         "invalid-credentials": "Zadali ste neplatný email alebo heslo"
@@ -15,6 +18,9 @@
         "Let.2022/2023": "Letný Semester 2022 / 2023"
     },
     "labels" : {
+        "confirm": "Potvrdiť",
+        "cancel": "Zrušiť",
+        "clear": "Vymazať",
         "courses" : "Kurzy",
         "account" : "Účet",
         "toggle" : {
@@ -37,6 +43,7 @@
     "student": {
         "name": "Meno",
         "email": "Emailová adresa",
+        "active": "Aktívny",
         "course": {
             "count": "Počet kurzov"
         }
