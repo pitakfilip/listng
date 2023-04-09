@@ -1,48 +1,39 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Filter} from '../../../../core/model/filter';
-import {FilterType} from '../../../../core/model/filter-type';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Filter} from '../../../../core/model/filter/filter';
+import {FilterType} from '../../../../core/model/filter/filter-type';
+import {Utils} from '../../../../core/util/utils';
 
 @Component({
   selector: 'app-filter-block',
   templateUrl: './filter-block.component.html'
 })
-export class FilterBlockComponent implements OnInit{
-
-    _inner: Filter[];
+export class FilterBlockComponent {
 
     @Input() filters: Filter[];
 
     @Output() onFilterChange = new EventEmitter();
 
-    ngOnInit() {
-        this._inner = [...this.filters];
-    }
-
     onChange(value, index: number) {
-        this._inner[index] = {...value};
+        this.filters[index] = {...value};
     }
 
     // Odoslat zmeny na spracovanie
     onSubmit() {
-        this.filters = {...this._inner}
         this.onFilterChange.emit(this.filters);
-    }
-
-    // Zrusit zmeny (ponechat stary filter)
-    onCancel() {
-        this._inner = [...this.filters];
     }
 
     // Vymazat filter (reset)
     onClear() {
-        for (let i = 0; i < this._inner.length ; i++) {
-            this._inner[i] = {
-                field: this._inner[i].field,
-                label: this._inner[i].label,
-                type: this._inner[i].type,
-                value: this._inner[i].default,
-                default: this._inner[i].default
+        for (let i = 0; i < this.filters.length ; i++) {
+            this.filters[i] = {
+                ...this.filters[i],
             } as Filter;
+
+            if (Utils.exists(this.filters[i].default) && this.filters[i].default instanceof Array) {
+                this.filters[i].value = [...this.filters[i].default];
+            } else {
+                this.filters[i].value = this.filters[i].default
+            }
         }
     }
 

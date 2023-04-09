@@ -1,26 +1,25 @@
 <div ngbAccordion class="filter-block my-4">
-    <div ngbAccordionItem="filters" [destroyOnHide]="false">
-        <h2 ngbAccordionHeader>
+    <div ngbAccordionItem="filters" [destroyOnHide]="false" [collapsed]="false">
+        <span ngbAccordionHeader>
             <button ngbAccordionButton>{{ 'header.filter' | translate }}</button>
-        </h2>
+        </span>
         <div ngbAccordionCollapse>
             <div ngbAccordionBody>
                 <ng-template>
-                    <section *ngFor="let filter of _inner; let index = index; trackBy: trackByFn" class="filter-row my-2">
-                        <app-filter-fulltext *ngIf="isFullText(filter.type)" [(ngModel)]="_inner[index]" (ngModelChange)="onChange($event, index)"></app-filter-fulltext>
-                        <app-filter-boolean *ngIf="isBoolean(filter.type)" [(ngModel)]="_inner[index]" (ngModelChange)="onChange($event, index)"></app-filter-boolean>
-                        <app-filter-choice *ngIf="isChoice(filter.type)"></app-filter-choice>
+                    <section *ngFor="let filter of filters; let index = index; trackBy: trackByFn" class="filter-row my-2">
+                        <app-filter-fulltext *ngIf="isFullText(filter.type)" [(ngModel)]="filters[index]" (ngModelChange)="onChange($event, index)"></app-filter-fulltext>
+                        <app-filter-boolean *ngIf="isBoolean(filter.type)" [(ngModel)]="filters[index]" (ngModelChange)="onChange($event, index)"></app-filter-boolean>
+                        <app-filter-choice *ngIf="isChoice(filter.type)" [(ngModel)]="filters[index]" (ngModelChange)="onChange($event, index)"></app-filter-choice>
+
+                        <!--      TODO RANGE                  -->
                         <app-filter-range *ngIf="isRange(filter.type)"></app-filter-range>
                     </section>
 
-                    <section class="filter-row button-group half-width">
+                    <section class="filter-buttons button-group">
                         <button type="button" class="btn btn-confirm" (click)="onSubmit()">
                             {{ 'labels.confirm' | translate }}
                         </button>
-                        <button type="button" class="btn btn-clear" (click)="onClear()">
-                            {{ 'labels.clear' | translate }}
-                        </button>
-                        <button type="button" class="btn btn-cancel" (click)="onCancel()">
+                        <button type="button" class="btn btn-cancel" (click)="onClear()">
                             {{ 'labels.cancel' | translate }}
                         </button>
                     </section>

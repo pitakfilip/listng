@@ -6,4 +6,5 @@ export interface Filter {
     type: FilterType;
     value: any;
     default: any;
+    data: any;
 }

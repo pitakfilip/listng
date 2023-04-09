@@ -1,7 +1,7 @@
 import {Component, ElementRef, forwardRef, ViewChild} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Utils} from '../../../../core/util/utils';
-import {Filter} from '../../../../core/model/filter';
+import {Filter} from '../../../../core/model/filter/filter';
 
 @Component({
     selector: 'app-filter-fulltext',

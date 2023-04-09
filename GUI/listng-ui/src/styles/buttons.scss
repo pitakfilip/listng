@@ -23,6 +23,9 @@ section.button-group {
         font-size: 0.75em;
         margin: 0 0.5em;
     }
+    > button.btn:first-child {
+        margin: 0;
+    }
 }
 
 button.btn.btn-confirm {

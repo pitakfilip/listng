@@ -1,11 +1,11 @@
 import {Component, forwardRef} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {Filter} from '../../../../core/model/filter';
+import {Filter} from '../../../../core/model/filter/filter';
 import {Utils} from '../../../../core/util/utils';
 
 @Component({
-  selector: 'app-filter-boolean',
-  templateUrl: './filter-tri-state.component.html',
+    selector: 'app-filter-boolean',
+    templateUrl: './filter-tri-state.component.html',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -18,7 +18,8 @@ export class FilterTriStateComponent implements ControlValueAccessor {
 
     filter: Filter;
 
-    private onChange(_) {}
+    private onChange(_) {
+    }
 
     private onTouch() {
     }

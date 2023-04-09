@@ -1,1 +1,25 @@
-<p>filter-choice works!</p>
+<div class="filter-type filter-options" *ngIf="filter">
+    <p>{{ filter.label | translate }}</p>
+    <div class="option-row" >
+        <input type="text" class="form-control option-input" #input
+               [ngbTypeahead]="search"
+               [inputFormatter]="formatter"
+               [resultFormatter]="formatter"
+               [editable]="false"
+               (selectItem)="onSelect($event, input)"
+        />
+
+        <div class="option-selected">
+            <div *ngFor="let option of filter.value" class="badge text-bg-primary">
+                <span class="selected-label">{{ option.label }}</span>
+                <span class="cancel-icon clickable" (click)="onUnselect(option)"><ng-icon name="bootstrapXLg"></ng-icon></span>
+            </div>
+        </div>
+
+        <div class="option-clear clickable" (click)="clear()">
+            <span>
+                <ng-icon name="bootstrapXCircleFill"></ng-icon>
+            </span>
+        </div>
+    </div>
+</div>
