@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{title}}</h3>
+
+    <button mat-mini-fab  class="mat-default pull-right" aria-label="Close" (click)="closeModal()">
+        <mat-icon class="mat-text">clear</mat-icon>
+    </button>
+</div>
+<div class="modal-body pt-0 pb-0 px-2">
+    <div class="bg-white pb-1 px-2 ">
+        <div class="my-2">
+            <ng-content select="[slot=body]"></ng-content>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer p-2 px-3">
+    <ng-content select="[slot=footer]"></ng-content>
+</div>

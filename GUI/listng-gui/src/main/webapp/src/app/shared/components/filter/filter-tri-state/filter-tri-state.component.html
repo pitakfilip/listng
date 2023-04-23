@@ -1,0 +1,8 @@
+<div class="filter-type filter-checkbox" *ngIf="filter">
+    <mat-checkbox
+        [indeterminate]="isIndeterminate()"
+        [checked]="isChecked()"
+        (click)="toggleCheckbox()"
+    ></mat-checkbox>
+    <span>{{ filter.label | translate }}</span>
+</div>

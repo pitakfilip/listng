@@ -1,5 +1,4 @@
-
 spring.datasource.url=jdbc:postgresql://localhost:5432/listng
 spring.datasource.driver-class-name=org.postgresql.Driver
-spring.datasource.username=postgres
+spring.datasource.username=listng_course
 spring.datasource.password=a

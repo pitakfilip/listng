@@ -1,6 +1,8 @@
 package sk.fmfi.listng.domain.administration;
 
-import sk.fmfi.listng.domain.course.Course;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Trieda reprezentujúca skupinu študentov v kurze.
@@ -10,12 +12,19 @@ public class Group {
     
     private long id;
     
-    private Course course;
+    private long courseId;
 
-    private String name;
+    private MultiLangText name;
+    
+    private Set<Class> classes = new HashSet<>();
 
-    public Group(Course course, String name) {
-        this.course = course;
+    @Deprecated
+    public Group() {
+        // Hibernate only
+    }
+
+    public Group(long course, MultiLangText name) {
+        this.courseId = course;
         this.name = name;
     }
 
@@ -27,19 +36,27 @@ public class Group {
         this.id = id;
     }
 
-    public Course getCourse() {
-        return course;
+    public long getCourseId() {
+        return courseId;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourseId(long course) {
+        this.courseId = course;
     }
 
-    public String getName() {
+    public MultiLangText getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(MultiLangText name) {
         this.name = name;
+    }
+
+    public Set<Class> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Set<Class> classes) {
+        this.classes = classes;
     }
 }

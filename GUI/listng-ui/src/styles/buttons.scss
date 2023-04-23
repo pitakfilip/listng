@@ -37,3 +37,41 @@ button.btn.btn-clear {
 button.btn.btn-cancel {
     border-color: $cancel;
 }
+
+mat-button-toggle.users-type {
+    width: 6em;
+}
+
+.mat-button-toggle-group ~ mat-button-toggle-group {
+    margin-left: 1em;
+}
+
+.mat-button-toggle.toggle-icon-button {
+    button.mat-button-toggle-button {
+        height: 2em;
+        width: 2em;
+        display: flex;
+        justify-content: center;
+
+        span.mat-button-toggle-label-content {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            color: #3b3a3a;
+        }
+
+    }
+}
+
+.mat-button-toggle-checked.toggle-icon-button.confirm {
+    background-color: $confirm;
+}
+.mat-button-toggle-checked.toggle-icon-button.decline {
+    background-color: $cancel;
+}
+.mat-button-toggle-checked.toggle-icon-button.warning {
+    background-color: $warn;
+}
+.mat-button-toggle-checked.toggle-icon-button.default-toggle {
+    background-color: $info;
+}

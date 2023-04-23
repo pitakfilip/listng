@@ -11,6 +11,8 @@
 @import 'card';
 @import 'home';
 @import 'filters';
+@import 'modals';
+@import 'custom_material';
 
 .login-body {
     position: relative;
@@ -62,4 +64,26 @@ button.list-btn {
 
 .half-width {
     width: 50%;
+}
+
+.hidden {
+    display: none;
+}
+
+.full-width {
+    width: 100%;
+    max-width: 100%;
+}
+
+.half-width {
+    width: 50%;
+    max-width: 50%;
+}
+
+.margin-bottom {
+    margin-bottom: 1em;
+}
+
+.half-gray {
+    color: $c-gray-light;
 }

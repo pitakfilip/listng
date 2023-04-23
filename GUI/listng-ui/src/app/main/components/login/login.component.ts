@@ -1,50 +1,75 @@
 import {Component} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons';
-import {OauthService} from '../../../core/service/oauth-service';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {AuthApiService} from '../../../core/api/auth-api.service';
+import {TranslateModule} from '@ngx-translate/core';
+import {MatInputModule} from '@angular/material/input';
+import {NgClass, NgIf} from '@angular/common';
+import {RouterLink} from '@angular/router';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {AuthenticationService} from '../../../core/service/authentication.service';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styleUrls: []
+    imports: [
+        TranslateModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        NgClass,
+        NgIf,
+        RouterLink,
+        MatButtonModule,
+        MatIconModule
+    ],
+    standalone: true
 })
 export class LoginComponent {
 
     loginForm : FormGroup;
-    _email = '';
-    _password = '';
-    emailControl = new FormControl(this._email, {
-        validators: [Validators.required, Validators.email],
-        updateOn: 'submit'
+    emailControl = new FormControl('frantik1@uniba.sk', {
+        validators: [Validators.required, Validators.email]
     });
-    passwordControl = new FormControl(this._password, {
-        validators: [Validators.required, Validators.minLength(6)],
-        updateOn: 'submit'
+    passwordControl = new FormControl('a', {
+        validators: [Validators.required]
     });
 
     failedLogin = false;
+    hidePass = true;
     year;
-    faError = faExclamationTriangle;
 
-    oauthService : OauthService;
-
-    constructor(private authService : OauthService) {
+    constructor(private authApi : AuthApiService,
+                private authService: AuthenticationService) {
         this.loginForm = new FormGroup({
             email: this.emailControl,
             password: this.passwordControl
         });
 
         this.year = new Date().getFullYear();
-        this.oauthService = authService;
     }
 
     submit() {
-        console.log(this.loginForm);
-        this.failedLogin = !this.oauthService.verifyLogin(this._email, this._password);
+        const username = this.loginForm.value['email'];
+        const password = this.loginForm.value['password'];
+
+        this.authApi.verifyLogin(username, password)
+            .subscribe(response => {
+                if (!response.success){
+                    this.invalidCredentials();
+                }
+            });
     }
 
     invalidCredentials() {
-        return this.failedLogin;
+        this.failedLogin = true;
+        this.loginForm.controls['email'].setValue('');
+        this.loginForm.controls['email'].markAsTouched();
+
+        this.loginForm.controls['password'].setValue('');
+        this.loginForm.controls['password'].markAsTouched();
     }
 
+    onEnter() {
+        this.failedLogin = false;
+    }
 }

@@ -1,0 +1,9 @@
+<app-modal [title]="'error.action' | translate">
+    <div slot="body">
+       {{ 'error.' + type | translate }}
+    </div>
+
+    <div slot="footer">
+        <button mat-raised-button (click)="closeModal()">{{ 'labels.close' | translate }}</button>
+    </div>
+</app-modal>

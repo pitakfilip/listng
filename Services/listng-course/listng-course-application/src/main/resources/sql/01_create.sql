@@ -1,12 +1,24 @@
+drop table if exists PERIOD cascade;
+drop table if exists COURSE_GROUP cascade;
+drop table if exists ROOM cascade;
+drop table if exists CLASS cascade;
+drop table if exists COURSE cascade;
+
 CREATE TABLE PERIOD (
         period_id SERIAL PRIMARY KEY,
-        name VARCHAR(128),
-        start date
+        name_sk VARCHAR(128),
+        name_en VARCHAR(128),
+        period_start date,
+        period_end date,
+        is_active bool
 );
 
 CREATE TABLE COURSE (
         course_id SERIAL PRIMARY KEY,
-        name VARCHAR(128),
+        name_sk VARCHAR(128),
+        name_en VARCHAR(128),
+        abbreviation_sk VARCHAR(128),
+        abbreviation_en VARCHAR(128),
         period_id INTEGER NOT NULL REFERENCES PERIOD(period_id) ON DELETE CASCADE 
 );
 
@@ -18,7 +30,8 @@ CREATE TABLE ROOM (
 
 CREATE TABLE COURSE_GROUP (
         group_id SERIAL PRIMARY KEY,
-        name VARCHAR(32),
+        name_sk VARCHAR(32),
+        name_en VARCHAR(32),
         course_id INTEGER NOT NULL REFERENCES COURSE(course_id) ON DELETE CASCADE
 );
 

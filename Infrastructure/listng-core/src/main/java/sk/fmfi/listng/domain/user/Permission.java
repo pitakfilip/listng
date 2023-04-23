@@ -17,7 +17,7 @@ public class Permission {
     
     private CourseStatus status;
     
-    private Long groupId;
+    private Long groupId = null;
     
     public Permission(long userId, long courseId, CourseRole role) {
         this.id = userId;
@@ -35,7 +35,7 @@ public class Permission {
         this.groupId = -1L;
     }
 
-    public Permission(long userId, long courseId, CourseRole role, CourseStatus status, long groupId) {
+    public Permission(long userId, long courseId, CourseRole role, CourseStatus status, Long groupId) {
         this.id = userId;
         this.courseId = courseId;
         this.role = role;
@@ -77,11 +77,11 @@ public class Permission {
         this.status = status;
     }
 
-    public long getGroupId() {
+    public Long getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(long groupId) {
+    public void setGroupId(Long groupId) {
         this.groupId = groupId;
     }
 }

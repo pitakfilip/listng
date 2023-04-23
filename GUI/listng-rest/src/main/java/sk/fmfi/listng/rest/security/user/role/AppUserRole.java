@@ -1,25 +1,33 @@
 package sk.fmfi.listng.rest.security.user.role;
 
-public enum AppUserRole implements UserRole {
-    ROOT("ROOT"),
-    TEACHER("TEACHER"),
-    STUDENT("STUDENT");
+import sk.fmfi.listng.domain.enums.SystemRole;
 
-    private final String name;
+public class AppUserRole implements UserRole {
+    
+    private final SystemRole role;
 
-    AppUserRole(String name) {
-        this.name = name;
+    AppUserRole(SystemRole role) {
+        this.role = role;
     }
 
     @Override
     public String getName() {
-        return name;
+        return role.getName();
+    }
+
+    public SystemRole getRole() {
+        return role;
+    }
+    
+    @Override
+    public Long getIdentifier(){
+        throw new UnsupportedOperationException("Not able to provide identifier for given UserRole type");
     }
 
     public static UserRole nameOf(String name) {
-        for (AppUserRole role : AppUserRole.values()) {
+        for (SystemRole role : SystemRole.values()) {
             if (role.getName().equals(name)) {
-                return role;
+                return new AppUserRole(role);
             }
         }
 

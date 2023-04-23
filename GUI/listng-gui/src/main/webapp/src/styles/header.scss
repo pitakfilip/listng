@@ -1,0 +1,36 @@
+
+.list-header {
+    position: relative;
+}
+
+.navbar-brand {
+    .navbar-logo {
+        width: 1.5em;
+        height: auto;
+    }
+}
+
+.navbar-brand.col-sm-2.col-md-2 {
+    text-align: end;
+}
+
+li.nav-item {
+    width: 10em;
+    text-align: center;
+}
+
+.user-dropdown {
+    background-color: red;
+}
+
+a.dropdown-toggle {
+    padding: 0 !important;
+}
+
+a fa-icon {
+    font-size: 1.5em;
+}
+
+div.user-burger {
+    display:inline;
+}

@@ -11,18 +11,27 @@
         <id name="id"
             column="PERIOD_ID"
             type="long">
-            <generator class="identity"/>
+            <generator class="increment"/>
         </id>
 
-        <property
+        <component
                 name="name"
-                column="NAME"
-        />
+                class="sk.fmfi.listng.domain.administration.MultiLangText">
+            <property name="SK" column="NAME_SK" type="java.lang.String"/>
+            <property name="EN" column="NAME_EN" type="java.lang.String"/>
+        </component>
 
         <property
                 name="start"
-                column="START"
+                column="PERIOD_START"
         />
+        
+        <property
+                name="end"
+                column="PERIOD_END"
+        />
+        
+        <property name="active" column="IS_ACTIVE" type="boolean"/>
     </class>
 
 </hibernate-mapping>

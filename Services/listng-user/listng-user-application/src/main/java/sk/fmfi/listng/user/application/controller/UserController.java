@@ -27,7 +27,6 @@ public class UserController extends BaseController implements UserApi {
         if (user == null) {
             return error();
         }
-        
         return success(UserAssembler.toAuthDto(user));
     }
 
@@ -58,7 +57,6 @@ public class UserController extends BaseController implements UserApi {
         if (userService.exists(dto.email)) {
             return error();
         }
-        
         try {
             User user = UserAssembler.newFromDto(dto);
             userService.save(user);
@@ -66,13 +64,5 @@ public class UserController extends BaseController implements UserApi {
         } catch (Exception e) {
             return error();
         }
-    }
-    
-    @Value("${server.port}")
-    String port;
-    
-    @Override
-    public Response dummy() {
-        return success(port);
     }
 }

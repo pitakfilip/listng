@@ -1,5 +1,7 @@
 package sk.fmfi.listng.infrastructure.common;
 
+import sk.fmfi.listng.infrastructure.common.dto.BaseDto;
+
 public enum OperationResult implements BaseDto {
     SUCCESS,
     FAILURE, // Genericka chyba

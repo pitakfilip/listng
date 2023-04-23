@@ -1,5 +1,7 @@
 package sk.fmfi.listng.domain.course;
 
+import sk.fmfi.listng.domain.administration.MultiLangText;
+
 import java.sql.Date;
 import java.util.Objects;
 
@@ -9,30 +11,40 @@ import java.util.Objects;
 
 public class Period {
 
-    private Long id;
+    private long id;
 
-    private String name;
+    private MultiLangText name;
 
     private Date start;
+    
+    private Date end;
+    
+    private boolean active = false;
 
-    public Period(String name, Date start) {
+    public Period(MultiLangText name, Date start, Date end) {
         this.name = name;
         this.start = start;
+        this.end = end;
     }
 
-    public Long getId() {
+    @Deprecated
+    public Period() {
+        // Hibernate only        
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public String getName() {
+    public MultiLangText getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(MultiLangText name) {
         this.name = name;
     }
 
@@ -44,6 +56,35 @@ public class Period {
         this.start = start;
     }
 
+    public Date getEnd() {
+        return end;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public boolean overlaps(Period other){
+        Date otherStart = other.getStart();
+        Date otherEnd = other.getEnd();
+        
+        return isWithinPeriod(otherStart) || isWithinPeriod(otherEnd);
+    }
+    
+    public boolean isWithinPeriod(Date day){
+        return start.equals(day)
+                || end.equals(day)
+                || (start.before(day) && end.after(day)); 
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

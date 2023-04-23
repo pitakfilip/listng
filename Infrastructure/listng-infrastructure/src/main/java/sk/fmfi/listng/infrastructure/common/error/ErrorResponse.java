@@ -1,6 +1,6 @@
 package sk.fmfi.listng.infrastructure.common.error;
 
-import sk.fmfi.listng.infrastructure.common.BaseDto;
+import sk.fmfi.listng.infrastructure.common.dto.BaseDto;
 
 import java.util.ArrayList;
 import java.util.List;

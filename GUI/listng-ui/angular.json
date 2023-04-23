@@ -6,9 +6,29 @@
     "listng-ui": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
+          "@schematics/angular:component": {
+              "skipTests": true,
+              "standalone": true,
+              "style": "none"
+          },
+          "@schematics/angular:class": {
+              "skipTests": false
+          },
+          "@schematics/angular:directive": {
+              "skipTests": false
+          },
+          "@schematics/angular:guard": {
+              "skipTests": false
+          },
+          "@schematics/angular:module": {
+              "skipTests": false
+          },
+          "@schematics/angular:pipe": {
+              "skipTests": false
+          },
+          "@schematics/angular:service": {
+              "skipTests": false
+          }
       },
       "root": "",
       "sourceRoot": "src",
@@ -68,6 +88,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+            "options": {
+                "proxyConfig": "src/proxy.conf.json"
+            },
           "configurations": {
             "production": {
               "browserTarget": "listng-ui:build:production"

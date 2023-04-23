@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {faUserCircle} from '@fortawesome/free-solid-svg-icons';
-import {HomeComponent} from '../home/home.component';
-import {StudentComponent} from '../../student/student.component';
+import {AuthApiService} from '../../../core/api/auth-api.service';
 
 @Component({
     selector: 'app-header',
@@ -13,7 +12,7 @@ export class HeaderComponent implements OnInit {
     userCollapsed = true;
     faUser = faUserCircle;
 
-    constructor() {
+    constructor(private authApi: AuthApiService) {
         console.log('debilko');
     }
 
@@ -25,7 +24,7 @@ export class HeaderComponent implements OnInit {
         {name: 'Kurzy', active: true, link: ''},
         {name: 'Ulohy', active: false, link: 'tasks'},
         {name: 'Zostavy', active: false, link: 'tasksets'},
-        {name: 'Studenti', active: false, link: 'students'},
+        {name: 'Uzivatelia', active: false, link: 'users'},
     ];
 
     toggleMenu() {
@@ -39,4 +38,10 @@ export class HeaderComponent implements OnInit {
         this.userCollapsed = !this.userCollapsed;
     }
 
+    logout() {
+        this.authApi.logout().subscribe(response => {
+            console.log(response);
+        })
+        // this.authService.logout();
+    }
 }

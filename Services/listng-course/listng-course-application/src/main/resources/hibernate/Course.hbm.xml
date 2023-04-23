@@ -11,25 +11,37 @@
         <id name="id"
             column="COURSE_ID"
             type="long">
-            <generator class="identity"/>
+            <generator class="increment"/>
         </id>
-
-        <property
-                name="name"
-                column="NAME"
-        />
-
-        <component
-                name="period"
-                class="sk.fmfi.listng.domain.course.Period">
-
-            <property
-                    name="id"
-                    column="PERIOD_ID"
-                    type="long"
-            />
+        
+        <component 
+                name="name" 
+                class="sk.fmfi.listng.domain.administration.MultiLangText">
+            <property name="SK" column="NAME_SK" type="java.lang.String"/>
+            <property name="EN" column="NAME_EN" type="java.lang.String"/>
         </component>
+        
+        <component
+                name="abbreviation"
+                class="sk.fmfi.listng.domain.administration.MultiLangText">
+            <property name="SK" column="ABBREVIATION_SK" type="java.lang.String"/>
+            <property name="EN" column="ABBREVIATION_EN" type="java.lang.String"/>
+        </component>
+        
+        <property name="periodId" column="PERIOD_ID" type="java.lang.Long"/>
 
+        <set
+                name="groups"
+                table="COURSE_GROUP"
+                cascade="all-delete-orphan"
+                fetch="join"
+                lazy="false"
+        >
+            <key>
+                <column name="COURSE_ID" not-null="true" />
+            </key>
+            <one-to-many class="sk.fmfi.listng.domain.administration.Group" />
+        </set>
     </class>
 
 </hibernate-mapping>

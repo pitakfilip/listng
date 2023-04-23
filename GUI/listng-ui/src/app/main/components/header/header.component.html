@@ -46,7 +46,7 @@
                 <div class="user-dropdown bg-success" ngbDropdownMenu aria-labelledby="Account Menu">
                     <a ngbDropdownItem class="dropdown-item" href="#">Nevim</a>
                     <a ngbDropdownItem class="dropdown-item" href="#">Nevim</a>
-                    <a ngbDropdownItem class="dropdown-item" href="#">Logout</a>
+                    <a ngbDropdownItem class="dropdown-item" (click)="logout()">Logout</a>
                 </div>
             </a>
             <button class="navbar-toggler" type="button" (click)="toggleMenu()"

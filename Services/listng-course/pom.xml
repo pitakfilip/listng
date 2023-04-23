@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>sk.fmfi.listng</groupId>
-        <artifactId>listng-shared</artifactId>
-        <version>1.0.0</version><!--    TAG:listng-shared Version    -->
-    </parent>
+<!--    <parent>-->
+<!--        <groupId>sk.fmfi.listng</groupId>-->
+<!--        <artifactId>listng-shared</artifactId>-->
+<!--        <version>1.0.0</version>&lt;!&ndash;    TAG:listng-shared Version    &ndash;&gt;-->
+<!--    </parent>-->
 
     <groupId>sk.fmfi.listng.course</groupId>
     <artifactId>listng-course</artifactId>
@@ -19,9 +19,21 @@
         <module>listng-course-api</module>
         <module>listng-course-application</module>
     </modules>
-
+    
+    <dependencies>
+        <dependency>
+            <groupId>sk.fmfi.listng</groupId>
+            <artifactId>listng-infrastructure</artifactId>
+        </dependency>
+    </dependencies>
+    
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>sk.fmfi.listng</groupId>
+                <artifactId>listng-infrastructure</artifactId>
+                <version>1.0.0</version><!--    TAG:listng-course Version    -->
+            </dependency>
             <dependency>
                 <groupId>sk.fmfi.listng.course</groupId>
                 <artifactId>listng-course-api</artifactId>

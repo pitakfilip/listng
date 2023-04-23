@@ -1,51 +1,53 @@
 package sk.fmfi.listng.rest.security.auth;
 
 import java.security.*;
-import java.util.Date;
-
+import java.util.*;
 import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.impl.DefaultClaims;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;
-import sk.fmfi.listng.rest.security.user.AppUser;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
+import javax.crypto.spec.SecretKeySpec;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import javax.xml.bind.DatatypeConverter;
 import io.jsonwebtoken.*;
+
+import sk.fmfi.listng.rest.controller.payload.response.CoursePermission;
+import sk.fmfi.listng.rest.security.user.AppUser;
+import sk.fmfi.listng.rest.security.user.role.AppCourseRole;
+import sk.fmfi.listng.rest.security.user.role.AppUserRole;
+import sk.fmfi.listng.rest.security.user.role.UserRole;
 
 @Component
 public class JwtUtils {
 
     @Value("${app.jwt.secret}")
     private String jwtSecret;
-    
-    private static final long ONE_HOUR = 1000L * 60 * 60;
 
     @Value("${app.jwt.cookieName}")
-    private String jwtCookie;
-    
-    private final String keyAlgorithm = "RSA";
-    
-    private PrivateKey privateKey;
-    
-    private PublicKey publicKey;
+    private String jwtCookieName;
 
-    public JwtUtils() {
-        try {
-            KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance(keyAlgorithm);
-            keyGenerator.initialize(2048);
+    private static final long ONE_HOUR_SECONDS = 60 * 60;
+    private static final long ONE_HOUR_MILLI = 1000L * ONE_HOUR_SECONDS;
 
-            KeyPair kp = keyGenerator.generateKeyPair();
-            privateKey = kp.getPrivate();
-            publicKey = kp.getPublic();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+    // FOR DEVELOPMENT
+    private static final long ONE_DAY_SECONDS = 60 * 60 * 24;
+    private static final long ONE_DAY_MILLI = 1000L * ONE_HOUR_SECONDS;
+    
+    private static final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+    private Key signingKey;
+    
+    @PostConstruct
+    public void postConstruct(){
+        byte[] apiSecretBytes = DatatypeConverter.parseBase64Binary(jwtSecret);
+        signingKey = new SecretKeySpec(apiSecretBytes, signatureAlgorithm.getJcaName());
     }
 
     public String getJwtFromCookies(HttpServletRequest request) {
-        Cookie cookie = WebUtils.getCookie(request, jwtCookie);
+        Cookie cookie = WebUtils.getCookie(request, jwtCookieName);
         if (cookie != null) {
             return cookie.getValue();
         } else {
@@ -54,23 +56,37 @@ public class JwtUtils {
     }
 
     public ResponseCookie generateJwtCookie(AppUser userPrincipal) {
-        String jwt = generateTokenFromUsername(userPrincipal.getUsername());
-        ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60).httpOnly(true).build();
-        return cookie;
+        String jwt = generateTokenFromUser(userPrincipal);
+        return ResponseCookie.from(jwtCookieName, jwt)
+                .path("/api")
+                .maxAge(ONE_DAY_SECONDS)
+                .httpOnly(false)
+                .build();
     }
 
     public ResponseCookie getCleanJwtCookie() {
-        ResponseCookie cookie = ResponseCookie.from(jwtCookie, null).path("/api").build();
-        return cookie;
+        return ResponseCookie.from(jwtCookieName, null)
+                .path("/api")
+                .build();
     }
 
-    public String getUserNameFromJwtToken(String token) {
-        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+    public String getUserNameFromJwtToken(String jwt) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(signingKey)
+                .build()
+                .parseClaimsJws(jwt)
+                .getBody();
+        
+        return claims.get("USER_MAIL", String.class);
     }
 
     public boolean validateJwtToken(String authToken) {
         try {
-            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
+            Jwts.parserBuilder()
+                    .setSigningKey(signingKey)
+                    .build()
+                    .parseClaimsJws(authToken);
+            
             return true;
         } catch (SignatureException e) {
             System.err.println("Invalid JWT signature: " + e.getMessage());
@@ -87,16 +103,37 @@ public class JwtUtils {
         return false;
     }
 
-    public String generateTokenFromUsername(String username) {
-        Date now = new Date();
-        Date hourLater = new Date(now.getTime() + ONE_HOUR);
-        String token =  Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(now)
-                .setExpiration(hourLater)
-                .signWith(privateKey, SignatureAlgorithm.RS512)
+    public String generateTokenFromUser(AppUser user) {   
+        return Jwts.builder()
+                .setClaims(makeClaimsForUser(user))
+                .signWith(signingKey, signatureAlgorithm)
                 .compact();
+    }
+    
+    private Claims makeClaimsForUser(AppUser user) {
+        Claims claims = new DefaultClaims();
+        claims.put("id", user.getId());
+        claims.put("name", user.getFullname());
+        claims.put("mail", user.getUsername());
         
-        return token;
+        List<CoursePermission> courseRoles = new ArrayList<>();
+
+        user.getAuthorities()
+                .forEach(authority -> {
+            UserRole role = authority.getRole();
+            
+            if (role instanceof AppUserRole) {
+                claims.put("role", ((AppUserRole) role).getRole().getName());
+            } else if (role instanceof AppCourseRole) {
+                CoursePermission permission = new CoursePermission(role.getIdentifier(), ((AppCourseRole) role).getRole());
+                courseRoles.add(permission);
+            }
+        });
+        
+        if (!courseRoles.isEmpty()) {
+            claims.put("permissions", courseRoles);
+        }
+        
+        return claims;
     }
 }

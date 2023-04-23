@@ -1,5 +1,6 @@
 package sk.fmfi.listng.infrastructure.common;
 
+import sk.fmfi.listng.infrastructure.common.dto.BaseDto;
 import sk.fmfi.listng.infrastructure.common.error.ErrorResponse;
 
 import java.util.Collection;

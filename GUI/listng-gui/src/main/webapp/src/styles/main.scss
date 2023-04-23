@@ -1,0 +1,69 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+@import 'variables';
+@import 'tables';
+@import 'buttons';
+@import 'header';
+@import 'forms';
+@import 'card';
+@import 'home';
+@import 'filters';
+
+.login-body {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.list-body {
+    position: relative;
+    margin-top: 3em;
+    width: 75%;
+    min-height: 80vh;
+    background-color: white;
+    padding: 3em;
+}
+
+button.list-btn {
+    border-color: $green2;
+
+    &:hover {
+        border-color: $green3;
+    }
+}
+
+.pull-middle {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+}
+
+.pull-right {
+    //text-align: end;
+    //align-content: end;
+    //align-items: end;
+    //margin-right: 0;
+    //margin-left: auto;
+    float: right;
+}
+
+.pull-left {
+    float: left;
+    left: 0;
+    right: auto;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.half-width {
+    width: 50%;
+}
+
+.hidden {
+    display: none;
+}

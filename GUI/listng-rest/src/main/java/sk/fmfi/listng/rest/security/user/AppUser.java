@@ -8,7 +8,7 @@ import org.springframework.security.web.authentication.preauth.PreAuthenticatedA
 import sk.fmfi.listng.rest.security.user.role.AppCourseRole;
 import sk.fmfi.listng.rest.security.user.role.AppUserRole;
 import sk.fmfi.listng.rest.security.user.role.UserRole;
-import sk.fmfi.listng.user.api.dto.UserAuthDto;
+import sk.fmfi.listng.user.dto.UserAuthDto;
 
 import java.util.*;
 
@@ -43,12 +43,10 @@ public class AppUser implements UserDetails {
         
         // buildnutie prav uzivatela v kurzoch ( {id: 12, role: 'OWNER'} -> "12/OWNER")
         List<AppAuthority> authorities = new ArrayList<>(); 
-        dto.permissions.forEach((key, value) -> {
-            UserRole role = new AppCourseRole(key, value);
+        dto.permissions.forEach(permission -> {
+            UserRole role = new AppCourseRole(permission.courseId, permission.role);
             authorities.add(new AppAuthority(role));
-
         });
-        
         
         UserRole systemRole = AppUserRole.nameOf(dto.role);
         authorities.add(new AppAuthority(systemRole));

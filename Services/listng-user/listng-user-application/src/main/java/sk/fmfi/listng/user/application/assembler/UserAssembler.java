@@ -50,7 +50,7 @@ public class UserAssembler {
         return user;
     }
     
-    public static User newFromDto(UserAuthDto dto) {
+    public static User newFromDto(UserAuthDto dto) {        
         User user = new User(dto.name, dto.email, dto.password, dto.role);
         if (dto.permissions != null && !dto.permissions.isEmpty()) {
             user.setPermissions(PermissionAssembler.fromDto(dto.permissions));

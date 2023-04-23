@@ -36,3 +36,25 @@ div.table-filter {
 table.list-table > tr > th {
     display: inline;
 }
+
+div.user-course-permissions {
+    max-height: 15em;
+    overflow-y: scroll;
+
+    table {
+        thead > tr.mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row {
+            height: 2em;
+        }
+
+        tbody {
+            height: 14em;
+            overflow-y: scroll;
+        }
+
+        tbody > tr.mat-mdc-row.mdc-data-table__row.cdk-row {
+            height: 3.5em;
+        }
+    }
+
+}
+

@@ -36,7 +36,6 @@
     }
 
     input[type="password"] {
-        margin-bottom: 10px;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
     }
@@ -64,4 +63,8 @@
     margin-left: 0.5em;
     margin-bottom: 1em;
     height:0.7em;
+}
+
+.control-error {
+    color: red;
 }

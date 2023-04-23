@@ -14,10 +14,10 @@ public interface UserApi {
     // TODO doplnit metody a prehodit anotacie z UserController + doplnit java doc ako v LVV
     
     @GetMapping("/auth")
-    Response<UserAuthDto> getAuthUserByEmail(@RequestParam String email);
+    Response<UserAuthDto> getAuthUserByEmail(@RequestParam("email") String email);
 
     @GetMapping("/email")
-    Response<UserDto> getUserByEmail(@RequestParam String email);
+    Response<UserDto> getUserByEmail(@RequestParam("email") String email);
 
     @GetMapping(value = "/all")
     Response<List<UserDto>> getAllUsers();
@@ -25,6 +25,4 @@ public interface UserApi {
     @PostMapping("/new")
     Response newUser(@RequestBody UserAuthDto user);
     
-    @GetMapping("/test")
-    Response dummy();
 }

@@ -20,8 +20,12 @@ public class PermissionAssembler {
         dto.id = permission.getId();
         dto.courseId = permission.getCourseId();
         dto.role = permission.getRole().name();
-        dto.status = permission.getStatus().name();
-        dto.groupId = permission.getGroupId();
+        if (dto.status != null) {
+            dto.status = permission.getStatus().name();
+        }
+        if (permission.getGroupId() != null) {
+            dto.groupId = permission.getGroupId();
+        }
         
         return dto;
     }
@@ -38,8 +42,13 @@ public class PermissionAssembler {
         permission.setId(dto.id);
         permission.setCourseId(dto.courseId);
         permission.setRole(CourseRole.valueOf(dto.role));
-        permission.setStatus(CourseStatus.valueOf(dto.status));
-        permission.setGroupId(dto.groupId);
+        
+        if (dto.status != null){
+            permission.setStatus(CourseStatus.valueOf(dto.status));
+        }
+        if (dto.groupId != null) {
+            permission.setGroupId(dto.groupId);
+        }
         
         return permission;
     }

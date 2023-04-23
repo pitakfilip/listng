@@ -13,6 +13,16 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <!--   LIST-NG MODULE VERSIONS   -->
+        <listng-core.version>1.0.0-SNAPSHOT</listng-core.version><!--    TAG:listng-core Version    -->
+        <listng-infrastructure.version>1.0.0</listng-infrastructure.version><!--    TAG:listng-infrastructure Version    -->
+        <listng-user.version>1.0.0-SNAPSHOT</listng-user.version><!--    TAG:listng-user Version    -->
+        <listng-course.version>1.0.0-SNAPSHOT</listng-course.version><!--    TAG:listng-course Version    -->
+        <listng-task.version>1.0.0-SNAPSHOT</listng-task.version><!--    TAG:listng-task Version    -->
+        <listng-solution.version>1.0.0-SNAPSHOT</listng-solution.version><!--    TAG:listng-solution Version    -->
+        <listng-test.version>1.0.0-SNAPSHOT</listng-test.version><!--    TAG:listng-test Version    -->
+        <listng-log.version>1.0.0-SNAPSHOT</listng-log.version><!--    TAG:listng-log Version    -->
+        
         <!--    Dependency versions    -->
         <springboot.version>2.5.12</springboot.version>
         <spring-cloud.version>3.0.4</spring-cloud.version>
@@ -23,6 +33,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>sk.fmfi.listng</groupId>
+            <artifactId>listng-core</artifactId>
+        </dependency>
+        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -72,6 +87,48 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--      LIST-NG MODULES     -->
+            <dependency>
+                <groupId>sk.fmfi.listng</groupId>
+                <artifactId>listng-core</artifactId>
+                <version>${listng-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng</groupId>
+                <artifactId>listng-infrastructure</artifactId>
+                <version>${listng-infrastructure.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng.user</groupId>
+                <artifactId>listng-user</artifactId>
+                <version>${listng-user.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng.course</groupId>
+                <artifactId>listng-course</artifactId>
+                <version>${listng-course.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng.task</groupId>
+                <artifactId>listng-task</artifactId>
+                <version>${listng-task.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng.solution</groupId>
+                <artifactId>listng-solution</artifactId>
+                <version>${listng-solution.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng.test</groupId>
+                <artifactId>listng-test</artifactId>
+                <version>${listng-test.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng.log</groupId>
+                <artifactId>listng-log</artifactId>
+                <version>${listng-log.version}</version>
+            </dependency>
+            
             <!--     TECHNOLOGIES       -->
             <dependency>
                 <groupId>javax.xml.bind</groupId>

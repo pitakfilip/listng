@@ -8,24 +8,29 @@ import java.time.LocalTime;
  * každý týždeň v určenom čase, v určenej miestnosti a trvá určitý počet minút.
  */
 public class Class {
-    
+
     private long id;
 
     private Room room;
 
-    private Group group;
+    private long groupId;
 
     private int day;
 
     private LocalTime time;
-    
+
     private int duration; // MINUTES
 
-    private Class (Room room, Group group, int day, String time, int duration) {
+    @Deprecated
+    public Class() {
+        // Hibernate only
+    }
+
+    public Class(Room room, long groupId, int day, LocalTime time, int duration) {
         this.room = room;
-        this.group = group;
+        this.groupId = groupId;
         this.day = day;
-        this.time = LocalTime.parse(time);
+        this.time = time;
         this.duration = duration;
     }
 
@@ -45,12 +50,12 @@ public class Class {
         this.room = room;
     }
 
-    public Group getGroup() {
-        return group;
+    public long getGroupId() {
+        return groupId;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setGroupId(long groupId) {
+        this.groupId = groupId;
     }
 
     public int getDay() {

@@ -1,18 +1,18 @@
 import {Injectable} from '@angular/core';
 import {TranslateLoader} from '@ngx-translate/core';
-import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {I18N_DIR, I18N_FILE_TYPE} from '../../consts/translate.consts';
-// import cacheBusting from '../../../../../i18n-cache-busting.json';
+import {Observable, of} from 'rxjs';
+import {SK_LANG} from '../../consts/translate.consts';
+import skLocale from 'src/assets/i18n/sk.json';
+import enLocale from 'src/assets/i18n/en.json';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CustomTranslateLoader implements TranslateLoader {
 
-    constructor(private http: HttpClient) { }
+    constructor() { }
 
     getTranslation(lang: string): Observable<any> {
-        return this.http.get(`${I18N_DIR}${lang}${I18N_FILE_TYPE}`);
+        return lang === SK_LANG ? of(skLocale) : of(enLocale);
     }
 }

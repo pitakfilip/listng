@@ -11,7 +11,7 @@
         <id name="id"
             column="USER_ID"
             type="long">
-            <generator class="identity"/>
+            <generator class="increment"/>
         </id>
 
         <property

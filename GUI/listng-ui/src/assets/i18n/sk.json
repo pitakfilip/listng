@@ -2,25 +2,37 @@
     "header": {
         "filter": "Filtrovanie tabuľky"
     },
-    "dummy" : "debil debil debil debil debil debil debil debil debil debil debil ",
-    "login" : {
-        "invalid-credentials": "Zadali ste neplatný email alebo heslo"
+    "invalid" : {
+        "email": "Nesprávny formát emailovej adresy",
+        "password": {
+            "new": "Zadané hesla sa nezhodujú",
+            "format": "Heslo musí obsahovať aspoň 6 znakov"
+        },
+        "credentials": "Nesprávne prihlasovacie údaje"
     },
-    "courses": {
-        "prog1": "Progamovanie 1 (Python)",
-        "prog2": "Progamovanie 2 (Python)",
-        "prog3": "Progamovanie 3 (C++)",
-        "prog4": "Progamovanie 4 (Java)"
-
-    },
-    "period": {
-        "Zim.2022/2023": "Zimný Semester 2022 / 2023",
-        "Let.2022/2023": "Letný Semester 2022 / 2023"
+    "error": {
+        "action": "Chyba pri akcii",
+        "expire": {
+            "reset": "Vypršala platnosť URL adresy pre obnovenie hesla.",
+            "jwt": "Uplynula doba platnosti prihlásenia od poslednej aktivity. Prosím, opäť sa prihláste"
+        },
+        "invalid": {
+            "resetHash": "Požadovaná URL cesta je neplatná. Skúste požiadať o zaslanie nového link na email alebo kontaktujte administrátora."
+        },
+        "field": {
+            "required": "Pole je povinné"
+        }
     },
     "labels" : {
+        "students": "Študenti",
+        "teachers": "Učitelia",
+        "submit": "Uložiť",
         "confirm": "Potvrdiť",
+        "return": "Vrátiť sa",
         "cancel": "Zrušiť",
         "clear": "Vymazať",
+        "close": "Zatvoriť",
+        "continue": "Pokračovať",
         "courses" : "Kurzy",
         "account" : "Účet",
         "toggle" : {
@@ -28,6 +40,11 @@
         },
         "welcome"   : "Vitajte v LIST-e",
         "password"  : "Heslo",
+        "password.new"  : "Nové heslo",
+        "password.confirm"  : "Potvrďte heslo",
+        "password.reset"  : "Zabudol som heslo",
+        "password.reset.email"  : "Zadajte emailovú adresu k študentskému kontu",
+        "password.reset.pass"  : "Zadajte nové heslo",
         "email"     : "Emailová adresa",
         "login"     : {
             "title"     : "Prihláste sa",
@@ -40,18 +57,44 @@
         "recordsPerPage": "záznamov / strana",
         "of" : "z"
     },
-    "student": {
+    "user": {
         "name": "Meno",
         "email": "Emailová adresa",
         "active": "Aktívny",
         "course": {
-            "count": "Počet kurzov"
+            "count": "Počet kurzov",
+            "active": "Aktuálne kurzy",
+            "permissions": "Oprávnenia v kurze"
         }
     },
     "table" : {
         "no": {
             "record": "Žiaden záznam nebol nájdený."
         }
-    }
+    },
+    "users": {
+        "state": {
+            "active": "Potvrdený",
+            "denied": "Odmietnutý",
+            "pending": "Čakajúci na potvrdenie"
+        },
+        "role": {
+            "viewer": "Sledovateľ: prístup k študentskému rozhraniu bez možnosti interakcie a odovzdávani.",
+            "attendee": "Študent",
+            "evaluator": "Hodnotiaci: opravnený úživateľ na hodnotenie študentov, tvorbe úloh a zostáv v danom kurze",
+            "owner": "Vlastník: opravnený úživateľ s plnou kontrolou nad kurzom"
+        }
+    },
 
+    "courses": {
+        "prog1": "Progamovanie 1 (Python)",
+        "prog2": "Progamovanie 2 (Python)",
+        "prog3": "Progamovanie 3 (C++)",
+        "prog4": "Progamovanie 4 (Java)"
+
+    },
+    "period": {
+        "Zim.2022/2023": "Zimný Semester 2022 / 2023",
+        "Let.2022/2023": "Letný Semester 2022 / 2023"
+    }
 }

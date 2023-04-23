@@ -13,7 +13,7 @@ import { PagingInfoPipe } from './pipe/paging-info.pipe';
 import {FormsModule} from '@angular/forms';
 import { FilterFulltextComponent } from './component/filter/filter-fulltext/filter-fulltext.component';
 import {NgIconsModule} from '@ng-icons/core';
-import { bootstrapX, bootstrapXLg, bootstrapCheck, bootstrapTrash, bootstrapXCircleFill} from '@ng-icons/bootstrap-icons';
+import { bootstrapX, bootstrapXLg, bootstrapCheck, bootstrapTrash, bootstrapXCircleFill, bootstrapCheckCircleFill} from '@ng-icons/bootstrap-icons';
 import { FilterRangeComponent } from './component/filter/filter-range/filter-range.component';
 import { FilterChoiceComponent } from './component/filter/filter-choice/filter-choice.component';
 import { FilterBlockComponent } from './component/filter/filter-block/filter-block.component';
@@ -48,7 +48,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         RouterLinkWithHref,
         NgbModule,
         FormsModule,
-        NgIconsModule.withIcons({bootstrapX, bootstrapXLg, bootstrapCheck, bootstrapTrash, bootstrapXCircleFill}),
+        NgIconsModule.withIcons({
+            bootstrapX, bootstrapXLg, bootstrapCheck, bootstrapTrash,
+            bootstrapXCircleFill, bootstrapCheckCircleFill}),
         MatCheckboxModule
     ]
 })

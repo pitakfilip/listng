@@ -1,6 +1,6 @@
 package sk.fmfi.listng.rest.controller.payload.request;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 
 public class LoginRequest {
     @NotBlank

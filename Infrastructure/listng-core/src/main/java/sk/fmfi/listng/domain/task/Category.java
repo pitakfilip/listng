@@ -1,5 +1,7 @@
 package sk.fmfi.listng.domain.task;
 
+import sk.fmfi.listng.domain.administration.MultiLangText;
+
 // hierarchia typov uloh e.g.:
 // Java
 //   - Collections
@@ -9,18 +11,18 @@ public class Category {
 
     private Long id;
 
-    private String name;
+    private MultiLangText name;
 
     private Category parent;
 
     private int level; // je toto treba?
 
-    public Category(String name) {
+    public Category(MultiLangText name) {
         this.name = name;
         this.level = 0;
     }
 
-    public Category(String name, Category parent) {
+    public Category(MultiLangText name, Category parent) {
         this.name = name;
         this.parent = parent;
         this.level = parent.level + 1;
@@ -34,11 +36,11 @@ public class Category {
         this.id = id;
     }
 
-    public String getName() {
+    public MultiLangText getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(MultiLangText name) {
         this.name = name;
     }
 

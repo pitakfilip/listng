@@ -17,7 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import sk.fmfi.listng.rest.security.auth.AppUserDetailsService;
+import sk.fmfi.listng.rest.security.service.AppUserDetailsService;
 import sk.fmfi.listng.rest.security.auth.AuthTokenFilter;
 import sk.fmfi.listng.rest.security.utils.UnauthorizedEntryPoint;
 
@@ -33,6 +33,12 @@ public class SecurityConfig {
 
     @Autowired
     AppUserDetailsService userDetailsService;
+
+    private static final String[] AUTH_WHITELIST = {
+            "/actuator/**",
+            "/auth/**",
+            "/preview/**"
+    };
     
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
@@ -59,22 +65,16 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        System.out.println("security config tu som");
-        http
-                .cors().and().csrf().disable()  // VYMAZAT
-                .exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint).and()
+        
+        http.cors().and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests()
-//                .antMatchers("/").permitAll()
-                .antMatchers("/api/actuator/**").permitAll()
-                .antMatchers("/api/swagger-ui/**").permitAll()
-                .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/**").authenticated()
-//                .anyRequest().authenticated()
-                
-                .and().addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-//                .authorizeRequests()
-//                .and().authenticationProvider(authenticationProvider());
+                .exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint)
+                .and().authorizeHttpRequests()
+                .requestMatchers(AUTH_WHITELIST).permitAll()
+                .anyRequest().permitAll();
+
+        http.authenticationProvider(authenticationProvider());
+        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

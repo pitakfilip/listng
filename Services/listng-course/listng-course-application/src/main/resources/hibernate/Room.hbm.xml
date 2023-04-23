@@ -11,7 +11,7 @@
         <id name="id"
             column="ROOM_ID"
             type="long">
-            <generator class="identity"/>
+            <generator class="increment"/>
         </id>
 
         <property
@@ -23,7 +23,6 @@
                 name="capacity"
                 column="CAPACITY"
         />
-
     </class>
 
 </hibernate-mapping>

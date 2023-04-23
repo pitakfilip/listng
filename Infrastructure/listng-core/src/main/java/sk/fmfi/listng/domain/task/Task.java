@@ -1,6 +1,7 @@
 package sk.fmfi.listng.domain.task;
 
 import sk.fmfi.listng.domain.administration.Attachement;
+import sk.fmfi.listng.domain.administration.MultiLangText;
 import sk.fmfi.listng.domain.test.Test;
 
 import java.util.ArrayList;
@@ -10,9 +11,9 @@ public class Task {
 
     private Long id;
 
-    private String name;
+    private MultiLangText name;
 
-    private String description;
+    private MultiLangText description;
 
     private List<Attachement> images;
 
@@ -22,7 +23,7 @@ public class Task {
 
     private List<Test> tests;
 
-    public Task(String name, String description) {
+    public Task(MultiLangText name, MultiLangText description) {
         this.name = name;
         this.description = description;
         this.images = new ArrayList<>();
@@ -39,19 +40,19 @@ public class Task {
         this.id = id;
     }
 
-    public String getName() {
+    public MultiLangText getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(MultiLangText name) {
         this.name = name;
     }
 
-    public String getDescription() {
+    public MultiLangText getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(MultiLangText description) {
         this.description = description;
     }
 

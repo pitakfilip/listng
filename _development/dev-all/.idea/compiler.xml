@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="listng-task-api" />
         <module name="listng-course-api" />
+        <module name="listng-consul-develop" />
         <module name="listng-course-application" />
         <module name="listng-user-api" />
         <module name="listng-infrastructure" />

@@ -11,6 +11,11 @@ public class Room {
     private String name;
 
     private int capacity;
+    
+    @Deprecated
+    public Room(){
+        // Hibernate only
+    }
 
     public Room(String name, int capacity) {
         this.name = name;

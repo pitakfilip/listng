@@ -11,24 +11,29 @@
         <id name="id"
             column="GROUP_ID"
             type="long">
-            <generator class="identity"/>
+            <generator class="increment"/>
         </id>
-
-        <component
-                name="course"
-                class="sk.fmfi.listng.domain.course.Course">
-
-            <property
-                    name="id"
-                    column="COURSE_ID"
-                    type="long"
-            />
-        </component>
         
-        <property
+        <property name="courseId" column="COURSE_ID" type="java.lang.Long"/>
+        
+        <component
                 name="name"
-                column="NAME"
-        />
+                class="sk.fmfi.listng.domain.administration.MultiLangText">
+            <property name="SK" column="NAME_SK" type="java.lang.String"/>
+            <property name="EN" column="NAME_EN" type="java.lang.String"/>
+        </component>
+
+        <set
+                name="classes"
+                table="CLASS"
+                fetch="join"
+                lazy="false"
+        >
+            <key>
+                <column name="GROUP_ID" not-null="true" />
+            </key>
+            <one-to-many class="sk.fmfi.listng.domain.administration.Class" />
+        </set>
         
     </class>
 

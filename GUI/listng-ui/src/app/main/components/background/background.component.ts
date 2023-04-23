@@ -11,12 +11,19 @@ import {
     faDna,
     faPencilRuler
 } from '@fortawesome/free-solid-svg-icons';
+import {FormsModule} from '@angular/forms';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @Component({
     selector: 'app-background',
     templateUrl: './background.component.html',
     styleUrls: ['./background.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.ShadowDom,
+    imports: [
+        FormsModule,
+        FontAwesomeModule
+    ],
+    standalone: true
 })
 export class BackgroundComponent {
 

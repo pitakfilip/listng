@@ -5,36 +5,31 @@
                 <img class="mb-4" src="../../../../assets/img/logo.png" alt="" width="72" height="57">
             </section>
 
-            <h1 class="h3 mb-3 pull-middle">{{ 'labels.welcome' | translate }}</h1>
+            <h1 class="h3 mb-5 pull-middle">{{ 'labels.welcome' | translate }}</h1>
 
-            <div class="form-floating mb-3">
-                <input type="email" class="form-control rounded-3" id="floatingInput" name="email"
-                placeholder="email"  [formControl]="emailControl" autocomplete="email"
-                [ngClass]="{'invalid-field' : invalidCredentials()}">
+            <mat-form-field class="login-field full-width margin-bottom" appearance="outline" (click)="onEnter()">
+                <mat-label>{{ 'labels.email' | translate }}</mat-label>
+                <input matInput [formControl]="emailControl" required>
+                <mat-error *ngIf="!failedLogin && emailControl.invalid">{{ 'invalid.email' | translate }}</mat-error>
+            </mat-form-field>
 
-                <label for="floatingInput">
-                    {{'labels.email' | translate}}</label>
+            <mat-form-field class="login-field full-width" appearance="outline" (click)="onEnter()">
+                <mat-label>{{ 'labels.password' | translate }}</mat-label>
+                <input matInput [formControl]="passwordControl" required [type]="hidePass ? 'password' : 'text'">
+                <mat-icon matSuffix (click)="hidePass = !hidePass" class="half-gray"
+                    >{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <mat-error *ngIf="!failedLogin && passwordControl.invalid">{{ 'error.field.required' | translate }}</mat-error>
+                <mat-error *ngIf="failedLogin">{{ 'invalid.credentials' | translate }}</mat-error>
+            </mat-form-field>
+
+            <div class="pull-middle">
+                <button mat-raised-button class="mx-1 my-2 mat-confirm full-width">{{ 'labels.login.submit' | translate }}</button>
             </div>
-
-            <div class="form-floating">
-                <input type="password" class="form-control rounded-3" id="floatingPassword" name="password"
-                placeholder="password" [formControl]="passwordControl" autocomplete="on"
-                [ngClass]="{'invalid-field' : invalidCredentials()}">
-
-                <label for="floatingPassword">
-                    {{'labels.password' | translate}}</label>
-            </div>
-
-            <div class="form-error">
-                <span class="invalid" *ngIf="invalidCredentials()">
-                    <fa-icon [icon]="faError"></fa-icon>
-                        {{'login.invalid-credentials' | translate }}
-                </span>
-            </div>
-
-            <button class="mt-2 login-btn w-100 btn btn-lg btn-primary" type="submit">
-                {{ 'labels.login.submit' | translate }}</button>
-            <p class="mt-4 mb-2 text-muted pull-middle">&copy; 2022 - {{year}}</p>
+            <a class="mx-1" [href]="'reset'">
+                {{ 'labels.password.reset' | translate }}
+            </a>
         </form>
+
+        <p class="mt-4 mb-2 text-muted pull-middle">&copy; 2022 - {{year}}</p>
     </main>
 </div>
