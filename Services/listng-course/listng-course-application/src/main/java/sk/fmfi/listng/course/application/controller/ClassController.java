@@ -1,7 +1,8 @@
 package sk.fmfi.listng.course.application.controller;
 
-import javassist.NotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sk.fmfi.listng.course.api.ClassApi;
 import sk.fmfi.listng.course.application.assembler.ClassAssembler;
@@ -13,12 +14,13 @@ import sk.fmfi.listng.course.dto.ClassDto;
 import sk.fmfi.listng.domain.administration.Class;
 import sk.fmfi.listng.domain.administration.Group;
 import sk.fmfi.listng.domain.course.Course;
-import sk.fmfi.listng.infrastructure.common.BaseController;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
-public class ClassController extends BaseController implements ClassApi {
+@RequestMapping("/class")
+public class ClassController implements ClassApi {
     
     @Autowired
     private CourseService courseService;
@@ -33,21 +35,21 @@ public class ClassController extends BaseController implements ClassApi {
     private ClassRepository repository;
     
     @Override
-    public List<ClassDto> getByCourse(Long courseId) throws NotFoundException {
+    public List<ClassDto> getByCourse(Long courseId) {
         Optional<Course> course = courseService.getById(courseId);
         
         if (course.isEmpty()) {
-            throw new NotFoundException("error.course.not.found");
+            throw new EntityNotFoundException("error.course.not.found");
         }
         
-        List<Group> groups = course.get().getGroups().stream().toList();
+        List<Group> groups = course.get().getGroups();
         Set<ClassDto> classes = new HashSet<>();
         
         for (Group group : groups) {
             classes.addAll(ClassAssembler.toDto(group.getClasses().stream().toList()));
         }
         
-        return classes.stream().toList();
+        return new ArrayList<>(classes);
     }
 
     @Override
@@ -55,7 +57,7 @@ public class ClassController extends BaseController implements ClassApi {
         List<Class> classes = repository.getClassesByGroupId(groupId);
         return classes.stream()
                 .map(ClassAssembler::toDto)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -63,14 +65,14 @@ public class ClassController extends BaseController implements ClassApi {
         List<Class> classes = repository.getClassesByRoom_Id(roomId);
         return classes.stream()
                 .map(ClassAssembler::toDto)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override
-    public void create(List<ClassDto> classes) throws NotFoundException {
+    public void create(List<ClassDto> classes) {
         for (ClassDto clazz : classes) {
             if (!roomService.existsById(clazz.room.id) || !groupService.groupExists(clazz.groupId)) {
-                throw new NotFoundException("error.class.FK.not.found");
+                throw new EntityNotFoundException("error.class.FK.not.found");
             }
         }
 
@@ -81,9 +83,9 @@ public class ClassController extends BaseController implements ClassApi {
     }
 
     @Override
-    public void create(ClassDto clazz) throws NotFoundException {
+    public void create(ClassDto clazz) {
         if (!roomService.existsById(clazz.room.id) || !groupService.groupExists(clazz.groupId)) {
-            throw new NotFoundException("error.class.FK.not.found");
+            throw new EntityNotFoundException("error.class.FK.not.found");
         }
 
         Class obj = ClassAssembler.fromDto(clazz);
@@ -91,10 +93,10 @@ public class ClassController extends BaseController implements ClassApi {
     }
 
     @Override
-    public void update(List<ClassDto> classes) throws NotFoundException {
+    public void update(List<ClassDto> classes) {
         for (ClassDto clazz : classes) {
             if (!repository.existsById(clazz.id)) {
-                throw new NotFoundException("error.class.not.found");
+                throw new EntityNotFoundException("error.class.not.found");
             }
         }
 
@@ -105,10 +107,10 @@ public class ClassController extends BaseController implements ClassApi {
     }
 
     @Override
-    public void delete(List<Long> classIds) throws NotFoundException {
+    public void delete(List<Long> classIds) {
         for (Long classId : classIds) {
             if (!repository.existsById(classId)) {
-                throw new NotFoundException("error.class.not.found");
+                throw new EntityNotFoundException("error.class.not.found");
             }
         }
 
@@ -118,9 +120,9 @@ public class ClassController extends BaseController implements ClassApi {
     }
 
     @Override
-    public void delete(Long classId) throws NotFoundException {
+    public void delete(Long classId) {
         if (!repository.existsById(classId)) {
-            throw new NotFoundException("error.class.not.found");
+            throw new EntityNotFoundException("error.class.not.found");
         }
         repository.deleteById(classId);
     }

@@ -46,6 +46,9 @@ export class LoginComponent {
         });
 
         this.year = new Date().getFullYear();
+        const dd = "eyJ1c2VybmFtZSI6ImZwaXRhazExQGdtYWlsLmNvbSIsImV4cGlyZXMiOjE2ODIzMzAxNzE1MDQsInRva2VuIjoiNTcxOTc5MzUzMzQ1ODIzN0U7djk3OGQ5W1k0M1MrKFs2NiQ0KkQ4MEw9djE3NkpneSY1M3YifQ==";
+        console.log(atob(dd));
+
     }
 
     submit() {

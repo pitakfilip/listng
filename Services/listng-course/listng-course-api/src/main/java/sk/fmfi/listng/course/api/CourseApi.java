@@ -1,6 +1,5 @@
 package sk.fmfi.listng.course.api;
 
-import javassist.NotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -8,28 +7,28 @@ import sk.fmfi.listng.course.dto.CourseDto;
 
 public interface CourseApi {
     
-    @PostMapping(value = "/course/new")
-    void create(@RequestBody CourseDto course) throws NotFoundException;
+    @PostMapping(value = "/new")
+    void create(@RequestBody CourseDto course);
     
-    @GetMapping(value = "/course/copy")
-    void copyCourse(@RequestParam Long courseId, @RequestParam Long periodId) throws NotFoundException;
+    @GetMapping(value = "/copy")
+    void copyCourse(@RequestParam Long courseId, @RequestParam Long periodId);
     
-    @GetMapping(value = "/courses/all")
+    @GetMapping(value = "/all")
     List<CourseDto> getCourses();
     
-    @GetMapping(value = "/courses/period")
+    @GetMapping(value = "/period")
     List<CourseDto> getCoursesOfPeriod(@RequestParam Long periodId);
 
-    @GetMapping(value = "/courses/active")
-    List<CourseDto> getActiveCourses() throws NotFoundException;
+    @GetMapping(value = "/active")
+    List<CourseDto> getActiveCourses();
     
-    @GetMapping(value = "/course/get")
-    CourseDto getCourseById(@RequestParam Long courseId) throws NotFoundException;
+    @GetMapping(value = "/get")
+    CourseDto getCourseById(@RequestParam Long courseId);
     
-    @PostMapping(value = "/course/update")
-    void update(@RequestBody CourseDto course) throws NotFoundException;
+    @PostMapping(value = "/update")
+    void update(@RequestBody CourseDto course);
     
-    @DeleteMapping(value = "/course/delete")
-    void delete(@RequestParam Long courseId) throws NotFoundException;
+    @DeleteMapping(value = "/delete")
+    void delete(@RequestParam Long courseId);
     
 }

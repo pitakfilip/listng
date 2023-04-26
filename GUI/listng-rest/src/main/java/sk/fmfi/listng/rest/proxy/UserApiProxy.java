@@ -1,9 +1,11 @@
 package sk.fmfi.listng.rest.proxy;
 
+import org.springframework.cloud.openfeign.FeignAutoConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
-import sk.fmfi.listng.infrastructure.configuration.RoundRobinLoadBalancerConfiguration;
-import sk.fmfi.listng.user.api.UserApi;
+import org.springframework.cloud.openfeign.FeignClientFactory;
+import org.springframework.cloud.openfeign.loadbalancer.FeignLoadBalancerAutoConfiguration;
+import sk.fmfi.listng.user.api.UserAuthApi;
 
-@FeignClient(name="listng-user", path="/user", configuration = RoundRobinLoadBalancerConfiguration.class)
-public interface UserApiProxy extends UserApi {
+@FeignClient(name = "listng-user", configuration = FeignLoadBalancerAutoConfiguration.class)
+public interface UserApiProxy extends UserAuthApi {
 }

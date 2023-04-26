@@ -41,7 +41,6 @@ public class AppUser implements UserDetails {
             return null;
         }
         
-        // buildnutie prav uzivatela v kurzoch ( {id: 12, role: 'OWNER'} -> "12/OWNER")
         List<AppAuthority> authorities = new ArrayList<>(); 
         dto.permissions.forEach(permission -> {
             UserRole role = new AppCourseRole(permission.courseId, permission.role);
@@ -53,8 +52,7 @@ public class AppUser implements UserDetails {
         
         UserRole systemRole1 = AppUserRole.nameOf(dto.role);
         return new AppUser(dto.id, dto.email, dto.name, dto.password, authorities);
-    }
-    
+    }    
 
     public static void setUserToSecurityContext(AppUser user) {
         if (user == null) {

@@ -1,6 +1,5 @@
 package sk.fmfi.listng.course.api;
 
-import javassist.NotFoundException;
 import org.springframework.web.bind.annotation.*;
 import sk.fmfi.listng.course.dto.ClassDto;
 
@@ -8,27 +7,27 @@ import java.util.List;
 
 public interface ClassApi {
     
-    @GetMapping(value = "/classes/course")
-    List<ClassDto> getByCourse(@RequestParam Long courseId) throws NotFoundException;
+    @GetMapping(value = "/course")
+    List<ClassDto> getByCourse(@RequestParam Long courseId);
     
-    @GetMapping(value = "/classes/group")
+    @GetMapping(value = "/group")
     List<ClassDto> getByGroup(@RequestParam Long groupId);
     
-    @GetMapping(value = "/classes/room")
+    @GetMapping(value = "/room")
     List<ClassDto> getByRoom(@RequestParam Long roomId);
     
-    @PostMapping(value = "/classes/new")
-    void create(@RequestBody List<ClassDto> classes) throws NotFoundException;
+    @PostMapping(value = "/s/new")
+    void create(@RequestBody List<ClassDto> classes);
 
-    @PostMapping(value = "/class/new")
-    void create(@RequestBody ClassDto clazz) throws NotFoundException;
+    @PostMapping(value = "/new")
+    void create(@RequestBody ClassDto clazz);
     
-    @PostMapping(value = "/classes/update")
-    void update(@RequestBody List<ClassDto> classes) throws NotFoundException;
+    @PostMapping(value = "/update")
+    void update(@RequestBody List<ClassDto> classes);
     
-    @PostMapping(value = "/classes/delete")
-    void delete(@RequestBody List<Long> classIds) throws NotFoundException;
+    @PostMapping(value = "/s/delete")
+    void delete(@RequestBody List<Long> classIds);
     
-    @DeleteMapping(value = "/class/delete")
-    void delete(@RequestParam Long classId) throws NotFoundException;
+    @DeleteMapping(value = "/delete")
+    void delete(@RequestParam Long classId);
 }

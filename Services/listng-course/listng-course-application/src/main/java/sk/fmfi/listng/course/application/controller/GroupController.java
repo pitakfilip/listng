@@ -1,7 +1,8 @@
 package sk.fmfi.listng.course.application.controller;
 
-import javassist.NotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sk.fmfi.listng.course.api.GroupApi;
 import sk.fmfi.listng.course.application.assembler.GroupAssembler;
@@ -9,12 +10,12 @@ import sk.fmfi.listng.course.application.service.CourseService;
 import sk.fmfi.listng.course.application.service.GroupService;
 import sk.fmfi.listng.course.dto.GroupDto;
 import sk.fmfi.listng.domain.administration.Group;
-import sk.fmfi.listng.infrastructure.common.BaseController;
 
 import java.util.List;
 
 @RestController
-public class GroupController extends BaseController implements GroupApi {
+@RequestMapping("/group")
+public class GroupController implements GroupApi {
     
     @Autowired
     private GroupService groupService;
@@ -24,10 +25,10 @@ public class GroupController extends BaseController implements GroupApi {
     
 
     @Override
-    public void createGroups(List<GroupDto> groups) throws NotFoundException {
+    public void createGroups(List<GroupDto> groups) {
         for (GroupDto groupDto : groups) {
             if (!courseService.courseExists(groupDto.courseId)) {
-                throw new NotFoundException("error.course.not.found");
+                throw new EntityNotFoundException("error.course.not.found");
             }
             Group group = GroupAssembler.fromDto(groupDto);
             groupService.save(group);
@@ -35,13 +36,13 @@ public class GroupController extends BaseController implements GroupApi {
     }
 
     @Override
-    public void updateGroups(List<GroupDto> groups) throws NotFoundException {
+    public void updateGroups(List<GroupDto> groups) {
         for (GroupDto groupDto : groups) {
             if (!groupService.groupExists(groupDto.id)){
-                throw new NotFoundException("error.group.not.found");
+                throw new EntityNotFoundException("error.group.not.found");
             }
             if (!courseService.courseExists(groupDto.courseId)) {
-                throw new NotFoundException("error.course.not.found");
+                throw new EntityNotFoundException("error.course.not.found");
             }
             
             Group group = GroupAssembler.fromDto(groupDto);

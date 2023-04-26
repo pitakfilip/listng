@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class AppAuthority implements GrantedAuthority {
 
@@ -26,7 +27,7 @@ public class AppAuthority implements GrantedAuthority {
         return roleNames == null ? List.of() : roleNames.stream()
                 .map(AppAuthority::forName)
                 .sorted(Comparator.comparing(AppAuthority::getAuthority))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override

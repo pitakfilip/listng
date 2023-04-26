@@ -2,9 +2,9 @@ package sk.fmfi.listng.domain.administration;
 
 public class MultiLangText {
     
-    public String SK = "";
-    
-    public String EN = "";
+    private String SK;
+
+    private String EN;
     
     public MultiLangText(){}
     

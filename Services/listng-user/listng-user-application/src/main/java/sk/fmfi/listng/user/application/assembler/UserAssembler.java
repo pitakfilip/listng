@@ -5,6 +5,7 @@ import sk.fmfi.listng.user.dto.UserAuthDto;
 import sk.fmfi.listng.user.dto.UserDto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserAssembler {
 
@@ -38,7 +39,7 @@ public class UserAssembler {
     public static List<UserDto> toDto(List<User> users) {
         return users.stream()
                 .map(UserAssembler::toDto)
-                .toList();
+                .collect(Collectors.toList());
     }
     
     public static User fromDto(UserAuthDto dto) {
@@ -50,7 +51,7 @@ public class UserAssembler {
         return user;
     }
     
-    public static User newFromDto(UserAuthDto dto) {        
+    public static User fromAuthDto(UserAuthDto dto) {        
         User user = new User(dto.name, dto.email, dto.password, dto.role);
         if (dto.permissions != null && !dto.permissions.isEmpty()) {
             user.setPermissions(PermissionAssembler.fromDto(dto.permissions));

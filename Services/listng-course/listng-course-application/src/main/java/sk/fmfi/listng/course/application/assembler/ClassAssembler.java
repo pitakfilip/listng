@@ -29,7 +29,7 @@ public class ClassAssembler {
         return dtos;
 //        return classes.stream()
 //                .map(ClassAssembler::toDto)
-//                .toList();
+//                .collect(Collectors.toList());
     }
     
     public static Class fromDto(ClassDto dto) {

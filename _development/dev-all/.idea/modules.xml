@@ -10,7 +10,6 @@
       <module fileurl="file://$PROJECT_DIR$/../../Services/listng-course/listng-course-application/listng-course-application.iml" filepath="$PROJECT_DIR$/../../Services/listng-course/listng-course-application/listng-course-application.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../Infrastructure/listng-infrastructure/listng-infrastructure.iml" filepath="$PROJECT_DIR$/../../Infrastructure/listng-infrastructure/listng-infrastructure.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../GUI/listng-rest/listng-rest.iml" filepath="$PROJECT_DIR$/../../GUI/listng-rest/listng-rest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../Infrastructure/listng-shared/listng-shared.iml" filepath="$PROJECT_DIR$/../../Infrastructure/listng-shared/listng-shared.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../Services/listng-task/listng-task.iml" filepath="$PROJECT_DIR$/../../Services/listng-task/listng-task.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../Services/listng-task/listng-task-api/listng-task-api.iml" filepath="$PROJECT_DIR$/../../Services/listng-task/listng-task-api/listng-task-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../Services/listng-task/listng-task-application/listng-task-application.iml" filepath="$PROJECT_DIR$/../../Services/listng-task/listng-task-application/listng-task-application.iml" />

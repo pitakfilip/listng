@@ -1,6 +1,6 @@
 package sk.fmfi.listng.course.application.controller;
 
-import javassist.NotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,14 +10,14 @@ import sk.fmfi.listng.course.application.service.*;
 import sk.fmfi.listng.course.dto.CourseDto;
 import sk.fmfi.listng.domain.course.Course;
 import sk.fmfi.listng.domain.course.Period;
-import sk.fmfi.listng.infrastructure.common.BaseController;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
-public class CourseController extends BaseController implements CourseApi {
+public class CourseController implements CourseApi {
 
     @Autowired
     private CourseService courseService;
@@ -29,9 +29,9 @@ public class CourseController extends BaseController implements CourseApi {
     private GroupService groupService;
     
     @Override
-    public void create(CourseDto dto) throws NotFoundException {
+    public void create(CourseDto dto) {
         if (periodService.getPeriod(dto.periodId).isEmpty()) {
-            throw new NotFoundException("error.period.not.found");
+            throw new EntityNotFoundException("error.period.not.found");
         }
         
         Course course = CourseAssembler.fromDto(dto);
@@ -40,14 +40,14 @@ public class CourseController extends BaseController implements CourseApi {
     }
 
     @Override
-    public void copyCourse(Long courseId, Long periodId) throws NotFoundException {
+    public void copyCourse(Long courseId, Long periodId) {
         Optional<Period> targetPeriod = periodService.getPeriod(periodId);
         if (targetPeriod.isEmpty()) {
-            throw new NotFoundException("error.period.not.found");
+            throw new EntityNotFoundException("error.period.not.found");
         }
         Optional<Course> fromCourse = courseService.getById(courseId);
         if (fromCourse.isEmpty()) {
-            throw new NotFoundException("error.course.not.found");
+            throw new EntityNotFoundException("error.course.not.found");
         }
         courseService.copyCourse(fromCourse.get(), targetPeriod.get());        
     }
@@ -56,7 +56,7 @@ public class CourseController extends BaseController implements CourseApi {
     public List<CourseDto> getCourses() {
         return courseService.getAll().stream()
                 .map(CourseAssembler::toDto)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -71,7 +71,7 @@ public class CourseController extends BaseController implements CourseApi {
     }
 
     @Override
-    public List<CourseDto> getActiveCourses() throws NotFoundException {
+    public List<CourseDto> getActiveCourses() {
         List<Course> courses = courseService.getAllInActivePeriod();
 
         if (courses == null || courses.isEmpty()) {
@@ -82,9 +82,9 @@ public class CourseController extends BaseController implements CourseApi {
     }
 
     @Override
-    public CourseDto getCourseById(Long courseId) throws NotFoundException {
+    public CourseDto getCourseById(Long courseId) {
         if (!courseService.courseExists(courseId)) {
-            throw new NotFoundException("error.course.not.found");
+            throw new EntityNotFoundException("error.course.not.found");
         }
         Optional<Course> course = courseService.getById(courseId);
         
@@ -92,19 +92,19 @@ public class CourseController extends BaseController implements CourseApi {
     }
 
     @Override
-    public void update(CourseDto course) throws NotFoundException {
+    public void update(CourseDto course) {
         Optional<Course> fromCourse = courseService.getById(course.id);
         if (fromCourse.isEmpty()) {
-            throw new NotFoundException("error.course.not.found");
+            throw new EntityNotFoundException("error.course.not.found");
         }
         courseService.saveCourse(CourseAssembler.fromDto(course));
     }
 
     @Override
-    public void delete(Long courseId) throws NotFoundException {
+    public void delete(Long courseId) {
         Optional<Course> fromCourse = courseService.getById(courseId);
         if (fromCourse.isEmpty()) {
-            throw new NotFoundException("error.course.not.found");
+            throw new EntityNotFoundException("error.course.not.found");
         }
         courseService.delete(courseId);
     }

@@ -11,7 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
 import jakarta.validation.Valid;
 
-import sk.fmfi.listng.infrastructure.common.BaseController;
+import sk.fmfi.listng.rest.common.BaseController;
 import sk.fmfi.listng.rest.controller.payload.request.LoginRequest;
 import sk.fmfi.listng.rest.security.auth.JwtUtils;
 import sk.fmfi.listng.rest.security.user.AppUser;
@@ -24,8 +24,7 @@ public class AuthController extends BaseController {
     private AuthenticationManager authenticationManager;
     
     @Autowired
-    private JwtUtils jwtUtils;
-
+    private JwtUtils jwtUtils;    
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticate(@Valid @RequestBody LoginRequest loginRequest) {
@@ -43,15 +42,6 @@ public class AuthController extends BaseController {
                     .header("X_AUTH_TOKEN", jwtCookie.toString())
                     .body(success());
             
-//            return ResponseEntity.ok()
-//                    .header("X_AUTH_TOKEN", jwtCookie.toString())
-//                    .body(success(new UserInfo(
-//                            userDetails.getId(),
-//                            userDetails.getFullname(),
-//                            userDetails.getUsername(),
-//                            userService.getSystemRoleFromAppAuthorities(userDetails.getAuthorities()),
-//                            userService.getCoursePermissionsFromAppAuthorities(userDetails.getAuthorities())
-//                    )));
         } catch (Exception e) {
             return ResponseEntity.ok(error());
         }
@@ -62,5 +52,10 @@ public class AuthController extends BaseController {
         ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
                 .body(success("User has been signed out!"));
+    }
+    
+    @PostMapping("/reset/request")
+    public void reset(){
+        
     }
 }

@@ -5,6 +5,7 @@ import sk.fmfi.listng.domain.course.Period;
 import sk.fmfi.listng.infrastructure.common.dto.MultiLangTextDto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PeriodAssembler {
     
@@ -12,7 +13,7 @@ public class PeriodAssembler {
         PeriodDto dto = new PeriodDto();
         dto.id = period.getId();
         System.out.println("PERIOD S ID: " + dto.id);
-        dto.name = MultiLangTextDto.toDto(period.getName());
+        dto.name = new MultiLangTextDto(period.getName());
         dto.start = period.getStart();
         dto.end = period.getEnd();
         dto.active = period.isActive();
@@ -22,7 +23,7 @@ public class PeriodAssembler {
     public static List<PeriodDto> toDto(List<Period> periods) {
         return periods.stream()
                 .map(PeriodAssembler::toDto)
-                .toList();
+                .collect(Collectors.toList());
     }
     
     public static Period fromDto(PeriodDto dto) {

@@ -38,17 +38,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>sk.fmfi.listng</groupId>
-            <artifactId>listng-infrastructure</artifactId>
-        </dependency>
-        <dependency>
             <groupId>sk.fmfi.listng.user</groupId>
             <artifactId>listng-user-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>sk.fmfi.listng.course</groupId>
-            <artifactId>listng-course-api</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>sk.fmfi.listng.course</groupId>-->
+<!--            <artifactId>listng-course-api</artifactId>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -98,11 +94,6 @@
     <dependencyManagement>
         <dependencies>
             <!--      LIST-NG MODULES     -->
-            <dependency>
-                <groupId>sk.fmfi.listng</groupId>
-                <artifactId>listng-infrastructure</artifactId>
-                <version>${listng-infrastructure.version}</version>
-            </dependency>
             <dependency>
                 <groupId>sk.fmfi.listng.user</groupId>
                 <artifactId>listng-user-api</artifactId>
@@ -159,6 +150,11 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+                <version>${spring-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-bootstrap</artifactId>
                 <version>${spring-cloud.version}</version>
             </dependency>
@@ -170,4 +166,15 @@
         </dependencies>
     </dependencyManagement>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <compilerArgument>-parameters</compilerArgument>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -6,15 +6,15 @@
         <option value="$PROJECT_DIR$/../../Services/listng-consul-develop/pom.xml" />
         <option value="$PROJECT_DIR$/../../Services/listng-course/pom.xml" />
         <option value="$PROJECT_DIR$/../../Services/listng-user/pom.xml" />
-        <option value="$PROJECT_DIR$/../../Services/listng-task/pom.xml" />
         <option value="$PROJECT_DIR$/../../Infrastructure/listng-core/pom.xml" />
         <option value="$PROJECT_DIR$/../../Infrastructure/listng-infrastructure/pom.xml" />
         <option value="$PROJECT_DIR$/../../Infrastructure/listng-shared/pom.xml" />
         <option value="$PROJECT_DIR$/../../GUI/listng-rest/pom.xml" />
+        <option value="$PROJECT_DIR$/../../Services/listng-task/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="openjdk-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="ProjectType">

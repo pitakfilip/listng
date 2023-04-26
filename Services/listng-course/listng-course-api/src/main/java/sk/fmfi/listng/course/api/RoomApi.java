@@ -1,6 +1,5 @@
 package sk.fmfi.listng.course.api;
 
-import javassist.NotFoundException;
 import org.springframework.web.bind.annotation.*;
 import sk.fmfi.listng.course.dto.RoomDto;
 
@@ -8,18 +7,18 @@ import java.util.List;
 
 public interface RoomApi {
     
-    @PostMapping(value = "/room/new")
+    @PostMapping(value = "/new")
     void create(@RequestBody RoomDto room);
     
-    @GetMapping(value = "/rooms")
+    @GetMapping(value = "/all")
     List<RoomDto> getAll();
     
-    @GetMapping(value = "/room/id")
-    RoomDto getById(@RequestParam long id) throws NotFoundException;
+    @GetMapping(value = "/id")
+    RoomDto getById(@RequestParam long id);
     
-    @PostMapping(value = "/room/update")
-    void update(@RequestBody RoomDto room) throws NotFoundException;
+    @PostMapping(value = "/update")
+    void update(@RequestBody RoomDto room);
     
-    @DeleteMapping(value = "/room/delete")
-    void deleteById(@RequestParam long id) throws NotFoundException;
+    @DeleteMapping(value = "/delete")
+    void deleteById(@RequestParam long id);
 }

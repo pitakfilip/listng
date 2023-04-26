@@ -1,6 +1,5 @@
 package sk.fmfi.listng.course.application.service;
 
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sk.fmfi.listng.course.application.repository.CourseRepository;
@@ -69,11 +68,11 @@ public class CourseService {
         return courseRepository.findByPeriodId(periodId);
     }
 
-    public List<Course> getAllInActivePeriod() throws NotFoundException {
+    public List<Course> getAllInActivePeriod() {
         Long periodId = periodService.getActivePeriodId();
 
         if (periodId == null) {
-            throw new NotFoundException("error.period.active.not.set");
+            return null;
         }
 
         return courseRepository.findByPeriodId(periodId);

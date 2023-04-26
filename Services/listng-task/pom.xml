@@ -4,12 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>sk.fmfi.listng</groupId>
-        <artifactId>listng-shared</artifactId>
-        <version>1.0.0</version><!--    TAG:listng-shared Version    -->
-    </parent>
-
     <groupId>sk.fmfi.listng.task</groupId>
     <artifactId>listng-task</artifactId>
     <packaging>pom</packaging>

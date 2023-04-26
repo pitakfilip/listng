@@ -5,23 +5,24 @@ import sk.fmfi.listng.domain.course.Course;
 import sk.fmfi.listng.infrastructure.common.dto.MultiLangTextDto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CourseAssembler {
 
     public static CourseDto toDto(Course course) {
         CourseDto dto = new CourseDto();
         dto.id = course.getId();
-        dto.name = MultiLangTextDto.toDto(course.getName());
-        dto.abbreviation = MultiLangTextDto.toDto(course.getAbbreviation());
+        dto.name = new MultiLangTextDto(course.getName());
+        dto.abbreviation = new MultiLangTextDto(course.getAbbreviation());
         dto.periodId = course.getPeriod();
-        dto.groups = GroupAssembler.toDto(course.getGroups().stream().toList());
+        dto.groups = GroupAssembler.toDto(course.getGroups());
         return dto;
     }
 
     public static List<CourseDto> toDto(List<Course> courses) {
         return courses.stream()
                 .map(CourseAssembler::toDto)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public static Course fromDto(CourseDto dto) {

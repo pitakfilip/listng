@@ -30,6 +30,7 @@ public class JwtUtils {
     @Value("${app.jwt.cookieName}")
     private String jwtCookieName;
 
+    // PRODUCTION
     private static final long ONE_HOUR_SECONDS = 60 * 60;
     private static final long ONE_HOUR_MILLI = 1000L * ONE_HOUR_SECONDS;
 

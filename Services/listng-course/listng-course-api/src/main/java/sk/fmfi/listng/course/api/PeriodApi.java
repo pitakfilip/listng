@@ -1,23 +1,20 @@
 package sk.fmfi.listng.course.api;
 
-
 import org.springframework.web.bind.annotation.*;
 import sk.fmfi.listng.course.dto.PeriodDto;
-
-import java.io.InvalidObjectException;
 import java.util.List;
 
 public interface PeriodApi {
 
-    @PostMapping(value = "/period/new")
-    void create(@RequestBody PeriodDto period) throws InvalidObjectException;
+    @PostMapping(value = "/new")
+    boolean create(@RequestBody PeriodDto period);
     
-    @GetMapping(value = "/period/all")
+    @GetMapping(value = "/all")
     List<PeriodDto> getAll();
     
-    @PostMapping(value = "/period/update")
-    void update(@RequestBody PeriodDto period) throws InvalidObjectException;
+    @PostMapping(value = "/update")
+    boolean update(@RequestBody PeriodDto period);
     
-    @DeleteMapping(value = "/period/delete")
-    void delete(@RequestParam Long id) throws Exception;
+    @DeleteMapping(value = "/delete")
+    void delete(@RequestParam Long id);
 }

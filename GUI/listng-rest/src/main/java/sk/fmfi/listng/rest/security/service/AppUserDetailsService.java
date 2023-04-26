@@ -6,7 +6,6 @@ import org.springframework.security.authentication.AccountStatusUserDetailsCheck
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import sk.fmfi.listng.infrastructure.common.Response;
 import sk.fmfi.listng.rest.proxy.UserApiProxy;
 import sk.fmfi.listng.rest.security.cache.UserCacheService;
 import sk.fmfi.listng.rest.security.user.AppUser;
@@ -29,12 +28,11 @@ public class AppUserDetailsService implements UserDetailsService {
             return userCacheService.getFromCache(username);
         }
 
-        Response<UserAuthDto> response = userApiProxy.getAuthUserByEmail(username);
-        if (!response.isSuccess()) {
+        UserAuthDto userAuthDto = userApiProxy.getAuthUserByEmail(username);
+        if (userAuthDto == null) {
             throw new UsernameNotFoundException("User with login email '" + username + "' not found.");
         }
         
-        UserAuthDto userAuthDto = response.getPayload();
         final AppUser user;
         user = AppUser.build(userAuthDto);
         

@@ -4,12 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-<!--    <parent>-->
-<!--        <groupId>sk.fmfi.listng</groupId>-->
-<!--        <artifactId>listng-shared</artifactId>-->
-<!--        <version>1.0.0</version>&lt;!&ndash;    TAG:listng-shared Version    &ndash;&gt;-->
-<!--    </parent>-->
-
     <groupId>sk.fmfi.listng.course</groupId>
     <artifactId>listng-course</artifactId>
     <version>1.0.0-SNAPSHOT</version><!--    TAG:listng-course Version    -->
@@ -19,7 +13,23 @@
         <module>listng-course-api</module>
         <module>listng-course-application</module>
     </modules>
-    
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <listng-core.version>1.0.0-SNAPSHOT</listng-core.version><!--    TAG:listng-core Version    -->
+        <listng-infrastructure.version>1.0.0</listng-infrastructure.version><!--    TAG:listng-infrastructure Version    -->
+
+        <springboot.version>3.0.5</springboot.version>
+        <spring-cloud.version>4.0.2</spring-cloud.version>
+        <hibernate.version>6.1.7.Final</hibernate.version>
+        <springfox.version>3.0.0</springfox.version>
+        <javax-xml.version>2.3.0</javax-xml.version>
+        <postgres.version>42.5.1</postgres.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>sk.fmfi.listng</groupId>
@@ -31,18 +41,56 @@
         <dependencies>
             <dependency>
                 <groupId>sk.fmfi.listng</groupId>
+                <artifactId>listng-core</artifactId>
+                <version>${listng-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng</groupId>
                 <artifactId>listng-infrastructure</artifactId>
-                <version>1.0.0</version><!--    TAG:listng-course Version    -->
+                <version>${listng-infrastructure.version}</version>
             </dependency>
             <dependency>
                 <groupId>sk.fmfi.listng.course</groupId>
                 <artifactId>listng-course-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <dependency>
-                <groupId>sk.fmfi.listng.user</groupId>
-                <artifactId>listng-user-api</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${javax-xml.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${springboot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-consul-config</artifactId>
+                <version>${spring-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+                <version>${spring-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgres.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

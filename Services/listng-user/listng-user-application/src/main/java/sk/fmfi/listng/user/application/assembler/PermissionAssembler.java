@@ -33,7 +33,7 @@ public class PermissionAssembler {
     public static List<PermissionDto> toDto(Set<Permission> permissions) {
         return permissions.stream()
                 .map(PermissionAssembler::toDto)
-                .toList();
+                .collect(Collectors.toList());
     }
     
     public static Permission fromDto(PermissionDto dto) {

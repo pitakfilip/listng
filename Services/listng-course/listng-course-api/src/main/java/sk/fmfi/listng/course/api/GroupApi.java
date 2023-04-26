@@ -1,7 +1,5 @@
 package sk.fmfi.listng.course.api;
 
-
-import javassist.NotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,12 +15,12 @@ import java.util.List;
  */
 public interface GroupApi {
     
-    @PostMapping(value = "/group/new")
-    void createGroups(@RequestBody List<GroupDto> groups) throws NotFoundException;
+    @PostMapping(value = "/new")
+    void createGroups(@RequestBody List<GroupDto> groups);
     
-    @PostMapping(value = "/groups/update")
-    void updateGroups(@RequestBody List<GroupDto> groups) throws NotFoundException;
+    @PostMapping(value = "/update")
+    void updateGroups(@RequestBody List<GroupDto> groups);
     
-    @PostMapping(value = "/groups/delete")
+    @PostMapping(value = "/delete")
     void deleteGroups(@RequestParam List<GroupDto> groups);
 }

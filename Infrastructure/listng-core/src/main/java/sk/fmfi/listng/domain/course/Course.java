@@ -3,10 +3,7 @@ package sk.fmfi.listng.domain.course;
 import sk.fmfi.listng.domain.administration.Group;
 import sk.fmfi.listng.domain.administration.MultiLangText;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Trieda reprezentujúca kurz v určenom období.
@@ -21,7 +18,7 @@ public class Course {
 
     private long periodId;
     
-    private Set<Group> groups = new HashSet<>();
+    private List<Group> groups = new ArrayList<>();
     
     public long getPeriodId() {
         return periodId;
@@ -42,8 +39,8 @@ public class Course {
     }
 
     public static Course copy(Course from, long periodId) {
-        Course course = new Course(new MultiLangText(from.name.SK, from.name.EN), periodId);
-        course.abbreviation = new MultiLangText(from.abbreviation.SK, from.abbreviation.EN);
+        Course course = new Course(new MultiLangText(from.name.getSK(), from.name.getEN()), periodId);
+        course.abbreviation = new MultiLangText(from.abbreviation.getSK(), from.abbreviation.getEN());
         
         return course;
     }
@@ -80,11 +77,11 @@ public class Course {
         this.periodId = periodId;
     }
 
-    public Set<Group> getGroups() {
+    public List<Group> getGroups() {
         return groups;
     }
 
-    public void setGroups(Set<Group> groups) {
+    public void setGroups(List<Group> groups) {
         this.groups = groups;
     }
 

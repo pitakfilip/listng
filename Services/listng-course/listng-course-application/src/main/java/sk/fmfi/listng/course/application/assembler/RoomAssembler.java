@@ -4,6 +4,7 @@ import sk.fmfi.listng.course.dto.RoomDto;
 import sk.fmfi.listng.domain.administration.Room;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RoomAssembler {
     
@@ -19,7 +20,7 @@ public class RoomAssembler {
     public static List<RoomDto> toDto(List<Room> rooms) {
         return rooms.stream()
                 .map(RoomAssembler::toDto)
-                .toList();
+                .collect(Collectors.toList());
     }
     
     public static Room fromDto(RoomDto dto) {
