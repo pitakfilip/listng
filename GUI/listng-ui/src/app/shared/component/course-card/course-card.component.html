@@ -1,18 +1,13 @@
-<div class="card mt-2 mb-2 clickable" *ngIf="course">
-    <div class="course-card">
-<!--        TODO img farba rozna (??? nevim jak ???)-->
-        <img src="../../../../assets/img/card-background.svg" class="card-img-top" alt="course-card-img">
-        <div class="card-body">
-            <div class="card-title">
-                <span>{{ 'courses.' + course.short | translate }}</span>
-<!--                <span *ngIf="course.isAdmin" class="pull-right">-->
-<!--                    <fa-icon [icon]="faAdmin"></fa-icon>-->
-<!--                </span>-->
-            </div>
-
-            <div class="mt-2">
-                <span><fa-icon [icon]="faStudent"></fa-icon>&nbsp;&nbsp;{{course.students}}</span>
-            </div>
+<mat-card class="card course-card mt-2 mb-2 clickable" (click)="onClick()" *ngIf="permission">
+    <div class="card-image">
+        <img mat-card-image src="../../../../assets/img/card-background.svg" class="card-img-top" alt="course-card-img">
+        <div class="card-action">
+            <span class="card-action-text">{{ getActionLabel() | translation }}</span>
         </div>
     </div>
-</div>
+
+    <mat-card-header class="mb-2">
+        <mat-card-title>{{ course.name | translation }}</mat-card-title>
+        <mat-card-subtitle>{{ 'course.role.' + permission.role | translation }}</mat-card-subtitle>
+    </mat-card-header>
+</mat-card>

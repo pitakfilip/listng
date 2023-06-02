@@ -1,8 +1,23 @@
 {
-    "header": {
-        "filter": "Filtrovanie tabuľky"
+    "menu": {
+        "label": {
+            "courses": "Kurzy",
+            "tasks": "Úlohy",
+            "tasksets": "Zostavy",
+            "users": "Úživatelia",
+            "moss": "MOSS",
+            "general": "Všeobecné",
+            "logs": "Logs"
+        },
+        "account":  {
+            "logout": "Odhlásiť sa",
+            "overview": "Zobraziť prehľad",
+            "change": {
+                "password": "Zmeniť heslo"
+            }
+        }
     },
-    "invalid" : {
+    "invalid": {
         "email": "Nesprávny formát emailovej adresy",
         "password": {
             "new": "Zadané hesla sa nezhodujú",
@@ -21,9 +36,19 @@
         },
         "field": {
             "required": "Pole je povinné"
+        },
+        "404": {
+            "title": "Ajéje problém",
+            "info": "Požadovaná stránka neexistuje alebo k nej nemáte prístup.",
+            "redirect": "Ísť na domovskú stránku"
+        },
+        "500": {
+            "title": "Nastala serverová chyba!",
+            "info": "Akciu prosím zopakujte.\nAk problém pretrváva, kontaktujte správcov"
         }
     },
-    "labels" : {
+    "label": {
+        "in": "v",
         "students": "Študenti",
         "teachers": "Učitelia",
         "submit": "Uložiť",
@@ -33,43 +58,68 @@
         "clear": "Vymazať",
         "close": "Zatvoriť",
         "continue": "Pokračovať",
-        "courses" : "Kurzy",
-        "account" : "Účet",
-        "toggle" : {
+        "courses": "Kurzy",
+        "account": "Účet",
+        "period": "Obdobie",
+        "toggle": {
             "animation": "Animácie"
         },
-        "welcome"   : "Vitajte v LIST-e",
-        "password"  : "Heslo",
-        "password.new"  : "Nové heslo",
-        "password.confirm"  : "Potvrďte heslo",
-        "password.reset"  : "Zabudol som heslo",
-        "password.reset.email"  : "Zadajte emailovú adresu k študentskému kontu",
-        "password.reset.pass"  : "Zadajte nové heslo",
-        "email"     : "Emailová adresa",
-        "login"     : {
-            "title"     : "Prihláste sa",
-            "submit"    : "Prihlásiť"
-        }
-    },
-    "pagination": {
-        "showing": "Zobrazené",
-        "page": "Strana",
-        "recordsPerPage": "záznamov / strana",
-        "of" : "z"
+        "welcome": "Vitajte v LIST-e",
+        "password": "Heslo",
+        "password.new": "Nové heslo",
+        "password.confirm": "Potvrďte heslo",
+        "password.reset": "Zabudol som heslo",
+        "password.reset.email": "Zadajte emailovú adresu k študentskému kontu",
+        "password.reset.pass": "Zadajte nové heslo",
+        "email": "Emailová adresa",
+        "name": "Meno",
+        "login": {
+            "title": "Prihláste sa",
+            "submit": "Prihlásiť"
+        },
+        "reset": "Reset",
+        "edit": "Upraviť",
+        "add": "Pridať",
+        "remove": "Odstrániť",
+        "save": "Uložiť zmeny"
     },
     "user": {
         "name": "Meno",
         "email": "Emailová adresa",
         "active": "Aktívny",
+        "isActive": "Je aktívny",
+        "permission.count": "Počet oprávnení",
+        "actions": "Akcie nad úživateľom",
         "course": {
             "count": "Počet kurzov",
             "active": "Aktuálne kurzy",
-            "permissions": "Oprávnenia v kurze"
+            "permissions": "Oprávnenia v kurze",
+            "belongs": "Patrí do kurzu"
         }
     },
-    "table" : {
+    "table": {
         "no": {
             "record": "Žiaden záznam nebol nájdený."
+        },
+        "action": {
+            "filter": "Filter",
+            "create": "Nový",
+            "delete": "Vymazať",
+            "edit": "Úpraviť"
+        },
+        "tooltip": {
+            "filter": "Otvoriť menu s filtrovaním tabuľky",
+            "create": "Vytvoriť nový záznam",
+            "bulk": {
+                "edit": "Hromadne úpraviť výber",
+                "delete": "Hromadne vymazať výber"
+            },
+            "sort": "Zoradiť podľa stĺpca"
+        }
+    },
+    "modal": {
+        "filter": {
+            "title": "Nastavenie filtrovania"
         }
     },
     "users": {
@@ -83,18 +133,92 @@
             "attendee": "Študent",
             "evaluator": "Hodnotiaci: opravnený úživateľ na hodnotenie študentov, tvorbe úloh a zostáv v danom kurze",
             "owner": "Vlastník: opravnený úživateľ s plnou kontrolou nad kurzom"
+        },
+        "action": {
+            "modal": {
+                "delete": "Naozaj chcete odstrániť účet úživateľa ",
+                "delete.bulk": "Naozaj chcete odstrániť účty označených úživateľov"
+            },
+            "tooltip": {
+                "new": "Vytvoriť nového úživateľa"
+            },
+            "delete": "Odstrániť účet",
+            "permission": {
+                "new": "Nové oprávnenie"
+            },
+            "new": {
+                "form": "Manuálne cez formulár",
+                "import": "Importovať z CSV"
+            }
+        },
+        "modal": {
+            "edit": "Úprava úživateľa",
+            "password.generated": "Heslo je automatický generované a odoslaný mailom úživateľovi.",
+            "new": "Vytvorenie nových úživateľov",
+            "bulk.edit": {
+                "label": "Úprava úživateľov",
+                "selected": "Označeni poúživatelia",
+                "info": "Nové oprávnenia sa vytvoria alebo aktualizuju existujúce oprávnenie pre daný kurz. Oprávnenia na odstránenie sa odstránia používateľom ktorí ho majú.",
+                "role": "Zmena typu úživateľov",
+                "permissions.new": "Nové oprávnenia",
+                "permissions.remove": "Oprávnenia na odstránenie"
+            }
         }
     },
-
-    "courses": {
-        "prog1": "Progamovanie 1 (Python)",
-        "prog2": "Progamovanie 2 (Python)",
-        "prog3": "Progamovanie 3 (C++)",
-        "prog4": "Progamovanie 4 (Java)"
-
+    "course": {
+        "role": {
+            "OWNER": "Vlastník",
+            "EVALUATOR": "Hodnotiaci",
+            "ATTENDEE": "Študent",
+            "VIEWER": "Sledovateľ",
+            "NOT_ASSIGNED": "Nezaradený"
+        },
+        "state": {
+            "PENDING": "Čaká sa na prijatie",
+            "ACTIVE": "Prijatý",
+            "DENIED": "Prístup bol odmietnutý"
+        },
+        "action": {
+            "enter": "Otvoriť obsah kurzu",
+            "request": "Požiadať o prístup"
+        },
+        "label": {
+            "denied": "Prístup do kurzu bol zamietnutý alebo odobratý správcom. Prosím, kontaktujte priamo správcov kurzu.",
+            "pending": "Vaša žiadosť o prístup do kurzu čaká na spracovanie. Prosím, počkajte na spracovanie správcom kurzu.",
+            "request.entry": "Naozaj chcete požiadať o prístup do kurzu "
+        }
     },
-    "period": {
-        "Zim.2022/2023": "Zimný Semester 2022 / 2023",
-        "Let.2022/2023": "Letný Semester 2022 / 2023"
+    "localization": {
+        "sk": "SK",
+        "en": "EN"
+    },
+    "paging": {
+        "page": {
+            "label": "stránka",
+            "first": "Prvá stránka",
+            "last": "Posledná stránka",
+            "next": "Ďalšia stránka",
+            "previous": "Predchádzajúca stránka"
+        },
+        "of": "z",
+        "itemsPerPage": "Záznamov"
+    },
+    "role": {
+        "label": "Typ úživateľa s oprávnením",
+        "student": {
+            "label": "Študent",
+            "description": "Účastník kurzov ako študent alebo opravujúci"
+        },
+        "teacher": {
+            "label": "Učiteľ",
+            "description": "Správca vlastných kurzov a sledovateľ ostatných kurzov"
+        },
+        "root": {
+            "label": "Administrátor",
+            "description": "Správca bez obmedzení"
+        }
+    },
+    "permission": {
+        "period": "Oprávnenia ku kurzu v období"
     }
 }

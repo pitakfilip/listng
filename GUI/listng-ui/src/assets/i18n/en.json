@@ -1,3 +1,126 @@
 {
-
+    "header": {
+        "filter": "Filtrovanie tabuľky"
+    },
+    "menu": {
+        "label": {
+            "courses": "Courses",
+            "tasks": "Tasks",
+            "tasksets": "Task sets",
+            "users": "Users",
+            "moss": "MOSS",
+            "general": "General"
+        }
+    },
+    "invalid": {
+        "email": "Nesprávny formát emailovej adresy",
+        "password": {
+            "new": "Zadané hesla sa nezhodujú",
+            "format": "Heslo musí obsahovať aspoň 6 znakov"
+        },
+        "credentials": "Nesprávne prihlasovacie údaje"
+    },
+    "error": {
+        "action": "Chyba pri akcii",
+        "expire": {
+            "reset": "Vypršala platnosť URL adresy pre obnovenie hesla.",
+            "jwt": "Uplynula doba platnosti prihlásenia od poslednej aktivity. Prosím, opäť sa prihláste"
+        },
+        "invalid": {
+            "resetHash": "Požadovaná URL cesta je neplatná. Skúste požiadať o zaslanie nového link na email alebo kontaktujte administrátora."
+        },
+        "field": {
+            "required": "Pole je povinné"
+        }
+    },
+    "labels": {
+        "students": "Študenti",
+        "teachers": "Učitelia",
+        "submit": "Uložiť",
+        "confirm": "Potvrdiť",
+        "return": "Vrátiť sa",
+        "cancel": "Zrušiť",
+        "clear": "Vymazať",
+        "close": "Zatvoriť",
+        "continue": "Pokračovať",
+        "courses": "Kurzy",
+        "account": "Účet",
+        "period": "Obdobie",
+        "toggle": {
+            "animation": "Animácie"
+        },
+        "welcome": "Vitajte v LIST-e",
+        "password": "Heslo",
+        "password.new": "Nové heslo",
+        "password.confirm": "Potvrďte heslo",
+        "password.reset": "Zabudol som heslo",
+        "password.reset.email": "Zadajte emailovú adresu k študentskému kontu",
+        "password.reset.pass": "Zadajte nové heslo",
+        "email": "Emailová adresa",
+        "login": {
+            "title": "Prihláste sa",
+            "submit": "Prihlásiť"
+        }
+    },
+    "pagination": {
+        "showing": "Zobrazené",
+        "page": "Strana",
+        "recordsPerPage": "záznamov / strana",
+        "of": "z"
+    },
+    "user": {
+        "name": "Meno",
+        "email": "Emailová adresa",
+        "active": "Aktívny",
+        "course": {
+            "count": "Počet kurzov",
+            "active": "Aktuálne kurzy",
+            "permissions": "Oprávnenia v kurze"
+        }
+    },
+    "table": {
+        "no": {
+            "record": "Žiaden záznam nebol nájdený."
+        }
+    },
+    "users": {
+        "state": {
+            "active": "Potvrdený",
+            "denied": "Odmietnutý",
+            "pending": "Čakajúci na potvrdenie"
+        },
+        "role": {
+            "viewer": "Sledovateľ: prístup k študentskému rozhraniu bez možnosti interakcie a odovzdávani.",
+            "attendee": "Študent",
+            "evaluator": "Hodnotiaci: opravnený úživateľ na hodnotenie študentov, tvorbe úloh a zostáv v danom kurze",
+            "owner": "Vlastník: opravnený úživateľ s plnou kontrolou nad kurzom"
+        }
+    },
+    "course": {
+        "role": {
+            "OWNER": "Vlastník",
+            "EVALUATOR": "Hodnotiaci",
+            "ATTENDEE": "Študent",
+            "VIEWER": "Sledovateľ",
+            "NOT_ASSIGNED": "Nezaradený"
+        },
+        "state": {
+            "PENDING": "Čaká sa na prijatie",
+            "ACTIVE": "Prijatý",
+            "DENIED": "Prístup bol odmietnutý"
+        },
+        "action": {
+            "enter": "Otvoriť obsah kurzu",
+            "request": "Požiadať o prístup"
+        },
+        "label": {
+            "denied": "Prístup do kurzu bol zamietnutý alebo odobratý správcom. Prosím, kontaktujte priamo správcov kurzu.",
+            "pending": "Vaša žiadosť o prístup do kurzu čaká na spracovanie. Prosím, počkajte na spracovanie správcom kurzu.",
+            "request.entry": "Naozaj chcete požiadať o prístup do kurzu "
+        }
+    },
+    "localization": {
+        "sk": "SK",
+        "en": "EN"
+    }
 }

@@ -10,7 +10,6 @@ export const AuthGuard = () => {
         return true;
     }
 
-    // TODO call nejaku error service co vyhodi modalne okno so spravou
 
     return router.navigate(['login']);
 }

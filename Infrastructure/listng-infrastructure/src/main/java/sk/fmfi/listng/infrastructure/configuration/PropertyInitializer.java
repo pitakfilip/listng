@@ -14,7 +14,7 @@ public final class PropertyInitializer {
 
     public PropertyInitializer() {}
 
-    //TODO dorob dalsie zaujimave common properties
+    //TODO dalsie zaujimave common properties
     public static void beforeSpringApplicationRun() {
         loadConsulProperties();
         loadHibernateMappings();

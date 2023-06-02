@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {LocalStorageService} from '../service/local-storage.service';
 import {HttpClient} from '@angular/common/http';
-import {Response} from '../model/response';
+import {RestReposnse} from '../model/restReposnse';
 import {LOGIN_API, LOGOUT_API} from '../consts/security.consts';
 
 @Injectable({
@@ -13,7 +12,7 @@ export class AuthApiService {
     }
 
     verifyLogin(username: string, password: string){
-        return this.http.post<Response>(LOGIN_API,
+        return this.http.post<RestReposnse>(LOGIN_API,
             { username: username, password: password});
     }
 

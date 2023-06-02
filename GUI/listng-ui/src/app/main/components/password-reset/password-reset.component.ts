@@ -6,7 +6,6 @@ import {
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
-import {TranslateModule} from '@ngx-translate/core';
 import {MatInputModule} from '@angular/material/input';
 import {NgIf} from '@angular/common';
 import {RxwebValidators} from '@rxweb/reactive-form-validators';
@@ -17,13 +16,14 @@ import {AuthErrorModalComponent} from '../auth-error-modal/auth-error-modal.comp
 import {STANDARD_MODAL_DIALOG_OPTIONS} from '../../../core/consts/modal.consts';
 import {Utils} from '../../../core/util/utils';
 import {MatIconModule} from '@angular/material/icon';
+import {CoreModule} from '../../../core/core.module';
 
 @Component({
     selector: 'app-password-reset',
     templateUrl: './password-reset.component.html',
     imports: [
+        CoreModule,
         ReactiveFormsModule,
-        TranslateModule,
         MatInputModule,
         NgIf,
         MatButtonModule,
@@ -53,7 +53,6 @@ export class PasswordResetComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.makeHash('jozko@uniba.sk'));
         this.isPermaLink = this.route.snapshot.paramMap.has('hash');
 
         if (!this.isPermaLink) {
@@ -125,8 +124,6 @@ export class PasswordResetComponent implements OnInit {
 
     sendEmail() {
         const hash = this.makeHash(this.resetForm.value['email']);
-
-        // TODO poslat request na BE na send email, ak neexistuje vyhodit chybu
     }
 
     resetPasswords() {

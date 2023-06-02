@@ -1,25 +1,23 @@
 <div class="filter-type filter-options" *ngIf="filter">
-    <p>{{ filter.label | translate }}</p>
-    <div class="option-row" >
-        <input type="text" class="form-control option-input" #input
-               [ngbTypeahead]="search"
-               [inputFormatter]="formatter"
-               [resultFormatter]="formatter"
-               [editable]="false"
-               (selectItem)="onSelect($event, input)"
-        />
+    <p>{{ filter.label | translation }}</p>
+    <mat-form-field class="filter-choice">
+        <mat-chip-grid #chipGrid>
+            <mat-chip-row *ngFor="let option of selectedOptions" (removed)="remove(option)" color="accent" highlighted>
+                {{option}}
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip-row>
+        </mat-chip-grid>
+        <input #choiceInput [formControl]="valueCtrl" class="option-input"
+               [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               (matChipInputTokenEnd)="add($event)"/>
 
-        <div class="option-selected">
-            <div *ngFor="let option of filter.value" class="badge text-bg-primary">
-                <span class="selected-label">{{ option.label }}</span>
-                <span class="cancel-icon clickable" (click)="onUnselect(option)"><ng-icon name="bootstrapXLg"></ng-icon></span>
-            </div>
-        </div>
-
-        <div class="option-clear clickable" (click)="clear()">
-            <span>
-                <ng-icon name="bootstrapXCircleFill"></ng-icon>
-            </span>
-        </div>
-    </div>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let value of filteredValues | async" [value]="value">
+                {{value}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
 </div>

@@ -1,0 +1,29 @@
+<div class="form-modal error-modal">
+    <div mat-dialog-content class="form-modal-content">
+        <div class="row row-centered">
+            <span class="col-10 form-title"></span>
+            <span class="col-2 form-close">
+                <button type="button" class="btn btn-blank btn-icon" (click)="close()">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </span>
+        </div>
+
+
+        <div class="row error-icon">
+            <mat-icon class="error-modal-icon">error_outline</mat-icon>
+        </div>
+
+        <div class="row error-title">
+            <h1>{{ 'error.500.title' | translation }}</h1>
+        </div>
+        <div class="row error-info">
+            <h2>{{ 'error.500.info' | translation }}</h2>
+        </div>
+
+        <div class="row save-buttons error-close">
+            <button mat-raised-button color="warn" (click)="close()">{{ 'label.close' | translation }}</button>
+        </div>
+
+    </div>
+</div>

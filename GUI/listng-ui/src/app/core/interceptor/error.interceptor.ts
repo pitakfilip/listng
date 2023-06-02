@@ -3,34 +3,38 @@ import {
     HttpRequest,
     HttpHandler,
     HttpEvent,
-    HttpInterceptor
+    HttpInterceptor, HttpErrorResponse
 } from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import {Observable, tap, throwError} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {AuthenticationService} from '../service/authentication.service';
+import {ErrorService} from '../service/error.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-    constructor(private authService: AuthenticationService) {
+    constructor(private authService: AuthenticationService,
+                private errorService: ErrorService) {
     }
 
-    /**
-     * Handle errors from requests
-     * @param request
-     * @param next
-     */
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return next.handle(request).pipe(catchError((res) => this.errorHandler(res, request.url)));
+        return next.handle(request).pipe(catchError((error: HttpErrorResponse) => this.errorHandler(error, request.url)));
     }
 
-    private errorHandler(response: any, url: string): Observable<any> {
+    private errorHandler(response: HttpErrorResponse, url: string): Observable<any> {
         const status = response?.status;
-        if (status === 401 || status === 403) {
-            this.authService.error(status, url);
+        if (status === 401) {
+            this.errorService.noLogin()
+        } else if (status === 403) {
+            this.errorService.insufficientPermissions(false);
+        } else if (status === 500) {
+            this.errorService.failedRequest();
+        } else {
+            this.errorService.errorMessage(response.message)
         }
+
         const error = response.error;
-        let message = response.message;
+        let message = error.message;
         if (typeof error === 'object') {
             const keys = Object.keys(error);
             if (keys.some(item => item === 'message')) {
@@ -39,8 +43,6 @@ export class ErrorInterceptor implements HttpInterceptor {
         } else if (typeof error === 'string') {
             message = error;
         }
-        // TODO not gucci, call error service s modalnym oknom
-        // 500
         return throwError(() => new Error(message));
     }
 }

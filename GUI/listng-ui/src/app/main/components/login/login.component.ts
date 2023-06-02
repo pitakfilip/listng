@@ -1,19 +1,19 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthApiService} from '../../../core/api/auth-api.service';
-import {TranslateModule} from '@ngx-translate/core';
 import {MatInputModule} from '@angular/material/input';
 import {NgClass, NgIf} from '@angular/common';
 import {RouterLink} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {AuthenticationService} from '../../../core/service/authentication.service';
+import {CoreModule} from '../../../core/core.module';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     imports: [
-        TranslateModule,
+        CoreModule,
         MatInputModule,
         ReactiveFormsModule,
         NgClass,
@@ -46,9 +46,6 @@ export class LoginComponent {
         });
 
         this.year = new Date().getFullYear();
-        const dd = "eyJ1c2VybmFtZSI6ImZwaXRhazExQGdtYWlsLmNvbSIsImV4cGlyZXMiOjE2ODIzMzAxNzE1MDQsInRva2VuIjoiNTcxOTc5MzUzMzQ1ODIzN0U7djk3OGQ5W1k0M1MrKFs2NiQ0KkQ4MEw9djE3NkpneSY1M3YifQ==";
-        console.log(atob(dd));
-
     }
 
     submit() {
@@ -57,7 +54,9 @@ export class LoginComponent {
 
         this.authApi.verifyLogin(username, password)
             .subscribe(response => {
-                if (!response.success){
+                if (response.success){
+                    this.authService.handleLogin(response.payload);
+                } else {
                     this.invalidCredentials();
                 }
             });

@@ -40,6 +40,7 @@ public class SecurityConfig {
             "/preview/**"
     };
     
+    
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
         return new AuthTokenFilter();
@@ -65,16 +66,17 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        
-//        http.cors().and().csrf().disable()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-//                .exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint)
-//                .and().authorizeHttpRequests()
-//                .requestMatchers(AUTH_WHITELIST).permitAll()
-//                .anyRequest().permitAll();
-//
-//        http.authenticationProvider(authenticationProvider());
-//        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.cors().and().csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint)
+                .and().authorizeHttpRequests()
+                .requestMatchers(AUTH_WHITELIST).permitAll()
+                .anyRequest().permitAll();
+//                .requestMatchers("/admin/**").hasAnyAuthority("TEACHER", "ROOT")
+//                .anyRequest().authenticated();
+
+        http.authenticationProvider(authenticationProvider());
+        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

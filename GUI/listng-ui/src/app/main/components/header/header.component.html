@@ -1,100 +1,28 @@
 <header>
-    <nav class="autohide navbar navbar-expand-md navbar-dark bg-success">
-
-        <div class="navbar-brand col-sm-2 col-md-2">
-            <a href="/home">
-                <img class="navbar-logo" src="../../../../assets/img/logo.png" alt="">
-            </a>
-        </div>
-
-<!--        <button *ngIf="!menuCollapsed" class="navbar-toggler" type="button" (click)="toggleMenu()"-->
-<!--                aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--            <span class="navbar-toggler-icon"></span>-->
-<!--        </button>-->
-
-        <div class="navbar-collapse collapse col-sm-10 col-md-6" [ngbCollapse]="menuCollapsed">
-            <div class="navbar-menu mx-auto">
-                <ul class="navbar-nav">
-                    <li class="nav-item" *ngFor="let item of menu">
-                        <a class="nav-link" [ngClass]="{'active' : item.active}" [routerLink]="item.link" routerLinkActive="active">{{item.name}}</a>
-                    </li>
-
-                    <li *ngIf="!menuCollapsed" class="nav-item">
-                        <a ngbDropdown>
-                            <a class="nav-link dropdown-toggle" ngbDropdownToggle>
-                                <fa-icon [icon]="faUser"></fa-icon>
-                            </a>
-
-                            <div class="user-dropdown bg-success" ngbDropdownMenu aria-labelledby="Account Menu">
-                                <a ngbDropdownItem class="dropdown-item" href="#">Nevim</a>
-                                <a ngbDropdownItem class="dropdown-item" href="#">Nevim</a>
-                                <a ngbDropdownItem class="dropdown-item" href="#">Logout</a>
-                            </div>
-                        </a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-
-        <div class="user-burger col-sm-5 col-md-2">
-            <a ngbDropdown *ngIf="menuCollapsed">
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle>
-                    <fa-icon [icon]="faUser"></fa-icon>
+    <mat-toolbar color="primary" class="navbar">
+        <mat-toolbar-row class="navbar-row">
+            <div class="menu-col menu-brand">
+                <a href="">
+                    <img class="brand-logo" src="../../../../assets/img/logo.png" alt="">
                 </a>
+            </div>
 
-                <div class="user-dropdown bg-success" ngbDropdownMenu aria-labelledby="Account Menu">
-                    <a ngbDropdownItem class="dropdown-item" href="#">Nevim</a>
-                    <a ngbDropdownItem class="dropdown-item" href="#">Nevim</a>
-                    <a ngbDropdownItem class="dropdown-item" (click)="logout()">Logout</a>
+            <div class="menu-col menu-links">
+                <div class="menu-links-wrapper" *ngIf="showMenu">
+                    <span *ngFor="let item of menuItems" class="menu-link">
+                        <a mat-button [routerLink]="item.link">{{ 'menu.label.' + item.name | translation }}</a>
+                    </span>
                 </div>
-            </a>
-            <button class="navbar-toggler" type="button" (click)="toggleMenu()"
-                    aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
+            </div>
 
-<!--        <a class="col-md-2 navbar-brand" href="/home">-->
-<!--            <img class="navbar-logo" src="assets/img/logo.png" alt="">-->
-<!--        </a>-->
+            <div class="menu-col menu-user">
+                <app-user-button></app-user-button>
+            </div>
 
-<!--        <button *ngIf="!menuCollapsed" class="navbar-toggler" type="button" (click)="toggleMenu()"-->
-<!--                aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--            <span class="navbar-toggler-icon"></span>-->
-<!--        </button>-->
+            <div class="menu-col menu-controls">
+                <app-language-switch></app-language-switch>
+            </div>
 
-<!--        <div class="collapse navbar-collapse" [ngbCollapse]="menuCollapsed">-->
-<!--            <div class="menu-items col-md-9">-->
-<!--                <ul class="navbar-nav">-->
-<!--                    <li class="nav-item" *ngFor="let item of menu">-->
-<!--                        <a class="nav-link" [ngClass]="{'active' : item.active}" routerLink="home" routerLinkActive="active">{{item.name}}</a>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </div>-->
-
-<!--            <div class="menu-user col-md-3">-->
-<!--                <ul class="navbar-nav mx-auto">-->
-<!--                    <li ngbDropdown class="nav-item">-->
-<!--                        <a class="nav-link dropdown-toggle" ngbDropdownToggle>-->
-<!--                            <fa-icon [icon]="faUser"></fa-icon>-->
-<!--                        </a>-->
-
-<!--                        <div class="user-dropdown bg-success" ngbDropdownMenu aria-labelledby="Account Menu">-->
-<!--                            <a ngbDropdownItem class="dropdown-item" href="#">Nevim</a>-->
-<!--                            <a ngbDropdownItem class="dropdown-item" href="#">Nevim</a>-->
-<!--                            <a ngbDropdownItem class="dropdown-item" href="#">Logout</a>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </div>-->
-
-<!--        </div>-->
-
-<!--&lt;!&ndash;        <div class="col-md-2"></div>&ndash;&gt;-->
-<!--        <button *ngIf="menuCollapsed" class="navbar-toggler" type="button" (click)="toggleMenu()"-->
-<!--                aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--            <span class="navbar-toggler-icon"></span>-->
-<!--        </button>-->
-    </nav>
+        </mat-toolbar-row>
+    </mat-toolbar>
 </header>

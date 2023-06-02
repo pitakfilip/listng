@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sk.fmfi.listng.course.application.assembler.GroupAssembler;
 import sk.fmfi.listng.course.application.repository.GroupRepository;
+import sk.fmfi.listng.course.domain.Group;
 import sk.fmfi.listng.course.dto.GroupDto;
-import sk.fmfi.listng.domain.administration.Group;
-import sk.fmfi.listng.domain.administration.MultiLangText;
-import sk.fmfi.listng.domain.course.Course;
+import sk.fmfi.listng.infrastructure.common.dto.MultiLangText;
 
 @Service
 public class GroupService {
@@ -15,8 +14,8 @@ public class GroupService {
     @Autowired
     private GroupRepository groupRepository;
 
-    public void createDefaultGroup(Course course) {
-        Group group = new Group(course.getId(), new MultiLangText("Všetci", "All"));
+    public void createDefaultGroup(Long courseId) {
+        Group group = new Group(courseId, new MultiLangText("Všetci", "All"));
         groupRepository.save(group);
     }
     
@@ -24,8 +23,8 @@ public class GroupService {
         return groupRepository.existsById(groupId);
     }
 
-    public void save(Group group) {
-        groupRepository.save(group);
+    public Long save(GroupDto group) {
+        return groupRepository.save(GroupAssembler.fromDto(group)).getId();
     }
 
     public void deleteById(long id) {

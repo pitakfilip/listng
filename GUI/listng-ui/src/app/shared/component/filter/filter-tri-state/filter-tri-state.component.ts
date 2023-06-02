@@ -2,6 +2,9 @@ import {Component, forwardRef} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Filter} from '../../../../core/model/filter/filter';
 import {Utils} from '../../../../core/util/utils';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {CoreModule} from '../../../../core/core.module';
+import {NgIf} from '@angular/common';
 
 @Component({
     selector: 'app-filter-boolean',
@@ -12,7 +15,13 @@ import {Utils} from '../../../../core/util/utils';
             useExisting: forwardRef(() => FilterTriStateComponent),
             multi: true
         }
-    ]
+    ],
+    imports: [
+        MatCheckboxModule,
+        CoreModule,
+        NgIf
+    ],
+    standalone: true
 })
 export class FilterTriStateComponent implements ControlValueAccessor {
 

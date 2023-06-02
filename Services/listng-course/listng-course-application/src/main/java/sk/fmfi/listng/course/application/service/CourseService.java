@@ -2,12 +2,16 @@ package sk.fmfi.listng.course.application.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sk.fmfi.listng.course.application.assembler.CourseAssembler;
+import sk.fmfi.listng.course.application.assembler.PeriodAssembler;
 import sk.fmfi.listng.course.application.repository.CourseRepository;
 import sk.fmfi.listng.course.application.repository.GroupRepository;
-import sk.fmfi.listng.domain.administration.Group;
-import sk.fmfi.listng.domain.administration.MultiLangText;
-import sk.fmfi.listng.domain.course.Course;
-import sk.fmfi.listng.domain.course.Period;
+import sk.fmfi.listng.course.domain.Course;
+import sk.fmfi.listng.course.domain.Group;
+import sk.fmfi.listng.course.domain.Period;
+import sk.fmfi.listng.course.dto.CourseDto;
+import sk.fmfi.listng.course.dto.PeriodDto;
+import sk.fmfi.listng.infrastructure.common.dto.MultiLangText;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,8 +32,9 @@ public class CourseService {
         return courseRepository.existsById(courseId);
     }
     
-    public void saveCourse(Course course) {
-        courseRepository.save(course);
+    public Long saveCourse(CourseDto dto) {
+        Course saved = courseRepository.save(CourseAssembler.fromDto(dto));
+        return saved.getId();
     }
 
     /**
@@ -39,11 +44,17 @@ public class CourseService {
      * TODO</strong> copy tasksets of the given existing course with their configurations,
      *  but without Date/Time related data (e.g. deadline) -> Need a TaskSetApi proxy once implemented.
      * </pre>
-     * @param from existing course which we want to copy.
-     * @param period new period to which we copy an existing course.
+     * @param courseId id of existing course.
+     * @param periodId id of period to which we copy the course.
      */
-    public void copyCourse(Course from, Period period) {
-        Course newCourse = Course.copy(from, period.getId());
+    public void copyCourse(Long courseId, Long periodId) {
+        Course from = courseRepository.getReferenceById(courseId);       
+        
+        if (!periodService.exists(periodId)) {
+            return;
+        }
+        
+        Course newCourse = Course.copy(from, periodId);
         Course course = courseRepository.save(newCourse);
 
         List<Group> oldGroups = groupRepository.getGroupsByCourseId(from.getId());

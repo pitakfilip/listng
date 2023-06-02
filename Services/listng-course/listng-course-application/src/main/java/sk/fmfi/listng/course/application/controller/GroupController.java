@@ -8,8 +8,8 @@ import sk.fmfi.listng.course.api.GroupApi;
 import sk.fmfi.listng.course.application.assembler.GroupAssembler;
 import sk.fmfi.listng.course.application.service.CourseService;
 import sk.fmfi.listng.course.application.service.GroupService;
+import sk.fmfi.listng.course.domain.Group;
 import sk.fmfi.listng.course.dto.GroupDto;
-import sk.fmfi.listng.domain.administration.Group;
 
 import java.util.List;
 
@@ -26,26 +26,24 @@ public class GroupController implements GroupApi {
 
     @Override
     public void createGroups(List<GroupDto> groups) {
-        for (GroupDto groupDto : groups) {
-            if (!courseService.courseExists(groupDto.courseId)) {
+        for (GroupDto group : groups) {
+            if (!courseService.courseExists(group.courseId)) {
                 throw new EntityNotFoundException("error.course.not.found");
             }
-            Group group = GroupAssembler.fromDto(groupDto);
             groupService.save(group);
         }
     }
 
     @Override
     public void updateGroups(List<GroupDto> groups) {
-        for (GroupDto groupDto : groups) {
-            if (!groupService.groupExists(groupDto.id)){
+        for (GroupDto group : groups) {
+            if (!groupService.groupExists(group.id)){
                 throw new EntityNotFoundException("error.group.not.found");
             }
-            if (!courseService.courseExists(groupDto.courseId)) {
+            if (!courseService.courseExists(group.courseId)) {
                 throw new EntityNotFoundException("error.course.not.found");
             }
             
-            Group group = GroupAssembler.fromDto(groupDto);
             groupService.save(group);
         }
     }

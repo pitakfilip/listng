@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="sk.fmfi.listng.domain.course.Course" table="COURSE">
+    <class name="sk.fmfi.listng.course.domain.Course" table="COURSE">
 
         <cache usage="read-write"/>
 
@@ -16,14 +16,14 @@
         
         <component 
                 name="name" 
-                class="sk.fmfi.listng.domain.administration.MultiLangText">
+                class="sk.fmfi.listng.infrastructure.common.dto.MultiLangText">
             <property name="SK" column="NAME_SK" type="java.lang.String"/>
             <property name="EN" column="NAME_EN" type="java.lang.String"/>
         </component>
         
         <component
                 name="abbreviation"
-                class="sk.fmfi.listng.domain.administration.MultiLangText">
+                class="sk.fmfi.listng.infrastructure.common.dto.MultiLangText">
             <property name="SK" column="ABBREVIATION_SK" type="java.lang.String"/>
             <property name="EN" column="ABBREVIATION_EN" type="java.lang.String"/>
         </component>
@@ -40,8 +40,8 @@
             <key>
                 <column name="COURSE_ID" not-null="true" />
             </key>
-            <one-to-many class="sk.fmfi.listng.domain.administration.Group" />
-        </set>
+            <one-to-many class="sk.fmfi.listng.course.domain.Group" />
+        </set>        
     </class>
 
 </hibernate-mapping>

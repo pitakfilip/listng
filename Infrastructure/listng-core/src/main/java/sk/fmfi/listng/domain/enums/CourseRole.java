@@ -4,5 +4,6 @@ public enum CourseRole {
     VIEWER,
     ATTENDEE,
     EVALUATOR,
-    OWNER
+    OWNER,
+    NOT_ASSIGNED
 }

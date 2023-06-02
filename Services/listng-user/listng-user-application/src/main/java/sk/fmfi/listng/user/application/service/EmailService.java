@@ -13,11 +13,11 @@ import javax.mail.MessagingException;
 @Service
 public class EmailService {
 
-    @Autowired
-    private JavaMailSender mailSender;
-
-    @Autowired
-    private TemplateEngine templateEngine;
+//    @Autowired
+//    private JavaMailSender mailSender;
+//
+//    @Autowired
+//    private TemplateEngine templateEngine;
         
     private static final String subjectBase = "[LIST-NG] ";
     
@@ -31,13 +31,13 @@ public class EmailService {
      * @throws MessagingException in case of a failure sending the email.
      */
     public void sendRawEmail(String to, String subject, String body) throws MessagingException, jakarta.mail.MessagingException {
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
-        helper.setSubject(subject);
-        helper.setText(body);
-        helper.setTo(to);
-
-        mailSender.send(mimeMessage);
+//        MimeMessage mimeMessage = mailSender.createMimeMessage();
+//        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
+//        helper.setSubject(subject);
+//        helper.setText(body);
+//        helper.setTo(to);
+//
+//        mailSender.send(mimeMessage);
     }
 
     /**
@@ -48,13 +48,13 @@ public class EmailService {
      * @throws MessagingException in case of a failure sending the email.
      */
     public void sendRawEmails(String[] to, String subject, String body) throws MessagingException, jakarta.mail.MessagingException {
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
-        helper.setSubject(subject);
-        helper.setText(body);
-        helper.setTo(to);
+//        MimeMessage mimeMessage = mailSender.createMimeMessage();
+//        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
+//        helper.setSubject(subject);
+//        helper.setText(body);
+//        helper.setTo(to);
 
-        mailSender.send(mimeMessage);
+//        mailSender.send(mimeMessage);
     }
 
     /**
@@ -65,18 +65,18 @@ public class EmailService {
      *                  either plain text or a HTML formatted text.
      * @throws MessagingException in case of a failure sending the email.
      */
-    public void sendTemplatedMail(String to, String subject, String body) throws MessagingException, jakarta.mail.MessagingException {
-        Context context = new Context();
-        context.setVariable("innerBodyInject", body);
-
-        String process = templateEngine.process("general", context);
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
-        helper.setSubject(subjectBase + subject);
-        helper.setText(process, true);
-        helper.setTo(to);
-        
-        mailSender.send(mimeMessage);
+    public void sendTemplatedMail(String to, String subject, String body) throws jakarta.mail.MessagingException {
+//        Context context = new Context();
+//        context.setVariable("innerBodyInject", body);
+//
+//        String process = templateEngine.process("general", context);
+//        MimeMessage mimeMessage = mailSender.createMimeMessage();
+//        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
+//        helper.setSubject(subjectBase + subject);
+//        helper.setText(process, true);
+//        helper.setTo(to);
+//
+//        mailSender.send(mimeMessage);
     }
 
     /**
@@ -88,31 +88,31 @@ public class EmailService {
      * @throws MessagingException in case of a failure sending the email.
      */
     public void sendTemplatedMails(String[] to, String subject, String body) throws MessagingException, jakarta.mail.MessagingException {
-        Context context = new Context();
-        context.setVariable("innerBodyInject", body);
-
-        String process = templateEngine.process("general", context);
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
-        helper.setSubject(subjectBase + subject);
-        helper.setText(process, true);
-        helper.setTo(to);
-
-        mailSender.send(mimeMessage);
+//        Context context = new Context();
+//        context.setVariable("innerBodyInject", body);
+//
+//        String process = templateEngine.process("general", context);
+//        MimeMessage mimeMessage = mailSender.createMimeMessage();
+//        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
+//        helper.setSubject(subjectBase + subject);
+//        helper.setText(process, true);
+//        helper.setTo(to);
+//
+//        mailSender.send(mimeMessage);
     }
     
     public void sendPasswordReset(String email, String URL, String expires) throws MessagingException, jakarta.mail.MessagingException {
-        Context context = new Context();
-        context.setVariable("generatedURL", URL);
-        context.setVariable("linkExpires", expires);
-        
-        String process = templateEngine.process("reset", context);
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
-        helper.setSubject(subjectBase + subjectPasswordReset);
-        helper.setText(process, true);
-        helper.setTo(email);
-        
-        mailSender.send(mimeMessage);
+//        Context context = new Context();
+//        context.setVariable("generatedURL", URL);
+//        context.setVariable("linkExpires", expires);
+//        
+//        String process = templateEngine.process("reset", context);
+//        MimeMessage mimeMessage = mailSender.createMimeMessage();
+//        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
+//        helper.setSubject(subjectBase + subjectPasswordReset);
+//        helper.setText(process, true);
+//        helper.setTo(email);
+//        
+//        mailSender.send(mimeMessage);
     }
 }

@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="sk.fmfi.listng.domain.administration.Class" table="CLASS">
+    <class name="sk.fmfi.listng.course.domain.Class" table="CLASS">
 
         <cache usage="read-write"/>
 

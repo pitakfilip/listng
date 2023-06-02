@@ -1,27 +1,24 @@
 package sk.fmfi.listng.rest.security.auth;
 
 import java.security.*;
-import java.util.*;
+
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.impl.DefaultClaims;
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
-import org.springframework.web.util.WebUtils;
 import javax.crypto.spec.SecretKeySpec;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import javax.xml.bind.DatatypeConverter;
 import io.jsonwebtoken.*;
 
-import sk.fmfi.listng.rest.controller.payload.response.CoursePermission;
+import org.springframework.stereotype.Service;
+import org.springframework.web.util.WebUtils;
 import sk.fmfi.listng.rest.security.user.AppUser;
-import sk.fmfi.listng.rest.security.user.role.AppCourseRole;
-import sk.fmfi.listng.rest.security.user.role.AppUserRole;
-import sk.fmfi.listng.rest.security.user.role.UserRole;
 
-@Component
+@Service
 public class JwtUtils {
 
     @Value("${app.jwt.secret}")
@@ -56,19 +53,35 @@ public class JwtUtils {
         }
     }
 
-    public ResponseCookie generateJwtCookie(AppUser userPrincipal) {
+    public Cookie generateJwtCookie(AppUser userPrincipal) {
         String jwt = generateTokenFromUser(userPrincipal);
-        return ResponseCookie.from(jwtCookieName, jwt)
-                .path("/api")
-                .maxAge(ONE_DAY_SECONDS)
-                .httpOnly(false)
-                .build();
+        Cookie cookie = new Cookie(jwtCookieName, jwt);
+        cookie.setPath("/");
+        cookie.setMaxAge((int) ONE_HOUR_SECONDS);
+        cookie.setSecure(true);
+        cookie.setHttpOnly(true);
+        
+        return cookie;
     }
 
-    public ResponseCookie getCleanJwtCookie() {
-        return ResponseCookie.from(jwtCookieName, null)
-                .path("/api")
-                .build();
+    public Cookie refreshCookie(String jwt) {
+        Cookie cookie = new Cookie(jwtCookieName, jwt);
+        cookie.setPath("/");
+        cookie.setMaxAge((int) ONE_HOUR_SECONDS);
+        cookie.setSecure(true); 
+        cookie.setHttpOnly(true);
+
+        return cookie;
+    }
+    
+    public Cookie getCleanJwtCookie() {
+        Cookie cookie = new Cookie(jwtCookieName, "");
+        cookie.setPath("/");
+        cookie.setMaxAge((int) ONE_HOUR_SECONDS);
+        cookie.setSecure(true); 
+        cookie.setHttpOnly(true);
+
+        return cookie;
     }
 
     public String getUserNameFromJwtToken(String jwt) {
@@ -78,7 +91,7 @@ public class JwtUtils {
                 .parseClaimsJws(jwt)
                 .getBody();
         
-        return claims.get("USER_MAIL", String.class);
+        return claims.get("mail", String.class);
     }
 
     public boolean validateJwtToken(String authToken) {
@@ -93,8 +106,6 @@ public class JwtUtils {
             System.err.println("Invalid JWT signature: " + e.getMessage());
         } catch (MalformedJwtException e) {
             System.err.println("Invalid JWT token: " + e.getMessage());
-        } catch (ExpiredJwtException e) {
-            System.err.println("JWT token is expired: " + e.getMessage());
         } catch (UnsupportedJwtException e) {
             System.err.println("JWT token is unsupported: " + e.getMessage());
         } catch (IllegalArgumentException e) {
@@ -116,24 +127,7 @@ public class JwtUtils {
         claims.put("id", user.getId());
         claims.put("name", user.getFullname());
         claims.put("mail", user.getUsername());
-        
-        List<CoursePermission> courseRoles = new ArrayList<>();
-
-        user.getAuthorities()
-                .forEach(authority -> {
-            UserRole role = authority.getRole();
-            
-            if (role instanceof AppUserRole) {
-                claims.put("role", ((AppUserRole) role).getRole().getName());
-            } else if (role instanceof AppCourseRole) {
-                CoursePermission permission = new CoursePermission(role.getIdentifier(), ((AppCourseRole) role).getRole());
-                courseRoles.add(permission);
-            }
-        });
-        
-        if (!courseRoles.isEmpty()) {
-            claims.put("permissions", courseRoles);
-        }
+        claims.put("role", user.getSysRole());
         
         return claims;
     }

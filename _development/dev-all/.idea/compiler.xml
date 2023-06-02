@@ -13,27 +13,15 @@
         <module name="listng-course-application" />
         <module name="listng-user-api" />
         <module name="listng-infrastructure" />
+        <module name="listng-course-domain" />
         <module name="listng-task-application" />
         <module name="listng-rest" />
         <module name="listng-user-application" />
-        <module name="listng-core" />
+        <module name="listng-user-domain" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="listng-consul-develop" target="17" />
       <module name="listng-core" target="17" />
-      <module name="listng-course" target="17" />
-      <module name="listng-course-api" target="17" />
-      <module name="listng-course-application" target="17" />
-      <module name="listng-infrastructure" target="17" />
-      <module name="listng-rest" target="17" />
-      <module name="listng-shared" target="17" />
-      <module name="listng-task" target="1.5" />
-      <module name="listng-task-api" target="1.5" />
-      <module name="listng-task-application" target="1.5" />
-      <module name="listng-user" target="17" />
-      <module name="listng-user-api" target="17" />
-      <module name="listng-user-application" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -44,15 +32,16 @@
       <module name="listng-course" options="" />
       <module name="listng-course-api" options="" />
       <module name="listng-course-application" options="" />
+      <module name="listng-course-domain" options="" />
       <module name="listng-infrastructure" options="" />
       <module name="listng-rest" options="-parameters" />
-      <module name="listng-shared" options="" />
       <module name="listng-task" options="" />
       <module name="listng-task-api" options="" />
       <module name="listng-task-application" options="" />
       <module name="listng-user" options="" />
       <module name="listng-user-api" options="" />
       <module name="listng-user-application" options="" />
+      <module name="listng-user-domain" options="" />
     </option>
   </component>
 </project>

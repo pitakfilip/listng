@@ -2,29 +2,47 @@ span.card-title {
     font-weight: bold;
 }
 
-div.course-card {
+.course-card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 0.375rem;
-    img {
+
+    .card-image {
         height: 145px;
-        object-fit: cover;
-        transition: opacity 0.6s ease-out;
+        > img {
+            max-height: 145px;
+            object-fit: cover;
+            transition: opacity 0.6s ease-out;
+
+        }
     }
-    div.card-body {
-        border-radius: 0 0 0.3rem 0.3rem;
-        transition-duration: 0.6s;
+
+    .card-image > .card-action {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        height: 145px;
+        text-align: center;
+        display: grid;
+
+        > span {
+            justify-self: center;
+            align-self: center;
+            font-size: 1.2em;
+        }
+        opacity: 0;
     }
 }
 
-div.course-card:hover {
+.course-card:hover {
     border-radius: 0.375rem;
-    img {
-        //transition-duration: 0.6s;
-        //opacity: 0.6;
-    }
-    div.card-body {
-
+    .card-image > img {
         transition-duration: 0.6s;
-        background-color: $green2;
+        opacity: 0.6;
+    }
+    .card-image > .card-action {
+        transition-duration: 0.6s;
+        opacity: 0.6;
     }
 }

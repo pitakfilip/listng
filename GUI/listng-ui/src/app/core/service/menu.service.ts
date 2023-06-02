@@ -15,7 +15,7 @@ export class MenuService {
     // TODO prepisat na Observable<MenuItem[]> a volat rest api
     getMenuItems(): string[] {
 
-        return ['Kurzy', 'Studenti', 'Ucet', 'idk nieco este'];
+        return ['Kurzy', 'Studenti', 'Ucet', ];
 
         // return this.http.get<MenuItem[]>(this.#apiUrl);
     }

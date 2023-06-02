@@ -1,6 +1,7 @@
 package sk.fmfi.listng.domain.administration;
 
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,7 +9,7 @@ import java.util.Set;
  * Trieda reprezentujúca skupinu študentov v kurze.
  */
 
-public class Group {
+public class Group implements Serializable {
     
     private long id;
     
@@ -26,6 +27,11 @@ public class Group {
     public Group(long course, MultiLangText name) {
         this.courseId = course;
         this.name = name;
+    }
+
+    public Group(long course, String sk, String en) {
+        this.courseId = course;
+        this.name = new MultiLangText(sk, en);
     }
 
     public long getId() {

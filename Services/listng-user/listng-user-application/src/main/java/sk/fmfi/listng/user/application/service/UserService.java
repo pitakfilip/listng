@@ -1,11 +1,18 @@
 package sk.fmfi.listng.user.application.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import sk.fmfi.listng.domain.user.User;
-import sk.fmfi.listng.user.application.repository.UserRepository;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import sk.fmfi.listng.infrastructure.common.dto.PageResponse;
+import sk.fmfi.listng.user.application.assembler.UserAssembler;
+import sk.fmfi.listng.user.application.repository.UserRepository;
+import sk.fmfi.listng.user.domain.SystemRole;
+import sk.fmfi.listng.user.domain.User;
+import sk.fmfi.listng.user.dto.UserDto;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -43,24 +50,35 @@ public class UserService {
         user.setPassword("");
         return user;
     }
+
+    public List<UserDto> getUsersById(List<Long> ids) {
+        return userRepository.findAllByIdIn(ids).stream()
+                .map(UserAssembler::toDto)
+                .toList();
+    }
+    
+    public PageResponse<User> getUsersPage(Pageable pageable, boolean students) {
+        List<SystemRole> roles;
+        if (students) {
+            roles = List.of(SystemRole.STUDENT);
+        }
+        else {
+            roles = List.of(SystemRole.TEACHER, SystemRole.ROOT);
+        }
+        
+        Page<User> page = userRepository.findAllByRoleIn(pageable, roles);
+        return new PageResponse<>(page);
+    }
     
     public boolean exists(String email) {
         return userRepository.existsByEmail(email);
     }
     
-    public User save(User user) {
-        return userRepository.save(user);
+    public boolean exists(Long id) { return userRepository.existsById(id);}
+    
+    @Transactional
+    public void delete(List<Long> userIds){
+        userRepository.deleteByIdIn(userIds);
     }
     
-    public List<User> save(List<User> users){
-        return userRepository.saveAll(users);
-    }
-    
-    public void delete(User user){
-        userRepository.deleteByEmail(user.getEmail());
-    }
-
-    public void delete(List<User> users){
-        userRepository.deleteAllInBatch(users);
-    }
 }

@@ -6,11 +6,11 @@ public class Attachement {
 
     private String name;
 
-    private String path;
+    private String relativePath;
 
-    public Attachement(String name, String path) {
+    public Attachement(String name, String relativePath) {
         this.name = name;
-        this.path = path;
+        this.relativePath = relativePath;
     }
 
     public Long getId() {
@@ -29,11 +29,11 @@ public class Attachement {
         this.name = name;
     }
 
-    public String getPath() {
-        return path;
+    public String getRelativePath() {
+        return relativePath;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setRelativePath(String relativePath) {
+        this.relativePath = relativePath;
     }
 }

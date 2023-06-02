@@ -2,7 +2,7 @@
     <div class="row pager-content">
         <div class="col-md-3 pager-section">
             <div>
-                <span>{{ 'pagination.showing' | translate }} {{ getCurrentLabel() }}</span>
+                <span>{{ 'pagination.showing' | translation }} {{ getCurrentLabel() }}</span>
             </div>
         </div>
         <div class="col-md-6 pager-section">
@@ -29,7 +29,7 @@
                             aria-labelledby="paginationInputLabel paginationDescription"
                             style="width: 2.5rem"
                         />
-                        <span id="paginationDescription" class="col-form-label text-nowrap px-2"> {{ 'pagination.of' | translate }} {{totalPages}}</span>
+                        <span id="paginationDescription" class="col-form-label text-nowrap px-2"> {{ 'pagination.of' | translation }} {{totalPages}}</span>
                     </div>
 
                 </ng-template>
@@ -39,7 +39,7 @@
         <div class="col-md-3 pager-section">
             <div ngbDropdown placement="bottom-right" class="pull-right">
                 <button type="button" class="btn btn-dropdown dropdown-toggle" ngbDropdownToggle>
-                    {{paging.pageSize}}&nbsp;{{ 'pagination.recordsPerPage' | translate }}
+                    {{paging.pageSize}}&nbsp;{{ 'pagination.recordsPerPage' | translation }}
                 </button>
 
                 <ul ngbDropdownMenu class="size-options">

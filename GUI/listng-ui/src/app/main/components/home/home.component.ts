@@ -1,85 +1,90 @@
 import {Component} from '@angular/core';
 import {Utils} from '../../../core/util/utils';
+import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle} from '@ng-bootstrap/ng-bootstrap';
+import {CourseCardComponent} from '../../../shared/component/course-card/course-card.component';
+import {NgForOf, NgIf} from '@angular/common';
+import {Period} from '../../../core/model/period';
+import {PeriodApiService} from '../../../core/api/period-api.service';
+import {MatSelectModule} from '@angular/material/select';
+import {FormsModule} from '@angular/forms';
+import {CourseBase} from '../../../core/model/course';
+import {CoreModule} from '../../../core/core.module';
+import {CourseApiService} from '../../../core/api/course-api.service';
+import {UserPermissionApiService} from '../../../core/api/user-permission-api.service';
+import {CoursePermission, DEFAULT_STUDENT_PERMISSION} from '../../../core/model/course-permission';
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    styles: []
+    imports: [
+        NgbDropdown,
+        NgbDropdownMenu,
+        NgbDropdownToggle,
+        NgbDropdownItem,
+        CourseCardComponent,
+        NgForOf,
+        NgIf,
+        MatSelectModule,
+        FormsModule,
+        CoreModule
+    ],
+    standalone: true
 })
 export class HomeComponent {
 
-    $kurzy = [{id: 1, name: 'Programovanie 4 (Java)', students: 43, isAdmin: false}]
-
-    $kurzyy = [
-        {id: 1, short:'prog4', name: 'Programovanie 4 (Java)', students: 43, isAdmin: false},
-        {id: 2, short:'prog3', name: 'Programovanie 3 (C++)', students: 69, isAdmin: true},
-        {id: 3, short:'prog2', name: 'Programovanie 2 (Python)', students: 22, isAdmin: true},
-        {id: 4, short:'prog1', name: 'Programovanie 1 (Python)', students: 99, isAdmin: false},
-    ];
-
-    $obdobia = [
-        { id: 2, ozn: 'Zim.2022/2023', isCurrent : false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false },
-        { id: 1, ozn: 'Let.2022/2023', isCurrent: false }
-    ]
+    $periods: Period[];
     selectedPeriod : any;
-    otherPeriods : any;
 
-    constructor() {
-        this.setDefaultPeriod();
-        this.setOtherPeriods();
+    $courses: CourseBase[];
+    $permissions = new Map<number, CoursePermission>();
+
+    constructor(private periodApi: PeriodApiService,
+                private courseApi: CourseApiService,
+                private permissionApi: UserPermissionApiService) {
+        this.fetchPeriods();
     }
 
-    setDefaultPeriod() {
-        if (Utils.exists(this.$obdobia)) {
-            const current = this.$obdobia.find( element => {
-                return element.isCurrent;
+    fetchPeriods() {
+        this.periodApi.getPeriods()
+            .subscribe(response => {
+                this.$periods = response.payload;
+                this.selectedPeriod = this.$periods.find(period => period.active).id;
+                this.fetchCourses();
             });
-            if (Utils.exists(current)){
-                this.selectedPeriod = current;
-            } else {
-                this.selectedPeriod = this.$obdobia[0];
-            }
-        }
     }
 
-    setOtherPeriods() {
-        if (Utils.exists(this.$obdobia)){
-            this.otherPeriods = this.$obdobia.filter( element => {
-                return element.id !== this.selectedPeriod.id;
+    fetchCourses() {
+        if (!Utils.exists(this.selectedPeriod)) {
+            return;
+        }
+        this.courseApi.getOfPeriod(this.selectedPeriod)
+            .subscribe(response => {
+                if (response.success) {
+                    this.$courses = response.payload;
+                    this.fetchPermissions();
+                }
             });
-        }
     }
 
-    changePeriod (id : number) {
-        console.log(id);
-        this.selectedPeriod = this.$obdobia.find( element => {
-            return element.id === id;
-        });
-        this.setOtherPeriods();
+    fetchPermissions() {
+        this.permissionApi.getPeriodPermissions(this.selectedPeriod)
+            .subscribe(response => {
+                if (response.success) {
+                    for (let course of this.$courses) {
+                        this.$permissions.set(course.id, response.payload[course.id]);
+                    }
+                }
+            })
+    }
+
+    onPeriodChange() {
+        this.fetchCourses();
+    }
+
+    getCoursePermission(courseId: number) {
+        if (this.$permissions.has(courseId) && Utils.exists(this.$permissions.get(courseId))) {
+            return this.$permissions.get(courseId);
+        }
+        return DEFAULT_STUDENT_PERMISSION;
     }
 }

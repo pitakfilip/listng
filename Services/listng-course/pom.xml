@@ -12,6 +12,7 @@
     <modules>
         <module>listng-course-api</module>
         <module>listng-course-application</module>
+        <module>listng-course-domain</module>
     </modules>
 
     <properties>
@@ -19,7 +20,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <listng-core.version>1.0.0-SNAPSHOT</listng-core.version><!--    TAG:listng-core Version    -->
+        <listng-core.version>1.0.0-SNAPSHOT</listng-core.version><!--    TAG:listng-domain Version    -->
         <listng-infrastructure.version>1.0.0</listng-infrastructure.version><!--    TAG:listng-infrastructure Version    -->
 
         <springboot.version>3.0.5</springboot.version>
@@ -41,17 +42,17 @@
         <dependencies>
             <dependency>
                 <groupId>sk.fmfi.listng</groupId>
-                <artifactId>listng-core</artifactId>
-                <version>${listng-core.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>sk.fmfi.listng</groupId>
                 <artifactId>listng-infrastructure</artifactId>
                 <version>${listng-infrastructure.version}</version>
             </dependency>
             <dependency>
                 <groupId>sk.fmfi.listng.course</groupId>
                 <artifactId>listng-course-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>sk.fmfi.listng.course</groupId>
+                <artifactId>listng-course-domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

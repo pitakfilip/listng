@@ -4,6 +4,7 @@
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 @import 'variables';
+@import 'custom_material';
 @import 'tables';
 @import 'buttons';
 @import 'header';
@@ -12,7 +13,6 @@
 @import 'home';
 @import 'filters';
 @import 'modals';
-@import 'custom_material';
 
 .login-body {
     position: relative;
@@ -20,13 +20,22 @@
     height: 100vh;
 }
 
-.list-body {
+.main-body-wrapper {
     position: relative;
     margin-top: 3em;
-    width: 75%;
+    min-width: 80vw;
     min-height: 80vh;
-    background-color: white;
-    padding: 3em;
+    width: 80vw;
+}
+
+.list-body {
+    //background-color: orange;
+    background-color: ghostwhite;
+    //height: 80vh;
+    //width: 80vw;
+    padding: 1em;
+    border: 1px solid $green2; // FIXME ???
+    border-radius: 0.5em;
 }
 
 button.list-btn {
@@ -38,7 +47,7 @@ button.list-btn {
 }
 
 .pull-middle {
-    text-align: center;
+    //text-align: center;
     justify-content: center;
     display: flex;
 }
@@ -49,7 +58,13 @@ button.list-btn {
     //align-items: end;
     //margin-right: 0;
     //margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
     float: right;
+}
+
+.flex-end {
+    justify-content: flex-end;
 }
 
 .pull-left {
@@ -86,4 +101,29 @@ button.list-btn {
 
 .half-gray {
     color: $c-gray-light;
+}
+
+.em-1 {
+    font-size: 1em;
+}
+.ml-2 {
+    margin-left: 2em;
+}
+
+@mixin make-margins() {
+    @for $i from 1 through 5 {
+        .mt-#{$i} {
+            margin-top: #{$i}em;
+        }
+        .ml-#{$i} {
+            margin-left: #{$i}em;
+        }
+    }
+}
+
+@include make-margins;
+
+.row-centered {
+    display: flex;
+    align-items: center;
 }

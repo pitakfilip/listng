@@ -24,11 +24,18 @@ public class User implements Serializable {
     
     private Set<Permission> permissions;
 
-    public User(String name, String email, String password, String role) {
+    public User(String name, String email, SystemRole role) {
+        this.name = name;
+        this.email = email;
+        this.role = role;
+        this.permissions = new HashSet<>();
+    }
+    
+    public User(String name, String email, String password, SystemRole role) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.role = SystemRole.nameOf(role);
+        this.role = role;
         this.permissions = new HashSet<>();
     }
 

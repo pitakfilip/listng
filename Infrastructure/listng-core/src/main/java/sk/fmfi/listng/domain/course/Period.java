@@ -2,6 +2,7 @@ package sk.fmfi.listng.domain.course;
 
 import sk.fmfi.listng.domain.administration.MultiLangText;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -9,7 +10,7 @@ import java.util.Objects;
  * Trieda reprezentujúca vyučbové obdobie.
  */
 
-public class Period {
+public class Period implements Serializable {
 
     private long id;
 

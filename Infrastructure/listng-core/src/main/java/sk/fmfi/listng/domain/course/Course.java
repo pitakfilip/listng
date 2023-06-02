@@ -3,12 +3,13 @@ package sk.fmfi.listng.domain.course;
 import sk.fmfi.listng.domain.administration.Group;
 import sk.fmfi.listng.domain.administration.MultiLangText;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Trieda reprezentujúca kurz v určenom období.
  */
-public class Course {
+public class Course implements Serializable {
 
     private Long id;
 
@@ -81,8 +82,8 @@ public class Course {
         return groups;
     }
 
-    public void setGroups(List<Group> groups) {
-        this.groups = groups;
+    public void setGroups(Set<Group> groups) {
+        this.groups = new ArrayList<>(groups);
     }
 
     public void addGroup(Group group) {

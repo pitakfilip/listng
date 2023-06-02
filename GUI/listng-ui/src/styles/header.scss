@@ -1,36 +1,47 @@
 
-.list-header {
-    position: relative;
-}
+.mat-toolbar-row.navbar-row {
+    width: 100%;
 
-.navbar-brand {
-    .navbar-logo {
-        width: 1.5em;
-        height: auto;
+    .menu-col {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        vertical-align: center;
     }
-}
 
-.navbar-brand.col-sm-2.col-md-2 {
-    text-align: end;
-}
+    .menu-brand {
+        width: 20%;
 
-li.nav-item {
-    width: 10em;
-    text-align: center;
-}
+        a > .brand-logo {
+            width: 40%;
+            height: auto;
+        }
+    }
 
-.user-dropdown {
-    background-color: red;
-}
+    .menu-links {
+        width: 60%;
+        > .menu-links-wrapper {
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            width: 90%;
 
-a.dropdown-toggle {
-    padding: 0 !important;
-}
+            > .menu-link {
+                flex: 1;
+            }
+        }
+    }
 
-a fa-icon {
-    font-size: 1.5em;
-}
+    .menu-user {
+        width: 10%;
+        justify-content: flex-end;
+    }
 
-div.user-burger {
-    display:inline;
+    .menu-controls {
+        width: 10%;
+    }
+
+    .menu-controls:not(:last-child) {
+        padding-right: 4em;
+    }
 }

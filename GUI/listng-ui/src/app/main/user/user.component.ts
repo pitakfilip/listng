@@ -1,121 +1,178 @@
 import {Component} from '@angular/core';
 import {Filter} from '../../core/model/filter/filter';
 import {FilterType} from '../../core/model/filter/filter-type';
-import {User, UserBase} from '../../core/model/user.model';
-import {CourseBase} from '../../core/model/course';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {SharedModule} from '../../shared/shared.module';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import {UserDetailComponent} from './user-detail/user-detail.component';
-import {TranslateModule} from '@ngx-translate/core';
-import {NgIf} from '@angular/common';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
+import {CoreModule} from '../../core/core.module';
+import {MatTabsModule} from '@angular/material/tabs';
+import {
+    PageResponse,
+    pagingFactory,
+    PagingParams,
+    SortDirection,
+    sortFactory,
+    SortParams
+} from '../../core/model/paging.model';
+import {UserApiService} from '../../core/api/user-api.service';
+import {ListTableComponent} from '../../shared/component/list-table/list-table.component';
+import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
+import {MatButtonModule} from '@angular/material/button';
+import {Utils} from '../../core/util/utils';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmModalComponent} from '../../shared/component/confirm-modal/confirm-modal.component';
+import {User, SystemRole} from '../../core/model/user.model';
+import {EditUserModalComponent} from './edit-user-modal/edit-user-modal.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {NewUserModalComponent} from './new-user-modal/new-user-modal.component';
+import {EditUsersModalComponent} from './edit-users-modal/edit-users-modal.component';
+import {FilterModalComponent} from '../../shared/component/filter/filter-modal/filter-modal.component';
+import {FilterOption} from '../../core/model/filter/filter-option';
+import {CourseApiService} from '../../core/api/course-api.service';
 
 @Component({
     selector: 'app-user',
     templateUrl: './user.component.html',
     imports: [
+        CoreModule,
         MatButtonToggleModule,
         MatTableModule,
         MatIconModule,
         SharedModule,
         MatCheckboxModule,
-        UserDetailComponent,
-        TranslateModule,
         NgIf,
+        MatTabsModule,
+        NgClass,
+        ListTableComponent,
+        MatPaginatorModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatMenuModule,
+        NgForOf,
     ],
     standalone: true
 })
 export class UserComponent {
 
-    isRoot: boolean;
+    student = SystemRole.STUDENT;
+    teacher = SystemRole.TEACHER;
+
+    // Table params
+    paging: PagingParams;
+    defaultSize = 20;
+    pageSizes = [50, 100, 200, 500];
+    columns = ['select', 'name', 'email', 'actions'];
+    $page: PageResponse;
+
     studentTab = true;
-
-    users: UserBase[];
-    activeCourses: CourseBase[];
-
-    filters = [
-        { field: 'name', label: 'user.name', type: FilterType.FULL_TEXT, value: '', default: '' } as Filter,
-        { field: 'email', label: 'user.email', type: FilterType.FULL_TEXT, value: '', default: '' } as Filter
-    ];
-
-    // Table properties
-    displayedColumns = ['select', 'name', 'email', 'courses'];
-    initialSelection = [];
+    initSelect = [];
+    selection: SelectionModel<number>;
+    names: Map<number, string>;
     allSelected = false;
-    allowMultiSelect = true;
-    selection = new SelectionModel<number>(this.allowMultiSelect, this.initialSelection);
-    expandedUserId: number;
 
-    // TODO docasne
-    dummy_course = {
-        id: 1,
-        name: 'Progamovanie (4)',
-        short: 'Java'
-    } as CourseBase
+    sort: SortParams;
+    courseOptions: FilterOption[] = [];
+    filters: Filter[];
 
-    dummy_user = {
-        id: 1,
-        name: 'Ferko Mrkva',
-        email: 'mrkva123@uniba.sk',
-        courses: [this.dummy_course],
-        lastLogin: new Date(Date.now())
-    } as UserBase;
 
-    constructor() {
-        this.isRoot = true; // TODO GET PRAVA BY USER
+    constructor(private userApi: UserApiService, private courseApi: CourseApiService,
+                public dialog: MatDialog) {
+        this.init();
+        this.loadData();
+        this.initFilters();
+    }
 
-        this.getActiveCourses();
-        this.getUserData();
+    // initialization filters, paging and selection model
+    init() {
+        this.sort = sortFactory();
+        this.paging = pagingFactory(this.defaultSize);
+        this.selection = new SelectionModel<number>(true, this.initSelect);
+        this.names = new Map<number, string>();
+    }
 
-        this.users = [];
-        for (let i = 0 ; i < 10 ; i++) {
-            this.users.push({...this.dummy_user, id: i+1});
+    initFilters() {
+        this.courseOptions = [
+            { id: 1, level: 0, label: { SK: "Programovanie 4 Java", EN: "Programming 4 Java"}, value: 'Java'} as FilterOption,
+            { id: 2, level: 0, label: { SK: "Programovanie 1 Python", EN: "Programming 2 Python"}, value: 'Py1'} as FilterOption,
+            { id: 3, level: 0, label: { SK: "Programovanie 2 Python", EN: "Programming 2 Python"}, value: 'Py2'} as FilterOption,
+            { id: 4, level: 0, label: { SK: "Programovanie 3 CPP", EN: "Programming 3 CPP"}, value: 'Cpp'} as FilterOption,
+            { id: 5, level: 0, label: { SK: "Principy Pocitacov OS", EN: "Computer Principles OS"}, value: 'OS'} as FilterOption,
+            { id: 6, level: 0, label: { SK: "Matematicka Analyza", EN: "Mathematical Analysis"}, value: 'Mat2'} as FilterOption
+        ]
+        this.filters = [
+            {field: 'name', label: 'user.name', type: FilterType.FULL_TEXT, value: '', default: ''} as Filter,
+            {field: 'email', label: 'user.email', type: FilterType.FULL_TEXT, value: '', default: ''} as Filter,
+            {field: 'active', label: 'user.isActive', type: FilterType.BOOLEAN, value: undefined, default: undefined} as Filter,
+            {field: 'course', label: 'user.course.belongs', type: FilterType.CHOICE, value: [], default: [], data: this.courseOptions} as Filter
+        ];
+    }
+
+
+
+    onPagingChange($event: PageEvent) {
+        this.paging.page = $event.pageIndex;
+        this.paging.size = $event.pageSize;
+        this.loadData();
+    }
+
+    loadData() {
+        this.paging.sort = [this.sort];
+        this.userApi.getUsersPage(this.paging, this.studentTab).subscribe(response => {
+            this.$page = response.payload;
+            this.checkAllSelected();
+        });
+    }
+
+    isStudentTab() {
+        return this.studentTab;
+    }
+
+    openTab(tab: SystemRole) {
+        if (tab === SystemRole.STUDENT && !this.studentTab) {
+            this.studentTab = true;
+            this.init();
+            this.loadData();
         }
-        this.expandedUserId = 1;
+        if (tab === SystemRole.TEACHER && this.studentTab) {
+            this.studentTab = false;
+            this.init();
+            this.loadData();
+        }
     }
 
-    getActiveCourses() {
-        const dummy = {
-            id: 1,
-            name: 'Progamovanie (4)',
-            short: 'Java'
-        } as CourseBase;
-
-        this.activeCourses = [this.dummy_course, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy];
-        console.log(this.activeCourses);
+    clearSelection() {
+        this.selection.clear();
     }
 
-    getUserData() {
+    toggleRow(user: User) {
+        this.selection.toggle(user.id);
 
-    }
-
-    swapType(students : boolean) {
-        this.studentTab = students;
-        this.getUserData();
-    }
-
-    onFilterChange(filters: Filter[]) {
-        console.log(filters);
-    }
-
-    toggleRow(userId: number) {
-        this.selection.toggle(userId);
+        if (this.selection.isSelected(user.id)) {
+            this.names.set(user.id, user.name);
+        } else {
+            this.names.delete(user.id);
+        }
         this.checkAllSelected();
     }
 
     toggleAllRows() {
-        this.users.forEach(user => {
-            if (this.allSelected) {
-                this.selection.deselect(user.id);
-            } else {
-                this.selection.select(user.id);
-            }
-        });
-
-        this.allSelected = !this.allSelected;
+        if (Utils.exists(this.$page) && Utils.exists(this.$page.data)) {
+            this.$page.data.forEach(user => {
+                if (this.allSelected) {
+                    this.selection.deselect(user.id);
+                    this.names.delete(user.id);
+                } else {
+                    this.selection.select(user.id);
+                    this.names.set(user.id, user.name);
+                }
+            });
+            this.allSelected = !this.allSelected;
+        }
     }
 
     isAllSelected() {
@@ -124,20 +181,103 @@ export class UserComponent {
 
     checkAllSelected() {
         let foundUnselected = false;
-        this.users.forEach(user => {
-            if (!this.selection.isSelected(user.id)){
-                foundUnselected = true;
+        if (Utils.exists(this.$page) && Utils.exists(this.$page.data)) {
+            for (let user of this.$page.data) {
+                if (!this.selection.isSelected(user.id)) {
+                    foundUnselected = true;
+                    break;
+                }
             }
-        });
+        }
         this.allSelected = !foundUnselected;
     }
 
-    toggleDetail(userId: number) {
-        if (this.expandedUserId !== userId){
-            this.expandedUserId = userId;
+    getSelectedCount() {
+        return this.selection.selected.length;
+    }
+
+    sortByColumn(field: string) {
+        this.sort = Utils.updateSort(this.sort, field);
+        this.loadData();
+    }
+
+    getSortIcon(field: string) {
+        if (Utils.exists(this.sort.field) && this.sort.field === field) {
+            return this.sort.direction === SortDirection.DESC ? 'keyboard_arrow_down' : 'keyboard_arrow_up';
         } else {
-            this.expandedUserId = -1;
+            return 'keyboard_arrow_down';
+        }
+    }
+
+    onDelete(id: number) {
+        const index = this.$page.data.findIndex(user => user.id === id);
+        if (index < 0) {
+            return;
         }
 
+        const dialogRef = this.dialog.open(ConfirmModalComponent, {
+            data: {message: 'users.action.modal.delete', specify: this.$page.data[index].name},
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result === 'confirm') {
+                this.userApi.deleteUsers([id]).subscribe(response => {
+                    if (response.success) {
+                        this.loadData();
+                    }
+                });
+            }
+        });
+    }
+
+    openBulkEdit() {
+        if (!this.selection.isEmpty() && this.studentTab) {
+            const dialogRef = this.dialog.open(EditUsersModalComponent, {
+                data: { userIds: this.selection.selected }
+            });
+        }
+    }
+
+    onBulkDelete() {
+        const detail = [];
+        this.names.forEach((value, key) => detail.push(value));
+
+        const dialogRef = this.dialog.open(ConfirmModalComponent, {
+            data: {message: 'users.action.modal.delete.bulk', detail: detail},
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result === 'confirm') {
+                this.userApi.deleteUsers(this.selection.selected).subscribe(response => {
+                    if (response.success) {
+                        this.loadData();
+                    }
+                });
+            }
+        });
+    }
+
+    onEdit(id: number) {
+        const dialogRef = this.dialog.open(EditUserModalComponent, {
+            data: { userId: id },
+        });
+    }
+
+    openNewForm() {
+        this.dialog.open(NewUserModalComponent);
+    }
+
+    openImport() {
+
+    }
+
+    openFilter() {
+        const dialogRef = this.dialog.open(FilterModalComponent, {
+            data : { filterConfigs: this.filters }
+        });
+
+        dialogRef.afterClosed().subscribe(response => {
+            console.log(response);
+        })
     }
 }

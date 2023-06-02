@@ -13,6 +13,8 @@
     <file url="file://$PROJECT_DIR$/../../Services/listng-course/listng-course-api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../Services/listng-course/listng-course-application/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../Services/listng-course/listng-course-application/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../Services/listng-course/listng-course-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../Services/listng-course/listng-course-domain/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../Services/listng-course/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../Services/listng-course/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../Services/listng-task/src/main/java" charset="UTF-8" />
@@ -21,6 +23,8 @@
     <file url="file://$PROJECT_DIR$/../../Services/listng-user/listng-user-api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../Services/listng-user/listng-user-application/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../Services/listng-user/listng-user-application/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../Services/listng-user/listng-user-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../Services/listng-user/listng-user-domain/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../Services/listng-user/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../Services/listng-user/src/main/resources" charset="UTF-8" />
   </component>

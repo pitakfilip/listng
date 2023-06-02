@@ -2,8 +2,8 @@ import {Component} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalComponent} from '../modal/modal.component';
 import {MatButtonModule} from '@angular/material/button';
-import {TranslateModule} from '@ngx-translate/core';
 import {Router} from '@angular/router';
+import {CoreModule} from '../../../core/core.module';
 
 @Component({
     selector: 'app-auth-error-modal',
@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
     imports: [
         ModalComponent,
         MatButtonModule,
-        TranslateModule
+        CoreModule
     ],
     standalone: true
 })

@@ -15,6 +15,6 @@ public enum OperationError implements Error {
             case INVALID_INPUT -> msg = "Unable to process input";
             case SYSTEM_FAILURE -> msg = "System failure";
         }
-        return MessageFormat.format("Error occured while performing operation [{1}]", "msg");
+        return MessageFormat.format("Error occured while performing operations [{1}]", "msg");
     }
 }

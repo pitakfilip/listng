@@ -1,7 +1,7 @@
 package sk.fmfi.listng.course.application.assembler;
 
+import sk.fmfi.listng.course.domain.Room;
 import sk.fmfi.listng.course.dto.RoomDto;
-import sk.fmfi.listng.domain.administration.Room;
 
 import java.util.List;
 import java.util.stream.Collectors;

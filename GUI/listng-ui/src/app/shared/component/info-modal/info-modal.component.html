@@ -1,0 +1,8 @@
+<div class="list-modal info-modal">
+    <div mat-dialog-content class="list-modal-content">
+        <p>{{ data.message | translation }}</p>
+    </div>
+    <div mat-dialog-actions class="list-modal-buttons">
+        <button mat-raised-button color="warn" [mat-dialog-close]="'confirm'">{{ 'label.close' | translation }}</button>
+    </div>
+</div>

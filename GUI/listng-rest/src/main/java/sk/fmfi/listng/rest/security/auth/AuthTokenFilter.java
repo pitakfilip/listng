@@ -1,6 +1,9 @@
 package sk.fmfi.listng.rest.security.auth;
 
+import jakarta.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +16,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import sk.fmfi.listng.rest.security.service.AppUserDetailsService;
+import sk.fmfi.listng.rest.security.user.AppUser;
 
 import java.io.IOException;
 
@@ -29,10 +33,13 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) 
             throws ServletException, IOException {
         try {
-            String jwt = parseJwt(request);
+                String jwt = jwtUtils.getJwtFromCookies(request);
+                
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
+                
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                AppUser.setUserToSecurityContext((AppUser) userDetails);
 
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(userDetails,
@@ -42,14 +49,13 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+
+                Cookie refreshedCookie = jwtUtils.refreshCookie(jwt);
+                response.addCookie(refreshedCookie);
             }
         } catch (Exception e) {
             System.err.println("Cannot set user authentication: " + e.getMessage());
         }
         chain.doFilter(request, response);
-    }
-
-    private String parseJwt(HttpServletRequest request) {
-        return jwtUtils.getJwtFromCookies(request);
     }
 }

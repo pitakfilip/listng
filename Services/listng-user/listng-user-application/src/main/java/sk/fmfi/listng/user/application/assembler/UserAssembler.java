@@ -1,11 +1,11 @@
 package sk.fmfi.listng.user.application.assembler;
 
-import sk.fmfi.listng.domain.user.User;
+import sk.fmfi.listng.user.domain.User;
+import sk.fmfi.listng.user.enums.SystemRole;
 import sk.fmfi.listng.user.dto.UserAuthDto;
 import sk.fmfi.listng.user.dto.UserDto;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UserAssembler {
 
@@ -19,7 +19,7 @@ public class UserAssembler {
         dto.email = user.getEmail();
         dto.name = user.getName();
         dto.password = user.getPassword();
-        dto.role = user.getRole().getName();
+        dto.role = SystemRole.valueOf(user.getRole().getName());
         dto.permissions = PermissionAssembler.toDto(user.getPermissions());
         
         return dto;
@@ -30,7 +30,7 @@ public class UserAssembler {
         dto.id = user.getId();
         dto.email = user.getEmail();
         dto.name = user.getName();
-        dto.role = user.getRole().getName();
+        dto.role = SystemRole.valueOf(user.getRole().getName());
         dto.permissions = PermissionAssembler.toDto(user.getPermissions());
 
         return dto;
@@ -39,23 +39,15 @@ public class UserAssembler {
     public static List<UserDto> toDto(List<User> users) {
         return users.stream()
                 .map(UserAssembler::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
     
-    public static User fromDto(UserAuthDto dto) {
-        User user = new User(dto.name, dto.email, dto.password, dto.role);
-        user.setId(dto.id);
-        if (dto.permissions != null && !dto.permissions.isEmpty()) {
-            user.setPermissions(PermissionAssembler.fromDto(dto.permissions));
+    public static User fromDto(UserDto dto) {
+        User user = new User(dto.name, dto.email, dto.role.name());
+        if (dto.id != null) {
+            user.setId(dto.id);
         }
         return user;
     }
     
-    public static User fromAuthDto(UserAuthDto dto) {        
-        User user = new User(dto.name, dto.email, dto.password, dto.role);
-        if (dto.permissions != null && !dto.permissions.isEmpty()) {
-            user.setPermissions(PermissionAssembler.fromDto(dto.permissions));
-        }
-        return user;
-    }
 }

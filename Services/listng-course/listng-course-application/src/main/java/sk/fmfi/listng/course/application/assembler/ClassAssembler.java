@@ -1,7 +1,7 @@
 package sk.fmfi.listng.course.application.assembler;
 
 import sk.fmfi.listng.course.dto.ClassDto;
-import sk.fmfi.listng.domain.administration.Class;
+import sk.fmfi.listng.course.domain.Class;
 
 import java.util.ArrayList;
 import java.util.List;

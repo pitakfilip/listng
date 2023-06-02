@@ -1,10 +1,16 @@
-import {Component, forwardRef} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {Component, ElementRef, forwardRef, ViewChild} from '@angular/core';
+import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
 import {Utils} from '../../../../core/util/utils';
 import {Filter} from '../../../../core/model/filter/filter';
-import {FilterOption} from '../../../../core/model/filter/filter-option';
-import {debounceTime, distinctUntilChanged, filter, map, Observable} from 'rxjs';
-import {NgbTypeaheadSelectItemEvent} from '@ng-bootstrap/ng-bootstrap';
+import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
+import {CoreModule} from '../../../../core/core.module';
+import {MatIconModule} from '@angular/material/icon';
+import {AsyncPipe, NgClass, NgForOf, NgIf} from '@angular/common';
+import {MatInputModule} from '@angular/material/input';
+import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
+import {MatAutocompleteModule, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {map, Observable, startWith} from 'rxjs';
 
 @Component({
     selector: 'app-filter-choice',
@@ -15,26 +21,71 @@ import {NgbTypeaheadSelectItemEvent} from '@ng-bootstrap/ng-bootstrap';
             useExisting: forwardRef(() => FilterChoiceComponent),
             multi: true
         }
-    ]
+    ],
+    imports: [
+        CoreModule,
+        NgbTypeahead,
+        MatIconModule,
+        NgIf,
+        NgForOf,
+        MatInputModule,
+        MatChipsModule,
+        MatAutocompleteModule,
+        ReactiveFormsModule,
+        AsyncPipe,
+        NgClass
+    ],
+    standalone: true
 })
 export class FilterChoiceComponent implements ControlValueAccessor {
 
-    options: FilterOption[];
+    @ViewChild('choiceInput') choiceInput: ElementRef<HTMLInputElement>;
+
+    separatorKeysCodes: number[] = [ENTER, COMMA];
+    valueCtrl = new FormControl('');
+    filteredValues: Observable<string[]>;
+    selectedOptions: string[] = [];
+    options: string[];
     filter: Filter;
 
-    formatter = (option: FilterOption) => option.label;
-
-    search = (text$: Observable<string>) =>
-        text$.pipe(
-            debounceTime(200),
-            distinctUntilChanged(),
-            filter((term) => term.length >= 2),
-            map((term) => this.options.filter((option) =>{
-                 return this.filter.value.findIndex( elem => elem.id === option.id) === -1
-                }).filter((option) =>
-                new RegExp(term, 'mi').test(option.label))
-            ),
+    constructor() {
+        this.filteredValues = this.valueCtrl.valueChanges.pipe(
+            startWith(null),
+            map((option: string | null) => (option ? this._filter(option) : this.options.slice())),
         );
+    }
+
+    private _filter(value: string): string[] {
+        const filterValue = value.toLowerCase();
+        return this.options.filter(fruit => fruit.toLowerCase().includes(filterValue));
+    }
+
+    add(event: MatChipInputEvent): void {
+        const value = (event.value || '').trim();
+        if (value) {
+            this.selectedOptions.push(value);
+        }
+        event.chipInput!.clear();
+        this.valueCtrl.setValue(null);
+    }
+
+    remove(val: string): void {
+        const index = this.selectedOptions.indexOf(val);
+
+        if (index >= 0) {
+            this.selectedOptions.splice(index, 1);
+            this.filter.value = [this.selectedOptions];
+            this.onChange(this.filter);
+        }
+    }
+
+    selected(event: MatAutocompleteSelectedEvent): void {
+        this.selectedOptions.push(event.option.viewValue);
+        this.filter.value = [this.selectedOptions];
+        this.onChange(this.filter);
+        this.choiceInput.nativeElement.value = '';
+        this.valueCtrl.setValue(null);
+    }
 
     private onChange(_) {}
 
@@ -51,38 +102,7 @@ export class FilterChoiceComponent implements ControlValueAccessor {
     writeValue(obj: Filter): void {
         if (Utils.exists(obj)) {
             this.filter = {...obj};
-            this.options = [...obj.data];
+            this.options = obj.data.map( filterOption => filterOption.label.SK);
         }
-    }
-
-    onSelect($event: NgbTypeaheadSelectItemEvent, input) {
-        $event.preventDefault();
-        input.value = '';
-
-        const item: FilterOption = $event.item;
-        const index = this.filter.value.findIndex( elem => {
-            return elem.id === item.id;
-        });
-
-        if (Utils.exists(index) && index > -1) {
-            this.filter.value.splice(index, 1);
-        } else {
-            this.filter.value.push(item);
-        }
-
-        this.onChange(this.filter);
-    }
-
-    onUnselect(item : FilterOption) {
-        const index = this.filter.value.findIndex( elem => {
-            return elem.id === item.id;
-        });
-        this.filter.value.splice(index, 1);
-        this.onChange(this.filter);
-    }
-
-    clear() {
-        this.filter.value = [];
-        this.onChange(this.filter);
     }
 }

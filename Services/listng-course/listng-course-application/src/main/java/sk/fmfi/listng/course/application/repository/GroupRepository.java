@@ -1,7 +1,7 @@
 package sk.fmfi.listng.course.application.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import sk.fmfi.listng.domain.administration.Group;
+import sk.fmfi.listng.course.domain.Group;
 
 import java.util.List;
 

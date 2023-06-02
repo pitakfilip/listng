@@ -1,14 +1,9 @@
 package sk.fmfi.listng.rest.security.user;
 
 import org.springframework.security.core.GrantedAuthority;
-import sk.fmfi.listng.rest.security.user.role.AppUserRole;
 import sk.fmfi.listng.rest.security.user.role.UserRole;
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class AppAuthority implements GrantedAuthority {
 
@@ -16,18 +11,6 @@ public class AppAuthority implements GrantedAuthority {
 
     AppAuthority(UserRole authority) {
         this.authority = Objects.requireNonNull(authority);
-    }
-    
-    private static AppAuthority forName(String roleName) {
-        UserRole userRole = AppUserRole.nameOf(roleName);
-        return new AppAuthority(userRole);
-    }
-
-    public static List<AppAuthority> fromRoleNames(Collection<String> roleNames) {
-        return roleNames == null ? List.of() : roleNames.stream()
-                .map(AppAuthority::forName)
-                .sorted(Comparator.comparing(AppAuthority::getAuthority))
-                .collect(Collectors.toList());
     }
 
     @Override

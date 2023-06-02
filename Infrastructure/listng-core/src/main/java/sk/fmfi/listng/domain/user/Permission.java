@@ -1,15 +1,20 @@
 package sk.fmfi.listng.domain.user;
 
+
 import sk.fmfi.listng.domain.enums.CourseRole;
 import sk.fmfi.listng.domain.enums.CourseStatus;
+
+import java.io.Serializable;
 
 /**
  * Trieda reprezentujúca študentské prístupové práva do kurzu.
  */
 
-public class Permission {
+public class Permission implements Serializable {
 
-    private long id;
+    private Long id;
+    
+    private long userId;
 
     private long courseId;
 
@@ -20,7 +25,7 @@ public class Permission {
     private Long groupId = null;
     
     public Permission(long userId, long courseId, CourseRole role) {
-        this.id = userId;
+        this.userId = userId;
         this.courseId = courseId;
         this.role = role;
         this.status = CourseStatus.PENDING;
@@ -28,7 +33,7 @@ public class Permission {
     }
     
     public Permission(long userId, long courseId, CourseRole role, CourseStatus status) {
-        this.id = userId;
+        this.userId = userId;
         this.courseId = courseId;
         this.role = role;
         this.status = status;
@@ -36,7 +41,7 @@ public class Permission {
     }
 
     public Permission(long userId, long courseId, CourseRole role, CourseStatus status, Long groupId) {
-        this.id = userId;
+        this.userId = userId;
         this.courseId = courseId;
         this.role = role;
         this.status = status;
@@ -45,12 +50,20 @@ public class Permission {
 
     public Permission(){}
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public long getCourseId() {

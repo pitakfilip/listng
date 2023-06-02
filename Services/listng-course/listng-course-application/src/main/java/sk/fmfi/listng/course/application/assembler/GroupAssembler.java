@@ -1,7 +1,7 @@
 package sk.fmfi.listng.course.application.assembler;
 
+import sk.fmfi.listng.course.domain.Group;
 import sk.fmfi.listng.course.dto.GroupDto;
-import sk.fmfi.listng.domain.administration.Group;
 import sk.fmfi.listng.infrastructure.common.dto.MultiLangTextDto;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public class GroupAssembler {
     public static GroupDto toDto(Group group) {
         GroupDto dto = new GroupDto();
         dto.id = group.getId();
-        dto.name = new MultiLangTextDto(group.getName());
+        dto.name = new MultiLangTextDto(group.getName().getSK(), group.getName().getEN());
         dto.courseId = group.getCourseId();
         dto.classes = ClassAssembler.toDto(group.getClasses()
                 .stream()

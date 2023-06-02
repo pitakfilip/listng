@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="sk.fmfi.listng.domain.course.Period" table="PERIOD">
+    <class name="sk.fmfi.listng.course.domain.Period" table="PERIOD">
 
         <cache usage="read-write"/>
 
@@ -16,7 +16,7 @@
 
         <component
                 name="name"
-                class="sk.fmfi.listng.domain.administration.MultiLangText">
+                class="sk.fmfi.listng.infrastructure.common.dto.MultiLangText">
             <property name="SK" column="NAME_SK" type="java.lang.String"/>
             <property name="EN" column="NAME_EN" type="java.lang.String"/>
         </component>

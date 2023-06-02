@@ -2,31 +2,31 @@
     <main class="login-form m-auto">
         <form [formGroup]="loginForm" (ngSubmit)="submit()">
             <section class="login-logo">
-                <img class="mb-4" src="../../../../assets/img/logo.png" alt="" width="72" height="57">
+                <img class="mb-3" src="../../../../assets/img/logoo.png" alt="" width="200" height="auto">
             </section>
 
-            <h1 class="h3 mb-5 pull-middle">{{ 'labels.welcome' | translate }}</h1>
+            <h1 class="h3 mb-5 pull-middle">{{ 'label.welcome' | translation }}</h1>
 
             <mat-form-field class="login-field full-width margin-bottom" appearance="outline" (click)="onEnter()">
-                <mat-label>{{ 'labels.email' | translate }}</mat-label>
+                <mat-label>{{ 'label.email' | translation }}</mat-label>
                 <input matInput [formControl]="emailControl" required>
-                <mat-error *ngIf="!failedLogin && emailControl.invalid">{{ 'invalid.email' | translate }}</mat-error>
+                <mat-error *ngIf="!failedLogin && emailControl.invalid">{{ 'invalid.email' | translation }}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="login-field full-width" appearance="outline" (click)="onEnter()">
-                <mat-label>{{ 'labels.password' | translate }}</mat-label>
+                <mat-label>{{ 'label.password' | translation }}</mat-label>
                 <input matInput [formControl]="passwordControl" required [type]="hidePass ? 'password' : 'text'">
                 <mat-icon matSuffix (click)="hidePass = !hidePass" class="half-gray"
                     >{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
-                <mat-error *ngIf="!failedLogin && passwordControl.invalid">{{ 'error.field.required' | translate }}</mat-error>
-                <mat-error *ngIf="failedLogin">{{ 'invalid.credentials' | translate }}</mat-error>
+                <mat-error *ngIf="!failedLogin && passwordControl.invalid">{{ 'error.field.required' | translation }}</mat-error>
+                <mat-error *ngIf="failedLogin">{{ 'invalid.credentials' | translation }}</mat-error>
             </mat-form-field>
 
             <div class="pull-middle">
-                <button mat-raised-button class="mx-1 my-2 mat-confirm full-width">{{ 'labels.login.submit' | translate }}</button>
+                <button mat-raised-button class="mx-1 my-2 mat-confirm full-width">{{ 'label.login.submit' | translation }}</button>
             </div>
             <a class="mx-1" [href]="'reset'">
-                {{ 'labels.password.reset' | translate }}
+                {{ 'label.password.reset' | translation }}
             </a>
         </form>
 

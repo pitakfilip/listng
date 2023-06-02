@@ -2,14 +2,26 @@ $green1 : #355125;
 $green2 : #4F7836;
 $green3 : #8EBD40;
 $green4 : #C5DA4B;
-$background : #FCFCEC;
 $error  : #a80606;
 
-$cancel: #f63b56;
+
+// Overwriting default bootstrap color values
+$primary: #27AF1F !important;
+$secondary: #99FF99 !important;
+$tertiary: #E1EEC7;
+$error  : #a80606;
+
+$cancel: $error;
 $warn: #ffa500;
 $confirm: $green3;
 $info: #ffff00;
 
+$c-blank: $tertiary;
 $c-black: #2b2b2b;
 $c-gray: #565858;
-$c-gray-light: #A6A7A7;
+$c-gray-light: #c6c7c7;
+
+$c-green-border: $green2;
+$background : $tertiary;
+
+$err : #E94F37;

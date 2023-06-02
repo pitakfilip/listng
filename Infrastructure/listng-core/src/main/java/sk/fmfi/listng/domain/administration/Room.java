@@ -1,10 +1,12 @@
 package sk.fmfi.listng.domain.administration;
 
+import java.io.Serializable;
+
 /**
  * Trieda reprezentujúca fyzickú vyučovaciu miestnosť.
  */
 
-public class Room {
+public class Room implements Serializable {
     
     private long id;
 

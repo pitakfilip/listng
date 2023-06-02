@@ -1,27 +1,24 @@
+<div class="list-body">
+    <div class="row flex-end">
+        <mat-form-field class="period-picker" appearance="outline" *ngIf="$periods as periods">
+            <mat-label>{{ 'label.period' | translation }}</mat-label>
+            <mat-select [(ngModel)]="selectedPeriod" (ngModelChange)="onPeriodChange()">
+                <mat-option *ngFor="let period of periods" [value]="period.id">
+                    {{ period.name | translation }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
 
-<div class="page-title">
-    <h1>{{ 'labels.courses' | translate }}</h1>
+    <div class="row pull-middle">
+        <ng-container *ngIf="$courses as courses">
+            <div class="row course-cards" *ngIf="$permissions">
+                <div class="col-lg-4" *ngFor="let course of courses">
+                    <app-course-card [course]="course" [permission]="getCoursePermission(course.id)"></app-course-card>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+
 </div>
 
-<div ngbDropdown container="body" class="mt-3 mb-2">
-    <button type="button" class="btn list-btn dropdown-btn btn-sm" ngbDropdownToggle>{{ 'period.' + selectedPeriod.ozn | translate }}</button>
-    <div ngbDropdownMenu *ngIf="$obdobia">
-        <div class="dropdown-scroll">
-            <button *ngFor="let period of otherPeriods"
-                    ngbDropdownItem
-                    (click)="changePeriod(period.id)">
-                {{ 'period.' + period.ozn | translate }}
-            </button>
-        </div>
-        <div class="dropdown-divider"></div>
-        <button ngbDropdownItem>{{ 'period.' + selectedPeriod.ozn | translate }}</button>
-    </div>
-</div>
-
-<ng-container *ngIf="$kurzy">
-    <div class="row">
-        <div class="col-sm-8 col-lg-4" *ngFor="let course of $kurzyy">
-            <app-course-card [course]="course" [routerLink]="'course/' + course.id"></app-course-card>
-        </div>
-    </div>
-</ng-container>

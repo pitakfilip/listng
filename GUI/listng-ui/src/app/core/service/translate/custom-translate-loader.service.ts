@@ -10,7 +10,8 @@ import enLocale from 'src/assets/i18n/en.json';
 })
 export class CustomTranslateLoader implements TranslateLoader {
 
-    constructor() { }
+    constructor() {
+    }
 
     getTranslation(lang: string): Observable<any> {
         return lang === SK_LANG ? of(skLocale) : of(enLocale);

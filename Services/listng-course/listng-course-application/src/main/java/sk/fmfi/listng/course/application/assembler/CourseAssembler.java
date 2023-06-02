@@ -1,7 +1,7 @@
 package sk.fmfi.listng.course.application.assembler;
 
+import sk.fmfi.listng.course.domain.Course;
 import sk.fmfi.listng.course.dto.CourseDto;
-import sk.fmfi.listng.domain.course.Course;
 import sk.fmfi.listng.infrastructure.common.dto.MultiLangTextDto;
 
 import java.util.List;

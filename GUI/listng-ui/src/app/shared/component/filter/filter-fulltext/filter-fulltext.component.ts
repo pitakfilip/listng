@@ -1,7 +1,9 @@
 import {Component, ElementRef, forwardRef, ViewChild} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Utils} from '../../../../core/util/utils';
 import {Filter} from '../../../../core/model/filter/filter';
+import {CoreModule} from '../../../../core/core.module';
+import {NgIf} from '@angular/common';
 
 @Component({
     selector: 'app-filter-fulltext',
@@ -12,7 +14,13 @@ import {Filter} from '../../../../core/model/filter/filter';
             useExisting: forwardRef(() => FilterFulltextComponent),
             multi: true
         }
-    ]
+    ],
+    imports: [
+        CoreModule,
+        FormsModule,
+        NgIf
+    ],
+    standalone: true
 })
 export class FilterFulltextComponent implements ControlValueAccessor {
 

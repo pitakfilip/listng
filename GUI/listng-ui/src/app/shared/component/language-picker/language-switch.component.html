@@ -1,0 +1,15 @@
+<div class="lang-switch clickable" (click)="onChange()">
+    <img src="assets/img/lang/sk.svg"
+         alt="SK"
+         class="lang-flag lang-sk"
+         [ngClass]="{ 'active-lang': isSelected('sk')}"
+         [style.left]="getSkFloat()"
+    >
+
+    <img src="assets/img/lang/en.svg"
+         alt="EN"
+         class="lang-flag lang-en"
+         [ngClass]="{ 'active-lang': isSelected('en')}"
+         [style.right]="getEnFloat()"
+    >
+</div>

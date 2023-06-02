@@ -9,7 +9,6 @@ const FILTER_PAG_REGEX = /[^0-9]/g;
 })
 export class TablePagingComponent implements OnInit {
 
-    // @ts-ignore
     @Input() paging : Paging;
 
     @Input() totalItems : any;

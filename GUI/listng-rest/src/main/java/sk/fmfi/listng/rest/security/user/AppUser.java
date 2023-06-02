@@ -5,7 +5,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
-import sk.fmfi.listng.rest.security.user.role.AppCourseRole;
 import sk.fmfi.listng.rest.security.user.role.AppUserRole;
 import sk.fmfi.listng.rest.security.user.role.UserRole;
 import sk.fmfi.listng.user.dto.UserAuthDto;
@@ -20,20 +19,24 @@ public class AppUser implements UserDetails {
 
     private String fullname;
     
+    private String role;
+    
     @JsonIgnore
     private String password;
 
+    @JsonIgnore
     private Collection<AppAuthority> authorities = Collections.emptyList();
 
     public AppUser() {
     }
 
-    public AppUser(Long id, String username, String fullname, String password, Collection<AppAuthority> authorities) {
+    public AppUser(Long id, String username, String fullname, String password, Collection<AppAuthority> authorities, String role) {
         this.id = id;
         this.username = username;
         this.fullname = fullname;
         this.password = password;
         this.authorities = Objects.requireNonNull(authorities);
+        this.role = role;
     }
     
     public static AppUser build(UserAuthDto dto) {
@@ -41,17 +44,8 @@ public class AppUser implements UserDetails {
             return null;
         }
         
-        List<AppAuthority> authorities = new ArrayList<>(); 
-        dto.permissions.forEach(permission -> {
-            UserRole role = new AppCourseRole(permission.courseId, permission.role);
-            authorities.add(new AppAuthority(role));
-        });
-        
-        UserRole systemRole = AppUserRole.nameOf(dto.role);
-        authorities.add(new AppAuthority(systemRole));
-        
-        UserRole systemRole1 = AppUserRole.nameOf(dto.role);
-        return new AppUser(dto.id, dto.email, dto.name, dto.password, authorities);
+        UserRole systemRole = AppUserRole.of(dto.role.name());
+        return new AppUser(dto.id, dto.email, dto.name, dto.password, List.of(new AppAuthority(systemRole)), dto.role.name());
     }    
 
     public static void setUserToSecurityContext(AppUser user) {
@@ -91,16 +85,6 @@ public class AppUser implements UserDetails {
         return authorities;
     }
 
-    public String[] getRoleNames() {
-        if (authorities == null) {
-            return new String[]{};
-        }
-
-        return authorities.stream()
-                .map(auth -> auth.getRole().getName())
-                .toArray(String[]::new);
-    }
-
     @Override
     public String getPassword() {
         return this.password;
@@ -131,17 +115,8 @@ public class AppUser implements UserDetails {
         return true;
     }
 
-    public boolean hasRole(UserRole role) {
-        return authorities.stream()
-                .anyMatch(a -> a.getRole().equals(role));
-    }
-
-    /**
-     * Return true, if user has at least one of given roles.
-     */
-    public boolean hasAnyRole(UserRole... roles) {
-        return Arrays.stream(roles)
-                .anyMatch(this::hasRole);
+    public String getSysRole() {
+        return this.role;
     }
 
     @Override

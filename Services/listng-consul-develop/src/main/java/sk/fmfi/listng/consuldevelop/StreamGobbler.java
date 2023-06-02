@@ -20,9 +20,6 @@ public class StreamGobbler implements Runnable {
 
     @Override
     public void run() {
-//        new BufferedReader(new InputStreamReader(inputStream)).lines()
-//                .filter(line -> line.contains("[           main]"))
-//                .forEach(consumer);
         new BufferedReader(new InputStreamReader(inputStream)).lines()
                 .forEach(consumer);
     }

@@ -6,7 +6,8 @@ import org.springframework.security.authentication.AccountStatusUserDetailsCheck
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import sk.fmfi.listng.rest.proxy.UserApiProxy;
+
+import sk.fmfi.listng.rest.proxy.user.UserAuthApiProxy;
 import sk.fmfi.listng.rest.security.cache.UserCacheService;
 import sk.fmfi.listng.rest.security.user.AppUser;
 import sk.fmfi.listng.user.dto.UserAuthDto;
@@ -15,7 +16,7 @@ import sk.fmfi.listng.user.dto.UserAuthDto;
 public class AppUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserApiProxy userApiProxy;
+    private UserAuthApiProxy userAuthApiProxy;
     
     @Autowired
     private UserCacheService userCacheService;
@@ -28,7 +29,7 @@ public class AppUserDetailsService implements UserDetailsService {
             return userCacheService.getFromCache(username);
         }
 
-        UserAuthDto userAuthDto = userApiProxy.getAuthUserByEmail(username);
+        UserAuthDto userAuthDto = userAuthApiProxy.getAuthUserByEmail(username);
         if (userAuthDto == null) {
             throw new UsernameNotFoundException("User with login email '" + username + "' not found.");
         }

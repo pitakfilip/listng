@@ -10,10 +10,10 @@ import sk.fmfi.listng.course.application.repository.ClassRepository;
 import sk.fmfi.listng.course.application.repository.RoomRepository;
 import sk.fmfi.listng.course.application.service.CourseService;
 import sk.fmfi.listng.course.application.service.GroupService;
+import sk.fmfi.listng.course.domain.Course;
+import sk.fmfi.listng.course.domain.Group;
+import sk.fmfi.listng.course.domain.Class;
 import sk.fmfi.listng.course.dto.ClassDto;
-import sk.fmfi.listng.domain.administration.Class;
-import sk.fmfi.listng.domain.administration.Group;
-import sk.fmfi.listng.domain.course.Course;
 
 import java.util.*;
 import java.util.stream.Collectors;

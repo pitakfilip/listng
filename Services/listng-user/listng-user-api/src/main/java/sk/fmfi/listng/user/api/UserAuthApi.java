@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import sk.fmfi.listng.user.dto.UserAuthDto;
 
-import java.util.List;
 
 /**
  * Api covering LIST security as getting the users info for login, request for password reset and handling changes.
@@ -14,14 +13,14 @@ import java.util.List;
 public interface UserAuthApi {
 
     /**
-     * Request user object used for authentification and permitting access to app features based on permissions.
+     * Request user object used for authentication and permitting access to app features based on permissions.
      * @param email User email used for login (username).
      * @return User object containing permissions and encoded password.
-     * @Deprecated Only used by GUI-REST for authentification, as this provided the users password as well.
+     * @Deprecated Only used by GUI-REST for authentication, as this provided the users password as well.
      *  Instead use {@link UserApi#getUserByEmail(String email)} providing the same object without the password.
      */
-    @GetMapping("/auth/login")
     @Deprecated
+    @GetMapping("/auth/login")
     UserAuthDto getAuthUserByEmail(@RequestParam("email") String email);
 
     /**
@@ -29,7 +28,7 @@ public interface UserAuthApi {
      * Email sent to user contains a generated URL for the password to be changed, containing a Base64 hash 
      * created from a JSON object with 'username', 'expires' and 'secret'.
      * @param email User email used for login (username).
-     * @return success of operation, as the provided email must be validated first.
+     * @return success of operations, as the provided email must be validated first.
      */
     @GetMapping("/auth/reset/init")
     boolean requestPasswordReset(@RequestParam("email") String email);
@@ -41,21 +40,6 @@ public interface UserAuthApi {
      *             password reset URL via {@link #requestPasswordReset(String hash)}.
      */
     @PostMapping("/auth/reset")
-    void changePassword(@RequestParam("hash") String hash) throws Exception;
+    void changePassword(@RequestBody String hash) throws Exception;
 
-    /**
-     * Create singe new user.
-     * @param user
-     * @return
-     */
-    @PostMapping("/auth/user/new")
-    void newUser(@RequestBody UserAuthDto user);
-
-    /**
-     * Create collection of new users.
-     * @param users
-     * @return
-     */
-    @PostMapping("/auth/users/new")
-    void newUsers(@RequestBody List<UserAuthDto> users);
 }

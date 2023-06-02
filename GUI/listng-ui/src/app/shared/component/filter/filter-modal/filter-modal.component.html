@@ -1,0 +1,33 @@
+<div class="form-modal">
+    <div mat-dialog-content class="form-modal-content">
+        <div class="row row-centered">
+            <span class="col-10 form-title">{{ 'modal.filter.title' | translation }}</span>
+            <span class="col-2 form-close">
+                <button type="button" class="btn btn-blank btn-icon" (click)="close()">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </span>
+        </div>
+
+        <div class="my-3">
+            <mat-divider></mat-divider>
+        </div>
+
+        <div class="">
+            <section *ngFor="let filter of filters; let index = index; trackBy: trackByFn" class="filter-row my-2">
+                <app-filter-fulltext *ngIf="isFullText(filter.type)" [(ngModel)]="filters[index]" (ngModelChange)="onChange($event, index)"></app-filter-fulltext>
+                <app-filter-boolean *ngIf="isBoolean(filter.type)" [(ngModel)]="filters[index]" (ngModelChange)="onChange($event, index)"></app-filter-boolean>
+                <app-filter-choice *ngIf="isChoice(filter.type)" [(ngModel)]="filters[index]" (ngModelChange)="onChange($event, index)"></app-filter-choice>
+
+                <app-filter-range *ngIf="isRange(filter.type)"></app-filter-range>
+            </section>
+        </div>
+
+        <div class="row save-buttons">
+            <button mat-raised-button color="primary" (click)="submit()">{{ 'label.save' | translation }}</button>
+            <button mat-raised-button color="accent" (click)="clear()">{{ 'label.reset' | translation }}</button>
+            <button mat-raised-button color="warn" (click)="close()">{{ 'label.cancel' | translation }}</button>
+        </div>
+
+    </div>
+</div>

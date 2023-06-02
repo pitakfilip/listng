@@ -4,12 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-<!--    <parent>-->
-<!--        <groupId>sk.fmfi.listng</groupId>-->
-<!--        <artifactId>listng-shared</artifactId>-->
-<!--        <version>1.0.0</version>&lt;!&ndash;    TAG:listng-shared Version    &ndash;&gt;-->
-<!--    </parent>-->
-
     <groupId>sk.fmfi.listng.rest</groupId>
     <artifactId>listng-rest</artifactId>
     <version>1.0.0-SNAPSHOT</version><!--    TAG:listng-rest Version    -->
@@ -20,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!--   LIST-NG MODULE VERSIONS   -->
-        <listng-core.version>1.0.0-SNAPSHOT</listng-core.version><!--    TAG:listng-core Version    -->
+        <listng-core.version>1.0.0-SNAPSHOT</listng-core.version><!--    TAG:listng-domain Version    -->
         <listng-infrastructure.version>1.0.0</listng-infrastructure.version><!--    TAG:listng-infrastructure Version    -->
         <listng-user.version>1.0.0-SNAPSHOT</listng-user.version><!--    TAG:listng-user Version    -->
         <listng-course.version>1.0.0-SNAPSHOT</listng-course.version><!--    TAG:listng-course Version    -->
@@ -41,10 +35,10 @@
             <groupId>sk.fmfi.listng.user</groupId>
             <artifactId>listng-user-api</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>sk.fmfi.listng.course</groupId>-->
-<!--            <artifactId>listng-course-api</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>sk.fmfi.listng.course</groupId>
+            <artifactId>listng-course-api</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

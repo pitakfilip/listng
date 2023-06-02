@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="sk.fmfi.listng.domain.user.User" table="LIST_USER">
+    <class name="sk.fmfi.listng.user.domain.User" table="LIST_USER">
 
         <cache usage="read-write"/>
 
@@ -33,7 +33,7 @@
                 name="role"
                 column="ROLE">
             <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">sk.fmfi.listng.domain.enums.SystemRole</param>
+                <param name="enumClass">sk.fmfi.listng.user.domain.SystemRole</param>
                 <param name="useNamed">true</param>
             </type>
         </property>
@@ -42,12 +42,13 @@
                 name="permissions"
                 table="USER_COURSE_PERMISSION"
                 cascade="all-delete-orphan"
-                fetch="join">
+                fetch="join"
+                lazy="false">
             <cache usage="read-write"/>
             <key>
                 <column name="USER_ID" not-null="true" />
             </key>
-            <one-to-many class="sk.fmfi.listng.domain.user.Permission"/>
+            <one-to-many class="sk.fmfi.listng.user.domain.Permission"/>
         </set>
 
     </class>

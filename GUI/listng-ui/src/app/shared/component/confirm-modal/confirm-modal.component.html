@@ -1,0 +1,15 @@
+<div class="list-modal confirm-modal">
+    <div mat-dialog-content class="list-modal-content">
+        <p *ngIf="!data.specify">{{ data.message | translation }}?</p>
+        <p *ngIf="data.specify">{{ data.message | translation }}<strong>{{ data.specify | translation }}</strong>?</p>
+
+        <div *ngIf="data.detail">
+            <p *ngFor="let line of data.detail"><strong>{{line}}</strong></p>
+        </div>
+
+    </div>
+    <div mat-dialog-actions class="list-modal-buttons">
+        <button mat-raised-button color="primary" [mat-dialog-close]="'confirm'">{{ 'label.confirm' | translation }}</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'deny'">{{ 'label.cancel' | translation }}</button>
+    </div>
+</div>

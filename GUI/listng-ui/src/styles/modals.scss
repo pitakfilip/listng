@@ -68,3 +68,90 @@
 .modal-backdrop {
     background: rgba(0, 0, 0, .5);
 }
+
+.list-modal {
+    overflow: hidden;
+
+    > .list-modal-content {
+        height: 65% !important;
+        padding-top: 1em;
+        overflow: auto;
+    }
+
+    > .list-modal-buttons {
+        height: 35%;
+        justify-content: center;
+
+        > button {
+            width: 10em;
+        }
+        > button:not(:first-child) {
+            margin-left: 1em;
+        }
+    }
+}
+
+.confirm-modal {
+    width: 35em;
+    min-height: 9em;
+    max-height: 40em;
+
+    //> .list-modal-content {
+    //    height: 65%
+    //}
+    //
+    //> .list-modal-buttons {
+    //    height: 35%;
+    //}
+}
+
+.info-modal {
+    width: 35em;
+    height: 12em;
+}
+
+div.form-modal {
+    width: 60vw;
+
+
+    > div.form-modal-content {
+        max-height: 80vh;
+    }
+
+    span.form-close {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+div.error-modal {
+    width: 40vw;
+    div.error-close {
+        display: flex;
+        justify-content: flex-end !important;
+    }
+
+    div.error-icon {
+        justify-content: center
+    }
+
+    .error-modal-icon {
+        font-size: 10em;
+        width: auto;
+        height: auto;
+    }
+
+    div.error-title > h1{
+        display: flex;
+        justify-content: center;
+        font-size: 2em;
+        font-weight: 600;
+    }
+
+    div.error-info > h2{
+        display: flex;
+        justify-content: center;
+        font-size: 1em;
+        font-weight: 400;
+    }
+}

@@ -1,0 +1,25 @@
+<div class="user-button">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon class="user-icon">account_circle</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item>
+            <mat-icon>info_outline</mat-icon>
+            <span>{{ 'menu.account.overview' | translation }}</span>
+        </button>
+
+        <button mat-menu-item>
+            <mat-icon>password</mat-icon>
+            <span>{{ 'menu.account.change.password' | translation }}</span>
+        </button>
+
+        <mat-divider></mat-divider>
+
+        <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>{{ 'menu.account.logout' | translation }}</span>
+        </button>
+
+    </mat-menu>
+</div>

@@ -8,8 +8,8 @@ import sk.fmfi.listng.course.api.PeriodApi;
 import sk.fmfi.listng.course.application.assembler.PeriodAssembler;
 import sk.fmfi.listng.course.application.service.CourseService;
 import sk.fmfi.listng.course.application.service.PeriodService;
+import sk.fmfi.listng.course.domain.Period;
 import sk.fmfi.listng.course.dto.PeriodDto;
-import sk.fmfi.listng.domain.course.Period;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,14 +26,12 @@ public class PeriodController implements PeriodApi {
     private CourseService courseService;
 
     @Override
-    public boolean create(PeriodDto dto) {
-        Period period = PeriodAssembler.fromDto(dto);
-        
-        if (!periodService.isValid(period)) {
+    public boolean create(PeriodDto periodDto) {
+        if (!periodService.isValid(periodDto)) {
             return false;
         }
 
-        periodService.savePeriod(period);
+        periodService.savePeriod(periodDto);
         return true;
     }
     
@@ -48,12 +46,11 @@ public class PeriodController implements PeriodApi {
     }
 
     @Override
-    public boolean update(PeriodDto dto) {
-        Period period = PeriodAssembler.fromDto(dto);
-        if (!periodService.isValid(period)) {
+    public boolean update(PeriodDto periodDto) {
+        if (!periodService.isValid(periodDto)) {
             return false;
         }
-        periodService.savePeriod(period);
+        periodService.savePeriod(periodDto);
         return true;
     }
 

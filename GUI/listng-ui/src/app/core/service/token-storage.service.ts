@@ -1,6 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Utils} from '../util/utils';
-import {JwtToken} from '../model/security/jwt-token';
 
 @Injectable({
     providedIn: 'root'
@@ -13,21 +11,14 @@ export class TokenStorageService {
 
     constructor() {}
 
-    registerOnChangeToken(cb) {
-        this._afterChangeToken = cb || function () {};
-        const token = this.retrieve();
-        if (Utils.exists(token)) {
-            cb(token);
-        }
-    }
 
-    store(token: JwtToken) {
+    store(token: string) {
         this._afterChangeToken(token);
-        return sessionStorage.setItem(this.storageKey, JSON.stringify(token));
+        return sessionStorage.setItem(this.storageKey, token);
     }
 
-    retrieve() {
-        return JSON.parse(sessionStorage.getItem(this.storageKey));
+    retrieve() : string {
+        return sessionStorage.getItem(this.storageKey);
     }
 
     clear() {

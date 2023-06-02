@@ -5,7 +5,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import sk.fmfi.listng.rest.security.user.AppUser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -18,8 +20,8 @@ public class UserCacheService {
     
     /**
      * Lookup user in cache and verify its validity, where the max. store value of user object in cache is 10 minutes.
-     * @param username (user email)
-     * @return boolean
+     * @param username
+     * @return boolean found user in cache.
      */
     public boolean haveValidInCache(String username) {
         if (userCache.containsKey(username)) {
@@ -40,11 +42,16 @@ public class UserCacheService {
     @Scheduled(fixedDelay = ONE_MINUTE)
     private void scheduleRemoveInvalid() {
         if (!userCache.isEmpty()) {
-            userCache.keySet().forEach(username -> {
-                if (!userCache.get(username).isValid()) {
-                    userCache.remove(username);
+            List<String> keys = new ArrayList<>();
+            for (Map.Entry<String, CachedUserDetail> cached : userCache.entrySet()) {
+                if (!cached.getValue().isValid()) {
+                    keys.add(cached.getKey());
                 }
-            });
+            }
+
+            for (String key : keys) {
+                userCache.remove(key);
+            }
         }
     }
 }

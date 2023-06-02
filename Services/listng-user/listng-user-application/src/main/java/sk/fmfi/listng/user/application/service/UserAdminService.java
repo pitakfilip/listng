@@ -5,7 +5,7 @@ import com.google.gson.JsonParser;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sk.fmfi.listng.domain.user.User;
+import sk.fmfi.listng.user.domain.User;
 import sk.fmfi.listng.user.application.repository.UserRepository;
 import sk.fmfi.listng.user.application.util.SecretUtil;
 
@@ -55,6 +55,7 @@ public class UserAdminService {
 
         try {
             emailService.sendPasswordReset(email, REST_BASE_URL + encoded, df.format(expires));
+            emailService.sendTemplatedMail(email, REST_BASE_URL + encoded, df.format(expires));
             return true;
         } catch (MessagingException | jakarta.mail.MessagingException e) {
             return false;

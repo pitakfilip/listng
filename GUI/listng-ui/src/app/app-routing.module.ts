@@ -4,6 +4,7 @@ import {MainComponent} from './main/main.component';
 import {LoginComponent} from './main/components/login/login.component';
 import {PasswordResetComponent} from './main/components/password-reset/password-reset.component';
 import {AuthGuard} from './core/guard/auth.guard';
+import {NotFoundComponent} from './main/components/not-found/not-found.component';
 
 const routes: Routes = [
     {
@@ -26,8 +27,12 @@ const routes: Routes = [
         component: PasswordResetComponent,
     },
     {
-        path: 'error',
-        component: LoginComponent //TODO urobit error stranku pre tento pripad
+        path: 'not-found',
+        component: NotFoundComponent
+    },
+    {
+        path: '**',
+        redirectTo: 'not-found'
     }
 ];
 

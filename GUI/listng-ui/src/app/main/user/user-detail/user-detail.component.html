@@ -5,14 +5,14 @@
                 <input type="email" class="form-control rounded-3" id="nameInput" name="email" [(ngModel)]="newName"
                        placeholder="email">
                 <label for="nameInput">
-                    {{'labels.email' | translate}}</label>
+                    {{'label.email' | translate}}</label>
             </div>
 
             <div class="form-floating mb-3">
                 <input type="email" class="form-control rounded-3" id="emailInput" name="email" [(ngModel)]="newEmail"
                        placeholder="email">
                 <label for="emailInput">
-                    {{'labels.email' | translate}}</label>
+                    {{'label.email' | translate}}</label>
             </div>
 
             <div class="form-floating">
@@ -20,7 +20,7 @@
                        placeholder="password">
 
                 <label for="passwordInput">
-                    {{'labels.password.new' | translate}}</label>
+                    {{'label.password.new' | translate}}</label>
             </div>
 
         </div>
@@ -91,7 +91,7 @@
     </div>
 
     <div class="row my-3 pull-right">
-        <button type="button" class="btn btn-success" (click)="submitChanges()">{{ 'labels.submit' | translate }}</button>
+        <button type="button" class="btn btn-success" (click)="submitChanges()">{{ 'label.submit' | translate }}</button>
     </div>
 
 </div>

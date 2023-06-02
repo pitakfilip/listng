@@ -1,5 +1,6 @@
 package sk.fmfi.listng.domain.administration;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
 /**
@@ -7,7 +8,7 @@ import java.time.LocalTime;
  * Vyučovanie je opakované nejaký deň (Pon.-Ned. teda 0-6 v číselnej interpretácii),
  * každý týždeň v určenom čase, v určenej miestnosti a trvá určitý počet minút.
  */
-public class Class {
+public class Class implements Serializable {
 
     private long id;
 

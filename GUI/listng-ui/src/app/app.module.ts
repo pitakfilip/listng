@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {MissingTranslationHandler, TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {DEFAULT_LANG} from './core/consts/translate.consts';
 import {CustomTranslateLoader} from './core/service/translate/custom-translate-loader.service';
@@ -16,6 +16,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {SharedModule} from './shared/shared.module';
 import {BackgroundComponent} from './main/components/background/background.component';
 import {CoreModule} from './core/core.module';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
+import {ListPaginator} from './core/custom/list-paginator';
 
 @NgModule({
     declarations: [
@@ -44,13 +48,20 @@ import {CoreModule} from './core/core.module';
         ReactiveFormsModule,
         BrowserAnimationsModule,
         MatTooltipModule,
-        BackgroundComponent
-
+        BackgroundComponent,
+        MatDialogModule,
+        MatMenuModule,
+        BackgroundComponent,
+        MatPaginatorModule
     ],
     providers: [
         {
             provide: TranslateLoader,
             useClass: CustomTranslateLoader
+        },
+        {
+            provide: MatPaginatorIntl,
+            useClass: ListPaginator
         }
     ],
     bootstrap: [AppComponent]

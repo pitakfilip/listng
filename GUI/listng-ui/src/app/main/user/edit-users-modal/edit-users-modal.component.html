@@ -1,0 +1,61 @@
+<div class="form-modal">
+    <div mat-dialog-content class="form-modal-content">
+        <div class="row row-centered">
+            <span class="col-10 form-title">{{ 'users.modal.bulk.edit.label' | translation }}</span>
+            <span class="col-2 form-close">
+                <button type="button" class="btn btn-blank btn-icon" (click)="close()">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </span>
+        </div>
+
+        <div class="my-3">
+            <mat-divider></mat-divider>
+        </div>
+
+        <div class="row my-1">
+            <span class="btn-group">{{ 'users.modal.bulk.edit.role' | translation }}:
+                <button mat-flat-button class="ml-2" [ngClass]="isSysRole(STUDENT) ? 'btn-secondary' : 'btn-clear'" (click)="setSysRole(STUDENT)" matTooltip="{{ 'role.student.description' | translation }}">
+                    <mat-icon>person</mat-icon>{{ 'role.student.label' | translation }}
+                </button>
+                <button mat-flat-button [ngClass]="isSysRole(TEACHER) ? 'btn-secondary' : 'btn-clear'" (click)="setSysRole(TEACHER)" matTooltip="{{ 'role.teacher.description' | translation }}">
+                    <mat-icon>school</mat-icon>{{ 'role.teacher.label' | translation }}
+                </button>
+                <button mat-flat-button [ngClass]="isSysRole(ROOT) ? 'btn-secondary' : 'btn-clear'" (click)="setSysRole(ROOT)" matTooltip="{{ 'role.root.description' | translation }}">
+                    <mat-icon>settings</mat-icon>{{ 'role.root.label' | translation }}
+                </button>
+            </span>
+        </div>
+
+        <div class="my-4">
+            <app-permission-select  [role]="role"
+                                    [customTitle]="'users.modal.bulk.edit.permissions.new'"
+                                    (onChange)="onNewPermissionChange($event)"></app-permission-select>
+        </div>
+
+        <div class="my-4" *ngIf="isSysRole(STUDENT)">
+            <app-permission-select  [role]="STUDENT"
+                                    [customTitle]="'users.modal.bulk.edit.permissions.remove'"
+                                    [disabledInteraction]="true"
+                                    (onChange)="onRemovePermissionChange($event)"></app-permission-select>
+        </div>
+
+        <div class="row my-3" *ngIf="$users as users">
+            <span>{{ 'users.modal.bulk.edit.selected' | translation }}</span>
+            <div>
+                <mat-chip-set>
+                    <mat-chip *ngFor="let user of users" (removed)="unselect(user.id)">
+                        {{ user.email }}
+                        <button matChipRemove><mat-icon>cancel</mat-icon></button>
+                    </mat-chip>
+                </mat-chip-set>
+            </div>
+        </div>
+
+        <div class="row save-buttons">
+            <button mat-raised-button color="primary" (click)="submit()">{{ 'label.save' | translation }}</button>
+            <button mat-raised-button color="warn" (click)="close()">{{ 'label.cancel' | translation }}</button>
+        </div>
+
+    </div>
+</div>

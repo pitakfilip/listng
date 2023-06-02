@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import sk.fmfi.listng.course.api.RoomApi;
 import sk.fmfi.listng.course.application.assembler.RoomAssembler;
 import sk.fmfi.listng.course.application.repository.RoomRepository;
+import sk.fmfi.listng.course.domain.Room;
 import sk.fmfi.listng.course.dto.RoomDto;
-import sk.fmfi.listng.domain.administration.Room;
 
 import java.util.List;
 import java.util.Optional;

@@ -12,6 +12,7 @@
     <modules>
         <module>listng-user-api</module>
         <module>listng-user-application</module>
+        <module>listng-user-domain</module>
     </modules>
     
     <properties>
@@ -41,17 +42,17 @@
         <dependencies>
             <dependency>
                 <groupId>sk.fmfi.listng</groupId>
-                <artifactId>listng-core</artifactId>
-                <version>${listng-core.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>sk.fmfi.listng</groupId>
                 <artifactId>listng-infrastructure</artifactId>
                 <version>${listng-infrastructure.version}</version>
             </dependency>            
             <dependency>
                 <groupId>sk.fmfi.listng.user</groupId>
                 <artifactId>listng-user-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>      
+            <dependency>
+                <groupId>sk.fmfi.listng.user</groupId>
+                <artifactId>listng-user-domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

@@ -68,3 +68,44 @@
 .control-error {
     color: red;
 }
+
+.period-picker {
+    width: 25em;
+}
+
+.period-picker-simple {
+    width: 20em;
+    border: none;
+    height: 1.5em !important;
+    max-height: 1.5em !important;
+
+    > * {
+        height: 1.5em !important;
+        max-height: 1.5em !important;
+    }
+
+    .mat-mdc-form-field-infix {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+}
+
+span.form-title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+span.form-detail {
+    font-size: 0.75em;
+}
+
+div.save-buttons {
+    margin-top: 2em;
+    > button {
+        width: 13em;
+    }
+
+    > button:not(:first-child) {
+        margin-left: 0.5em;
+    }
+}

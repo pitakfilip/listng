@@ -1,16 +1,97 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@include mat.core();
+
+// Angular material custom theme (ignore errors)
+$list-primary: mat.define-palette(mat.$light-green-palette, 800);
+$list-accent: mat.define-palette(mat.$light-green-palette, 300);
+$list-warn: mat.define-palette(mat.$red-palette);
+$list-theme: mat.define-light-theme((
+    color: (
+        primary: $list-primary,
+        accent: $list-accent,
+        warn: $list-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+));
+@include mat.all-component-themes($list-theme);
+
+
+$btn-primary: mat.define-palette(mat.$light-green-palette, 300);
+$btn-accent: mat.define-palette(mat.$yellow-palette, 600);
+$btn-warn: mat.define-palette(mat.$red-palette);
+$btn-theme: mat.define-light-theme((
+    color: (
+        primary: $btn-primary,
+        accent: $btn-accent,
+        warn: $btn-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+));
+@include mat.button-theme($btn-theme);
+
+// Material colors as variables
+$mat-primary: mat.get-color-from-palette($list-primary, default);
+$mat-accent: mat.get-color-from-palette($list-accent, default);
+$mat-warn: mat.get-color-from-palette($list-warn, default);
+$mat-btn-primary: mat.get-color-from-palette($btn-primary, default);
+$mat-btn-accent: mat.get-color-from-palette($btn-accent, default);
+$mat-btn-warn: mat.get-color-from-palette($btn-warn, default);
+
+.mat-dark-primary {
+    background-color: $mat-primary !important;
+}
+
+.txt-primary {
+    color: $mat-primary !important;
+}
+
+.txt-secondary {
+    color: red !important;
+}
 
 .mat-confirm {
     background-color: $confirm !important;
 }
-.mat-warn {
-    background-color: $warn !important;
-}
-.mat-error {
-    background-color: $error !important;
-}
-.mat-default {
+
+.col-clear {
     background-color: transparent !important;
 }
+
+.btn-clear {
+    background-color: transparent !important;
+    border: 1px solid $mat-primary !important;
+}
+
+.col-primary {
+    background-color: $mat-primary !important;
+}
+
+.btn-secondary {
+    background-color: $mat-accent !important;
+    border: 1px solid $mat-primary !important;
+}
+
+.col-secondary {
+    background-color: $mat-accent !important;
+}
+
+.btn-warn {
+    background-color: $mat-btn-warn !important;
+    color: white;
+}
+
+.btn-accent {
+    background-color: $mat-btn-accent !important;
+}
+
 .mat-text {
     color: black;
 }
+
+.mat-mdc-paginator {
+    background-color: transparent !important;
+}
+

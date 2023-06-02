@@ -1,6 +1,8 @@
 package sk.fmfi.listng.domain.administration;
 
-public class MultiLangText {
+import java.io.Serializable;
+
+public class MultiLangText implements Serializable {
     
     private String SK;
 

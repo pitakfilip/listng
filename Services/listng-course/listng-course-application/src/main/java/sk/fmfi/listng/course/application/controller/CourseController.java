@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import sk.fmfi.listng.course.api.CourseApi;
 import sk.fmfi.listng.course.application.assembler.CourseAssembler;
 import sk.fmfi.listng.course.application.service.*;
+import sk.fmfi.listng.course.domain.Course;
+import sk.fmfi.listng.course.domain.Period;
 import sk.fmfi.listng.course.dto.CourseDto;
-import sk.fmfi.listng.domain.course.Course;
-import sk.fmfi.listng.domain.course.Period;
 
 import java.util.Collections;
 import java.util.List;
@@ -34,22 +34,13 @@ public class CourseController implements CourseApi {
             throw new EntityNotFoundException("error.period.not.found");
         }
         
-        Course course = CourseAssembler.fromDto(dto);
-        courseService.saveCourse(course);
-        groupService.createDefaultGroup(course);
+        Long courseId = courseService.saveCourse(dto);
+        groupService.createDefaultGroup(courseId);
     }
 
     @Override
     public void copyCourse(Long courseId, Long periodId) {
-        Optional<Period> targetPeriod = periodService.getPeriod(periodId);
-        if (targetPeriod.isEmpty()) {
-            throw new EntityNotFoundException("error.period.not.found");
-        }
-        Optional<Course> fromCourse = courseService.getById(courseId);
-        if (fromCourse.isEmpty()) {
-            throw new EntityNotFoundException("error.course.not.found");
-        }
-        courseService.copyCourse(fromCourse.get(), targetPeriod.get());        
+        courseService.copyCourse(courseId, periodId);        
     }
 
     @Override
@@ -97,7 +88,7 @@ public class CourseController implements CourseApi {
         if (fromCourse.isEmpty()) {
             throw new EntityNotFoundException("error.course.not.found");
         }
-        courseService.saveCourse(CourseAssembler.fromDto(course));
+        courseService.saveCourse(course);
     }
 
     @Override
