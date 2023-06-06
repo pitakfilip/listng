@@ -1,16 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {TranslateModule} from '@ngx-translate/core';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {RouterLinkWithHref} from '@angular/router';
-import { TablePagingComponent } from './component/table-paging/table-paging.component';
+import {TablePagingComponent} from './component/table-paging/table-paging.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { PagingPipe } from './pipe/paging.pipe';
-import { RoundUpPipe } from './pipe/round-up.pipe';
-import { PagingInfoPipe } from './pipe/paging-info.pipe';
+import {PagingPipe} from './pipe/paging.pipe';
+import {RoundUpPipe} from './pipe/round-up.pipe';
+import {PagingInfoPipe} from './pipe/paging-info.pipe';
 import {FormsModule} from '@angular/forms';
 import {NgIconsModule} from '@ng-icons/core';
-import { bootstrapX, bootstrapXLg, bootstrapCheck, bootstrapTrash, bootstrapXCircleFill, bootstrapCheckCircleFill} from '@ng-icons/bootstrap-icons';
+import {
+    bootstrapCheck,
+    bootstrapCheckCircleFill,
+    bootstrapTrash,
+    bootstrapX,
+    bootstrapXCircleFill,
+    bootstrapXLg
+} from '@ng-icons/bootstrap-icons';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {CoreModule} from '../core/core.module';
 
@@ -27,7 +33,6 @@ import {CoreModule} from '../core/core.module';
     imports: [
         CommonModule,
         TranslateModule,
-        FontAwesomeModule,
         RouterLinkWithHref,
         NgbModule,
         FormsModule,

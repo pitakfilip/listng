@@ -4,7 +4,6 @@ import {CommonModule} from '@angular/common';
 import {MainRoutingModule} from './main-routing.module';
 import {HeaderComponent} from './components/header/header.component';
 import {MainComponent} from './main.component';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NgbCollapseModule, NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {SharedModule} from '../shared/shared.module';
@@ -28,7 +27,6 @@ import {UserButtonComponent} from '../shared/component/user-button/user-button.c
         SharedModule,
         CoreModule,
         MainRoutingModule,
-        FontAwesomeModule,
         NgbCollapseModule,
         NgbDropdownModule,
         MatToolbarModule,

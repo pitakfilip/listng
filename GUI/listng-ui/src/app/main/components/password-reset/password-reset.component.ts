@@ -1,16 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {
-    FormControl,
-    FormGroup,
-    ReactiveFormsModule,
-    Validators,
-} from '@angular/forms';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators,} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {NgIf} from '@angular/common';
 import {RxwebValidators} from '@rxweb/reactive-form-validators';
 import {MatButtonModule} from '@angular/material/button';
-import {CryptoService} from '../../../core/service/crypto.service';
 import {NgbModal, NgbToast} from '@ng-bootstrap/ng-bootstrap';
 import {AuthErrorModalComponent} from '../auth-error-modal/auth-error-modal.component';
 import {STANDARD_MODAL_DIALOG_OPTIONS} from '../../../core/consts/modal.consts';
@@ -45,11 +39,8 @@ export class PasswordResetComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
-                private cryptoService: CryptoService,
                 private modalService: NgbModal) {
         this.year = new Date().getFullYear();
-
-        this.makeHash('frantisek1@uniba.sk');
     }
 
     ngOnInit() {
@@ -71,30 +62,8 @@ export class PasswordResetComponent implements OnInit {
         }
     }
 
-    makeHash(username: string) {
-        let expire = new Date();
-        expire.setMinutes(expire.getMinutes() + 30);
-
-        const obj = {
-            email: username,
-            valid: expire.toUTCString()
-        };
-
-        return this.cryptoService.encrypt(JSON.stringify(obj));
-    }
-
     decryptHash() {
-        try {
-            const decryptedString = this.cryptoService.decrypt(this.hash);
-            const json = JSON.parse(decryptedString);
 
-            this.dataFromHash = {
-                username: json.username,
-                valid: new Date(json.valid)
-            }
-        } catch (e) {
-            this.openErrorModal('invalid.resetHash');
-        }
     }
 
     validateHash() {
@@ -123,7 +92,7 @@ export class PasswordResetComponent implements OnInit {
     }
 
     sendEmail() {
-        const hash = this.makeHash(this.resetForm.value['email']);
+
     }
 
     resetPasswords() {

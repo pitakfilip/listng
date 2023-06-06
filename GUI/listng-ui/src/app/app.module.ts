@@ -4,7 +4,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {MissingTranslationHandler, TranslateLoader, TranslateModule} from '@ngx-translate/core';
@@ -31,7 +30,6 @@ import {ListPaginator} from './core/custom/list-paginator';
         BrowserModule,
         AppRoutingModule,
         NgbModule,
-        FontAwesomeModule,
         FormsModule,
         HttpClientModule,
         TranslateModule.forRoot({

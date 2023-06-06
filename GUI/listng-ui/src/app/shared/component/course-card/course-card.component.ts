@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {CourseBase} from '../../../core/model/course';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {TranslateModule} from '@ngx-translate/core';
 import {NgIf} from '@angular/common';
 import {CoreModule} from '../../../core/core.module';
@@ -17,7 +16,6 @@ import {InfoModalComponent} from '../info-modal/info-modal.component';
     selector: 'app-course-card',
     templateUrl: './course-card.component.html',
     imports: [
-        FontAwesomeModule,
         TranslateModule,
         NgIf,
         CoreModule,
