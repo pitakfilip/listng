@@ -7,16 +7,12 @@ SERVICES_DIR=$HOME_DIR/Services
 cd $HOME_DIR/Infrastructure/listng-infrastructure
 mvn clean install
 
-cd $SERVICES_DIR/listng-consul-develop
-mvn clean install
-
 cd $SERVICES_DIR/listng-user
 mvn clean install
+cd $SERVICES_DIR/listng-user/listng-user-application/target
+cp listng-user-application-1.0.0-SNAPSHOT.jar /opt/listng/listng-user.jar
 
 cd $SERVICES_DIR/listng-course
-mvn clean install
-
-cd $SERVICES_DIR/listng-task
 mvn clean install
 
 #cd $SERVICES_DIR/listng-solution

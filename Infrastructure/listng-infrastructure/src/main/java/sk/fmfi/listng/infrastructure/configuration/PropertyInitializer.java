@@ -4,7 +4,6 @@ package sk.fmfi.listng.infrastructure.configuration;
 import java.io.File;
 import java.net.URL;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -17,7 +16,6 @@ public final class PropertyInitializer {
     //TODO dalsie zaujimave common properties
     public static void beforeSpringApplicationRun() {
         loadConsulProperties();
-        loadHibernateMappings();
     }
 
     public static void loadConsulProperties() {
