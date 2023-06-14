@@ -23,12 +23,6 @@ public class UserService {
         this.userApi.createUsers(dto);
     }
     
-    public boolean isAdmin(Long userId) {
-        UserDto user = this.userApi.getUserById(userId);
-        
-        return !user.role.equals(SystemRole.STUDENT);
-    }
-    
     public UserDto getUserById(Long userId) {
         return userApi.getUserById(userId);
     }

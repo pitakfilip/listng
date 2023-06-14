@@ -1,6 +1,6 @@
 package sk.fmfi.listng.course.domain;
 
-import sk.fmfi.listng.infrastructure.common.dto.MultiLangText;
+import sk.fmfi.listng.infrastructure.common.MultiLangText;
 
 import java.io.Serializable;
 import java.sql.Date;

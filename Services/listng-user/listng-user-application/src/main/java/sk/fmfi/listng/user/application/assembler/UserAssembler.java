@@ -30,7 +30,7 @@ public class UserAssembler {
         dto.id = user.getId();
         dto.email = user.getEmail();
         dto.name = user.getName();
-        dto.role = SystemRole.valueOf(user.getRole().getName());
+        dto.role = user.getRole().getName();
         dto.permissions = PermissionAssembler.toDto(user.getPermissions());
 
         return dto;
@@ -43,11 +43,17 @@ public class UserAssembler {
     }
     
     public static User fromDto(UserDto dto) {
-        User user = new User(dto.name, dto.email, dto.role.name());
+        User user = new User(dto.name, dto.email, dto.role);
         if (dto.id != null) {
             user.setId(dto.id);
         }
         return user;
+    }
+    
+    public static List<User> fromDto(List<UserDto> dtos) {
+        return dtos.stream()
+                .map(UserAssembler::fromDto)
+                .toList();
     }
     
 }

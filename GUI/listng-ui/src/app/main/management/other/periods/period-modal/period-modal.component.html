@@ -1,0 +1,59 @@
+<div class="form-modal">
+    <div mat-dialog-content class="form-modal-content">
+        <div class="row row-centered">
+            <span class="col-10 form-title">{{ 'other.periods.modal.' + (isNew()? 'create': 'edit') | translation }}</span>
+            <span class="col-2 form-close">
+                <button type="button" class="btn btn-blank btn-icon" (click)="close()">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </span>
+        </div>
+
+        <div class="my-3">
+            <mat-divider></mat-divider>
+        </div>
+
+        <form [formGroup]="periodForm">
+            <div class="row">
+                <mat-form-field class="col-6">
+                    <mat-label>{{ 'multi.name.SK' | translation }}</mat-label>
+                    <input matInput [formControlName]="'nameSK'">
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                    <mat-label>{{ 'multi.name.EN' | translation }}</mat-label>
+                    <input matInput [formControlName]="'nameEN'">
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="col-6">
+                    <mat-label>{{ 'date.start' | translation }}</mat-label>
+                    <input matInput [matDatepicker]="pickerStart" [formControlName]="'start'">
+                    <mat-hint>DD/MM/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerStart></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                    <mat-label>{{ 'date.end' | translation }}</mat-label>
+                    <input matInput [matDatepicker]="pickerEnd" [formControlName]="'end'">
+                    <mat-hint>DD/MM/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerEnd></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="row my-3">
+                <p><mat-checkbox formControlName="active">{{ 'other.periods.active' | translation }}</mat-checkbox></p>
+            </div>
+        </form>
+
+
+
+        <div class="list-btn-group">
+            <button class="list-btn" mat-raised-button color="primary" (click)="submit()" >{{ 'label.save' | translation }}</button>
+            <button class="list-btn" mat-raised-button color="warn" (click)="close()">{{ 'label.cancel' | translation }}</button>
+        </div>
+    </div>
+</div>

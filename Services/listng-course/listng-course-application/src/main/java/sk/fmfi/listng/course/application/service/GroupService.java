@@ -6,7 +6,7 @@ import sk.fmfi.listng.course.application.assembler.GroupAssembler;
 import sk.fmfi.listng.course.application.repository.GroupRepository;
 import sk.fmfi.listng.course.domain.Group;
 import sk.fmfi.listng.course.dto.GroupDto;
-import sk.fmfi.listng.infrastructure.common.dto.MultiLangText;
+import sk.fmfi.listng.infrastructure.common.MultiLangText;
 
 @Service
 public class GroupService {

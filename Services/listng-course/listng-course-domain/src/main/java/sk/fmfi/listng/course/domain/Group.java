@@ -1,7 +1,7 @@
 package sk.fmfi.listng.course.domain;
 
 
-import sk.fmfi.listng.infrastructure.common.dto.MultiLangText;
+import sk.fmfi.listng.infrastructure.common.MultiLangText;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -13,38 +13,66 @@ import java.util.Set;
 
 public class Group implements Serializable {
     
-    private long id;
+    private Long id;
     
-    private long courseId;
+    private Long courseId;
 
+    private boolean defaultGroup;
+    
+    private Integer capacity;
+    
     private MultiLangText name;
     
-    private Set<Class> classes = new HashSet<>();
+//    private Set<Class> classes = new HashSet<>();
 
     @Deprecated
     public Group() {
         // Hibernate only
     }
 
-    public Group(long course, MultiLangText name) {
-        this.courseId = course;
+    public Group(long courseId, MultiLangText name) {
+        this.courseId = courseId;
         this.name = name;
     }
 
-    public long getId() {
+    public Group copy() {
+        Group copy = new Group();
+        copy.setDefaultGroup(defaultGroup);
+        copy.setCapacity(capacity);
+        copy.setName(new MultiLangText(name.getSK(), name.getEN()));
+        return copy;
+    }
+    
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getCourseId() {
+    public Long getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(long course) {
+    public void setCourseId(Long course) {
         this.courseId = course;
+    }
+
+    public boolean isDefaultGroup() {
+        return defaultGroup;
+    }
+
+    public void setDefaultGroup(boolean defaultGroup) {
+        this.defaultGroup = defaultGroup;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
     }
 
     public MultiLangText getName() {
@@ -55,11 +83,11 @@ public class Group implements Serializable {
         this.name = name;
     }
 
-    public Set<Class> getClasses() {
-        return classes;
-    }
-
-    public void setClasses(Set<Class> classes) {
-        this.classes = classes;
-    }
+//    public Set<Class> getClasses() {
+//        return classes;
+//    }
+//
+//    public void setClasses(Set<Class> classes) {
+//        this.classes = classes;
+//    }
 }

@@ -16,14 +16,14 @@
         
         <component 
                 name="name" 
-                class="sk.fmfi.listng.infrastructure.common.dto.MultiLangText">
+                class="sk.fmfi.listng.infrastructure.common.MultiLangText">
             <property name="SK" column="NAME_SK" type="java.lang.String"/>
             <property name="EN" column="NAME_EN" type="java.lang.String"/>
         </component>
         
         <component
                 name="abbreviation"
-                class="sk.fmfi.listng.infrastructure.common.dto.MultiLangText">
+                class="sk.fmfi.listng.infrastructure.common.MultiLangText">
             <property name="SK" column="ABBREVIATION_SK" type="java.lang.String"/>
             <property name="EN" column="ABBREVIATION_EN" type="java.lang.String"/>
         </component>
@@ -33,15 +33,17 @@
         <set
                 name="groups"
                 table="COURSE_GROUP"
-                cascade="all-delete-orphan"
+                cascade="all"
                 fetch="join"
                 lazy="false"
         >
+            <cache usage="read-write"/>
             <key>
                 <column name="COURSE_ID" not-null="true" />
             </key>
             <one-to-many class="sk.fmfi.listng.course.domain.Group" />
-        </set>        
+        </set>
+
     </class>
 
 </hibernate-mapping>

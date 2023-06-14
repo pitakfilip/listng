@@ -1,0 +1,58 @@
+<div class="form-modal">
+    <div mat-dialog-content class="form-modal-content">
+        <div class="row row-centered">
+            <span class="col-10 form-title">{{ 'courses.modal.' + (isNew() ? 'create' : 'edit') | translation }}</span>
+            <span class="col-2 form-close">
+                <button type="button" class="btn btn-blank btn-icon" (click)="close()">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </span>
+        </div>
+
+        <div class="my-3">
+            <mat-divider></mat-divider>
+        </div>
+
+        <div class="row my-2" *ngIf="$periods as periods">
+            <span>{{ 'courses.label.period' | translation }}:
+                <mat-form-field class="period-picker-simple" appearance="outline">
+                    <mat-select [(ngModel)]="inner.periodId">
+                        <mat-option *ngFor="let period of periods" [value]="period.id">
+                            {{ period.name | translation }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </span>
+        </div>
+
+        <div class="row">
+            <app-multi-lang-input class="col-6"
+                                  [(ngModel)]="inner.name"
+                                  [title]="'courses.label.name'">
+            </app-multi-lang-input>
+
+            <app-multi-lang-input class="col-6"
+                                  [(ngModel)]="inner.abbreviation"
+                                  [title]="'courses.label.abbreviation'">
+            </app-multi-lang-input>
+        </div>
+
+        <div class="my-1">
+            <mat-divider></mat-divider>
+        </div>
+
+        <div class="row">
+            <app-group-input [(ngModel)]="inner.groups"></app-group-input>
+        </div>
+
+        <div class="my-1">
+            <mat-divider></mat-divider>
+        </div>
+
+
+        <div class="list-btn-group">
+            <button class="list-btn" mat-raised-button color="primary" (click)="submit()">{{ 'label.save' | translation }}</button>
+            <button class="list-btn" mat-raised-button color="warn" (click)="close()">{{ 'label.cancel' | translation }}</button>
+        </div>
+    </div>
+</div>

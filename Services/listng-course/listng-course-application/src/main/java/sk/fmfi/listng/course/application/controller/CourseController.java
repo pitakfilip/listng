@@ -2,6 +2,7 @@ package sk.fmfi.listng.course.application.controller;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import sk.fmfi.listng.course.api.CourseApi;
@@ -10,6 +11,9 @@ import sk.fmfi.listng.course.application.service.*;
 import sk.fmfi.listng.course.domain.Course;
 import sk.fmfi.listng.course.domain.Period;
 import sk.fmfi.listng.course.dto.CourseDto;
+import sk.fmfi.listng.infrastructure.common.dto.PageResponse;
+import sk.fmfi.listng.infrastructure.common.dto.PagingParams;
+import sk.fmfi.listng.infrastructure.common.dto.SortParams;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,33 +29,43 @@ public class CourseController implements CourseApi {
     @Autowired
     private PeriodService periodService;
 
-    @Autowired
-    private GroupService groupService;
     
     @Override
-    public void create(CourseDto dto) {
-        if (periodService.getPeriod(dto.periodId).isEmpty()) {
-            throw new EntityNotFoundException("error.period.not.found");
-        }
-        
-        Long courseId = courseService.saveCourse(dto);
-        groupService.createDefaultGroup(courseId);
+    public void save(CourseDto courseDto) {
+        courseService.saveCourse(courseDto);
     }
 
     @Override
-    public void copyCourse(Long courseId, Long periodId) {
-        courseService.copyCourse(courseId, periodId);        
+    public void copyCourses(List<Long> courseIds, Long periodId) {
+        courseService.copyCourses(courseIds, periodId);
     }
 
+    @Override
+    public CourseDto getCourseById(Long courseId) {
+        Optional<Course> course = courseService.getById(courseId);
+        if (course.isEmpty()) {
+            throw new EntityNotFoundException("error.course.not.found");
+        }
+        return CourseAssembler.toDto(course.get());
+    }
+    
+    @Override
+    public PageResponse<CourseDto> getCoursePage(PagingParams params) {
+        if (params.sort.isEmpty()) {
+            params.sort.add(new SortParams("id"));
+        }
+        return courseService.getCoursePage(params);
+    }
+    
     @Override
     public List<CourseDto> getCourses() {
         return courseService.getAll().stream()
                 .map(CourseAssembler::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
-    public List<CourseDto> getCoursesOfPeriod(@RequestParam Long periodId) {
+    public List<CourseDto> getCoursesOfPeriod(Long periodId) {
         List<Course> courses = courseService.getAllInPeriod(periodId);
 
         if (courses == null || courses.isEmpty()) {
@@ -73,30 +87,7 @@ public class CourseController implements CourseApi {
     }
 
     @Override
-    public CourseDto getCourseById(Long courseId) {
-        if (!courseService.courseExists(courseId)) {
-            throw new EntityNotFoundException("error.course.not.found");
-        }
-        Optional<Course> course = courseService.getById(courseId);
-        
-        return CourseAssembler.toDto(course.get());
-    }
-
-    @Override
-    public void update(CourseDto course) {
-        Optional<Course> fromCourse = courseService.getById(course.id);
-        if (fromCourse.isEmpty()) {
-            throw new EntityNotFoundException("error.course.not.found");
-        }
-        courseService.saveCourse(course);
-    }
-
-    @Override
-    public void delete(Long courseId) {
-        Optional<Course> fromCourse = courseService.getById(courseId);
-        if (fromCourse.isEmpty()) {
-            throw new EntityNotFoundException("error.course.not.found");
-        }
-        courseService.delete(courseId);
+    public void delete(List<Long> courseIds) {
+        courseService.delete(courseIds);
     }
 }

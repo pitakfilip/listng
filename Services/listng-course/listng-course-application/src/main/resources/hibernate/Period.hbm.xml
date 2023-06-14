@@ -16,7 +16,7 @@
 
         <component
                 name="name"
-                class="sk.fmfi.listng.infrastructure.common.dto.MultiLangText">
+                class="sk.fmfi.listng.infrastructure.common.MultiLangText">
             <property name="SK" column="NAME_SK" type="java.lang.String"/>
             <property name="EN" column="NAME_EN" type="java.lang.String"/>
         </component>

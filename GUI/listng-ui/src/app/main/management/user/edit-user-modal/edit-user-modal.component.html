@@ -1,0 +1,61 @@
+<div class="form-modal"  *ngIf="$user as user">
+    <div mat-dialog-content class="form-modal-content">
+        <div class="row row-centered">
+            <span class="col-10 form-title">{{ 'users.modal.edit' | translation }}</span>
+            <span class="col-2 form-close">
+                <button type="button" class="btn btn-blank btn-icon" (click)="close()">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </span>
+        </div>
+
+        <div class="my-3">
+            <mat-divider></mat-divider>
+        </div>
+
+        <div class="row my-2">
+            <div class="col-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control rounded-3" id="nameInput" [(ngModel)]="user.name"
+                           placeholder="email" [disabled]="isLocked()">
+                    <label for="nameInput">
+                        {{'label.name' | translation }}</label>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-floating">
+                    <input type="email" class="form-control rounded-3" id="emailInput" [(ngModel)]="user.email"
+                           placeholder="email" [disabled]="isLocked()">
+                    <label for="emailInput">
+                        {{'label.email' | translation }}</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-1">
+            <span class="btn-group">{{ 'role.label' | translation }}:
+                <button [disabled]="isLocked()" mat-flat-button class="ml-2" [ngClass]="isSysRole(STUDENT) ? 'btn-secondary' : 'btn-clear'" (click)="setSysRole(STUDENT)" matTooltip="{{ 'role.student.description' | translation }}">
+                    <mat-icon>person</mat-icon>{{ 'role.student.label' | translation }}
+                </button>
+                <button [disabled]="isLocked()" mat-flat-button [ngClass]="isSysRole(TEACHER) ? 'btn-secondary' : 'btn-clear'" (click)="setSysRole(TEACHER)" matTooltip="{{ 'role.teacher.description' | translation }}">
+                    <mat-icon>school</mat-icon>{{ 'role.teacher.label' | translation }}
+                </button>
+                <button [disabled]="isLocked()" mat-flat-button [ngClass]="isSysRole(ROOT) ? 'btn-secondary' : 'btn-clear'" (click)="setSysRole(ROOT)" matTooltip="{{ 'role.root.description' | translation }}">
+                    <mat-icon>settings</mat-icon>{{ 'role.root.label' | translation }}
+                </button>
+            </span>
+        </div>
+
+        <div class="my-3">
+            <mat-divider></mat-divider>
+        </div>
+
+        <app-permission-select [role]="$user.role" [userId]="data.userId" (onChange)="onPermissionChange($event)"></app-permission-select>
+
+        <div class="list-btn-group">
+            <button class="list-btn" mat-raised-button color="primary" (click)="submit()">{{ 'label.save' | translation }}</button>
+            <button class="list-btn" mat-raised-button color="warn" (click)="close()">{{ 'label.cancel' | translation }}</button>
+        </div>
+
+    </div>
+</div>

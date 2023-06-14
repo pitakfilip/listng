@@ -38,11 +38,15 @@ div.user-course-permissions {
 }
 
 .table-row {
-    height: 0em !important;
+    height: 2.5em !important;
 
     > .mdc-data-table__cell {
         //padding: 0 !important;
     }
+}
+
+.cell-middle {
+    text-align: center !important;
 }
 
 .cell-end {

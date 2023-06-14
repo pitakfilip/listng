@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sk.fmfi.listng.user.domain.User;
 import sk.fmfi.listng.user.application.repository.UserRepository;
-import sk.fmfi.listng.user.application.util.SecretUtil;
+import sk.fmfi.listng.user.util.SecretUtil;
 
 import javax.mail.MessagingException;
 import java.io.InvalidObjectException;

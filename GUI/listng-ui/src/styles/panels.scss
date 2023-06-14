@@ -1,0 +1,30 @@
+
+.panel-header {
+    border: $mat-primary 1px solid;
+    border-radius: 1em;
+    line-height: 1.6em;
+
+    .panel-link {
+        display: block;
+        padding: 0 1em;
+
+        .collapse-label {
+            float: right;
+            display: inline-flex;
+            align-items: center;
+        }
+    }
+
+    a {
+        text-decoration: none;
+        color: $mat-primary !important;
+    }
+}
+
+.panel-collapse > div.panel-content {
+    margin: 0 0.7em;
+    border: $mat-accent 1px solid;
+    border-top: none;
+    border-radius: 0 0 0.6em 0.6em;
+    padding: 1em 1em 0;
+}

@@ -1,11 +1,14 @@
 package sk.fmfi.listng.course.application.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import sk.fmfi.listng.course.application.assembler.PeriodAssembler;
 import sk.fmfi.listng.course.application.repository.PeriodRepository;
 import sk.fmfi.listng.course.domain.Period;
 import sk.fmfi.listng.course.dto.PeriodDto;
+import sk.fmfi.listng.infrastructure.common.dto.PageResponse;
+import sk.fmfi.listng.infrastructure.common.dto.PagingParams;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,8 +19,11 @@ public class PeriodService {
     @Autowired
     private PeriodRepository periodRepository;
     
-    public void savePeriod(PeriodDto period){
-        periodRepository.save(PeriodAssembler.fromDto(period));
+    public void savePeriod(PeriodDto dto){
+        if (dto.active) {
+            unsetCurrentActive();
+        }
+        periodRepository.save(PeriodAssembler.fromDto(dto));
     }
     
     public List<Period> getAllPeriods() {
@@ -48,15 +54,26 @@ public class PeriodService {
     public void deletePeriod(Long id){
         periodRepository.deleteById(id);
     }
-
-    public boolean isValid(PeriodDto dto) {
-        Period period = PeriodAssembler.fromDto(dto);
-        List<Period> periods = getAllPeriods();
-        for (Period existingPeriod : periods) {
-            if (existingPeriod.overlaps(period)) {
-                return false;
-            }
+    
+    public PageResponse<PeriodDto> getPeriodsPage(PagingParams params) {
+        Page<Period> page = periodRepository.findAll(params.compile());
+        return new PageResponse<>(page, PeriodAssembler.toDto(page.getContent()));
+    }
+    
+    private void unsetCurrentActive() {
+        Period period = periodRepository.findFirstByActiveIsTrue();
+        if (period != null) {
+            period.setActive(false);
+            periodRepository.save(period);    
         }
-        return true;
+    }
+    
+    public void setActive(Long periodId, boolean state) {
+        Period period = periodRepository.getReferenceById(periodId);
+        if (state) {
+            unsetCurrentActive();
+        }
+        period.setActive(state);
+        periodRepository.save(period);
     }
 }

@@ -29,13 +29,13 @@ public class CourseController extends ListController {
         return success(CourseBaseDto.of(courses));
     }
     
-    @GetMapping("/courses")
-    public Response<List<CourseBaseDto>> getAllCourses() {
-        List<CourseDto> courses = courseService.getAllCourses();
-
-        if (courses == null) {
-            return success(Collections.emptyList());
-        }
-        return success(CourseBaseDto.of(courses));
-    }
+//    @GetMapping("/courses")
+//    public Response<List<CourseBaseDto>> getAllCourses() {
+//        List<CourseDto> courses = courseService.getAllCourses();
+//
+//        if (courses == null) {
+//            return success(Collections.emptyList());
+//        }
+//        return success(CourseBaseDto.of(courses));
+//    }
 }

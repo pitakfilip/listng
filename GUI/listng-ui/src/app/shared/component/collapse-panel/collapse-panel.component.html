@@ -1,0 +1,22 @@
+<div class="panel panel-collapse my-2">
+    <div class="panel-header">
+
+        <a class="panel-link clickable" (click)="toggleCollapse()">
+            {{title}}
+
+            <div class="collapse-label" *ngIf="!collapsed">
+                {{ 'label.hide' | translation }}
+                <mat-icon>keyboard_arrow_up</mat-icon>
+            </div>
+            <div class="collapse-label" *ngIf="collapsed">
+                {{ 'label.show' | translation }}
+                <mat-icon>keyboard_arrow_down</mat-icon>
+            </div>
+        </a>
+    </div>
+
+    <div class="panel-content" *ngIf="!collapsed">
+        <ng-container *ngTemplateOutlet="template; context: { $implicit: expanded }"/>
+    </div>
+</div>
+

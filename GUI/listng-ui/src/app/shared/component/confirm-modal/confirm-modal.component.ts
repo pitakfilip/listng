@@ -15,7 +15,7 @@ import {MatButtonModule} from '@angular/material/button';
 })
 export class ConfirmModalComponent {
 
-    constructor(@Inject(MAT_DIALOG_DATA) public data: { message: string, specify: MultiLang|string, detail: string[] }) {
+    constructor(@Inject(MAT_DIALOG_DATA) public data: { message: string, specify: MultiLang|string, simpleList: string[], list: MultiLang[] }) {
         if (typeof data.specify === 'string') {
             data.specify = { EN: data.specify, SK: data.specify } as MultiLang;
         }

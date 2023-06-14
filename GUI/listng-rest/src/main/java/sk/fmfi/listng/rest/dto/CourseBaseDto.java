@@ -26,6 +26,6 @@ public class CourseBaseDto implements BaseDto {
     public static List<CourseBaseDto> of(List<CourseDto> dtos) {
         return dtos.stream()
                 .map(CourseBaseDto::of)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

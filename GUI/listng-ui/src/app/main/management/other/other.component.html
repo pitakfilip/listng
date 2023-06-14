@@ -1,0 +1,23 @@
+<div class="list-body">
+
+    <app-collapse-panel
+        [title]="'other.periods.title' | translation"
+        [collapsed]="collapse.periods"
+        (toggle)="onTogglePeriods($event)"
+    >
+        <ng-template let-expanded>
+            <app-periods *ngIf="expanded"></app-periods>
+        </ng-template>
+    </app-collapse-panel>
+
+    <app-collapse-panel
+        [title]="'other.rooms.title' | translation"
+        [collapsed]="collapse.rooms"
+        (toggle)="onToggleRooms($event)"
+    >
+        <ng-template let-expanded>
+            <app-rooms *ngIf="expanded"></app-rooms>
+        </ng-template>
+    </app-collapse-panel>
+
+</div>

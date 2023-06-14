@@ -2,13 +2,19 @@ package sk.fmfi.listng.course.application.controller;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sk.fmfi.listng.course.api.RoomApi;
+import sk.fmfi.listng.course.application.assembler.PeriodAssembler;
 import sk.fmfi.listng.course.application.assembler.RoomAssembler;
 import sk.fmfi.listng.course.application.repository.RoomRepository;
 import sk.fmfi.listng.course.domain.Room;
 import sk.fmfi.listng.course.dto.RoomDto;
+import sk.fmfi.listng.infrastructure.common.dto.PageResponse;
+import sk.fmfi.listng.infrastructure.common.dto.PagingParams;
+import sk.fmfi.listng.infrastructure.common.dto.SortParams;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,16 +28,17 @@ public class RoomController implements RoomApi {
     private RoomRepository repository;
     
     @Override
-    public void create(RoomDto room) {
-        Room obj = RoomAssembler.fromDto(room);
-        repository.save(obj);        
+    public void save(RoomDto room) {
+        repository.save(RoomAssembler.fromDto(room));        
     }
 
     @Override
-    public List<RoomDto> getAll() {
-        return repository.findAll().stream()
-                .map(RoomAssembler::toDto)
-                .collect(Collectors.toList());
+    public PageResponse<RoomDto> getRoomsPage(@RequestBody PagingParams params) {
+        if (params.sort.isEmpty()) {
+            params.sort.add(new SortParams("name"));
+        }
+        Page<Room> page = repository.findAll(params.compile());
+        return new PageResponse<>(page, RoomAssembler.toDto(page.getContent()));
     }
 
     @Override
@@ -42,14 +49,6 @@ public class RoomController implements RoomApi {
             throw new EntityNotFoundException("error.not.found");
         }
         return RoomAssembler.toDto(room.get());
-    }
-
-    @Override
-    public void update(RoomDto room) {
-        if (!repository.existsById(room.id)) {
-            throw new EntityNotFoundException("error.not.found");
-        }
-        repository.save(RoomAssembler.fromDto(room));
     }
 
     @Override

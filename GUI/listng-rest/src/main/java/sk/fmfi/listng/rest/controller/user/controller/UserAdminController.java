@@ -1,20 +1,27 @@
 package sk.fmfi.listng.rest.controller.user.controller;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import sk.fmfi.listng.infrastructure.common.Response;
 import sk.fmfi.listng.infrastructure.common.dto.PageResponse;
 import sk.fmfi.listng.infrastructure.common.dto.PagingParams;
+import sk.fmfi.listng.infrastructure.enums.FileType;
 import sk.fmfi.listng.rest.common.ListController;
 import sk.fmfi.listng.rest.controller.user.service.PermissionService;
 import sk.fmfi.listng.rest.controller.user.service.UserService;
+import sk.fmfi.listng.rest.dto.ImportDto;
 import sk.fmfi.listng.rest.dto.UserBaseDto;
 import sk.fmfi.listng.rest.dto.UserSaveDto;
+import sk.fmfi.listng.rest.util.XlsxImportParser;
 import sk.fmfi.listng.user.dto.UsersOperationDto;
 import sk.fmfi.listng.user.dto.PermissionDto;
 import sk.fmfi.listng.user.dto.UserDto;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Admin controller for handling requests for Users and Permissions.
@@ -25,7 +32,7 @@ import java.util.List;
 public class UserAdminController extends ListController {
     
     @Autowired
-    private UserService userService;
+    private UserService userService;    
 
     @Autowired
     private PermissionService permissionService;
@@ -42,6 +49,41 @@ public class UserAdminController extends ListController {
         return success();
     }
 
+    @PostMapping("/import/{type}/header")
+    public Response<Map<Integer, String>> parseHeader(@RequestParam MultipartFile file, @PathVariable FileType type, int sheet, int row) {
+        if (!type.equals(FileType.CSV) && !type.equals(FileType.XLSX)) {
+            return error("file.upload.invalid.type");
+        }
+        
+        Map<Integer, String> labels = null;
+        if (type == FileType.XLSX) {
+            labels = XlsxImportParser.getHeaderLabels(file, sheet, row);
+        } else {
+            // TODO podpora CSV
+        }
+        
+        if (labels == null) {
+            return error("file.parse.error");
+        }
+        return success(labels);
+    }
+    
+    @PostMapping("/import/{type}/parse")
+    public Response importUsers(@RequestPart("file") MultipartFile file, @RequestPart("config") ImportDto config, @PathVariable FileType type) {
+        if (!type.equals(FileType.CSV) && !type.equals(FileType.XLSX)) {
+            return error();
+        }
+        List<UserDto> newUsers = XlsxImportParser.parseUsers(file, config);
+        
+        UsersOperationDto usersOperationDto = new UsersOperationDto();
+        usersOperationDto.role = config.role;
+        usersOperationDto.users = newUsers;
+        usersOperationDto.permissions = config.permissions;
+        
+        this.userService.create(usersOperationDto);
+        return success();
+    }
+    
     /**
      * Get basic user data by user id.
      * @param   userId
@@ -96,7 +138,7 @@ public class UserAdminController extends ListController {
      * @return  Request handle successful or throw error
      */    
     @PostMapping("/update")
-    public Response updateUser(@RequestBody UserSaveDto userSaveDto){
+    public  Response updateUser(@RequestBody UserSaveDto userSaveDto){
         userService.updateUser(userSaveDto);
         return success();
     }

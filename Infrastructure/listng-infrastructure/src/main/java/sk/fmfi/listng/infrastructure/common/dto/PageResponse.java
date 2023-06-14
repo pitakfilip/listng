@@ -24,6 +24,13 @@ public class PageResponse<T> implements BaseDto {
         this.totalEntries = page.getTotalElements();
         this.totalPages = page.getTotalPages();
     }
+
+    public PageResponse(Page page, List<T> data) {
+        this.data = data;
+        this.page = page.getNumber();
+        this.totalEntries = page.getTotalElements();
+        this.totalPages = page.getTotalPages();
+    }
     
     public PageResponse(PageResponse copy, List<T> assembled) {
         this.data = assembled;

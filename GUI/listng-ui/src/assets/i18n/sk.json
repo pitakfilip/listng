@@ -4,10 +4,11 @@
             "courses": "Kurzy",
             "tasks": "Úlohy",
             "tasksets": "Zostavy",
-            "users": "Úživatelia",
+            "users": "Používatelia",
             "moss": "MOSS",
-            "general": "Všeobecné",
-            "logs": "Logs"
+            "other": "Ostatné",
+            "logs": "Činnosti",
+            "system": "Systém"
         },
         "account":  {
             "logout": "Odhlásiť sa",
@@ -44,7 +45,16 @@
         },
         "500": {
             "title": "Nastala serverová chyba!",
-            "info": "Akciu prosím zopakujte.\nAk problém pretrváva, kontaktujte správcov"
+            "info": "Akciu prosím zopakujte.\nAk problém pretrváva, prosím kontaktujte správcov."
+        },
+        "login": {
+            "expired": {
+                "title": "Uplynula platnosť prihlásenia"
+            },
+            "access": {
+                "title": "Ku žiadanému obsahu nemáte prístup",
+                "info": ""
+            }
         }
     },
     "label": {
@@ -58,6 +68,7 @@
         "clear": "Vymazať",
         "close": "Zatvoriť",
         "continue": "Pokračovať",
+        "import": "Importovať",
         "courses": "Kurzy",
         "account": "Účet",
         "period": "Obdobie",
@@ -73,6 +84,8 @@
         "password.reset.pass": "Zadajte nové heslo",
         "email": "Emailová adresa",
         "name": "Meno",
+        "surname": "Priezvisko",
+        "fullname": "Celé meno",
         "login": {
             "title": "Prihláste sa",
             "submit": "Prihlásiť"
@@ -81,7 +94,11 @@
         "edit": "Upraviť",
         "add": "Pridať",
         "remove": "Odstrániť",
-        "save": "Uložiť zmeny"
+        "save": "Uložiť zmeny",
+        "show": "Zobraziť",
+        "from": "od",
+        "to": "do",
+        "hide": "Schovať"
     },
     "user": {
         "name": "Meno",
@@ -89,7 +106,7 @@
         "active": "Aktívny",
         "isActive": "Je aktívny",
         "permission.count": "Počet oprávnení",
-        "actions": "Akcie nad úživateľom",
+        "actions": "Akcie nad používateľom",
         "course": {
             "count": "Počet kurzov",
             "active": "Aktuálne kurzy",
@@ -98,20 +115,25 @@
         }
     },
     "table": {
-        "no": {
-            "record": "Žiaden záznam nebol nájdený."
+        "label": {
+            "name": "Názov"
         },
+        "no.record": "Žiaden záznam nebol nájdený.",
         "action": {
+            "label": "Akcie",
             "filter": "Filter",
-            "create": "Nový",
+            "create": "Vytvoriť",
             "delete": "Vymazať",
+            "copy": "Kopírovať",
             "edit": "Úpraviť"
         },
         "tooltip": {
             "filter": "Otvoriť menu s filtrovaním tabuľky",
             "create": "Vytvoriť nový záznam",
+            "copy": "Kopírovať",
             "bulk": {
                 "edit": "Hromadne úpraviť výber",
+                "copy": "Hromadne kopírovať výber",
                 "delete": "Hromadne vymazať výber"
             },
             "sort": "Zoradiť podľa stĺpca"
@@ -131,16 +153,16 @@
         "role": {
             "viewer": "Sledovateľ: prístup k študentskému rozhraniu bez možnosti interakcie a odovzdávani.",
             "attendee": "Študent",
-            "evaluator": "Hodnotiaci: opravnený úživateľ na hodnotenie študentov, tvorbe úloh a zostáv v danom kurze",
-            "owner": "Vlastník: opravnený úživateľ s plnou kontrolou nad kurzom"
+            "evaluator": "Hodnotiaci: opravnený používateľ na hodnotenie študentov, tvorbe úloh a zostáv v danom kurze",
+            "owner": "Vlastník: opravnený používateľ s plnou kontrolou nad kurzom"
         },
         "action": {
             "modal": {
-                "delete": "Naozaj chcete odstrániť účet úživateľa ",
-                "delete.bulk": "Naozaj chcete odstrániť účty označených úživateľov"
+                "delete": "Naozaj chcete odstrániť účet používateľa ",
+                "delete.bulk": "Naozaj chcete odstrániť účty označených používateľov"
             },
             "tooltip": {
-                "new": "Vytvoriť nového úživateľa"
+                "new": "Vytvoriť nového používateľa"
             },
             "delete": "Odstrániť účet",
             "permission": {
@@ -148,18 +170,19 @@
             },
             "new": {
                 "form": "Manuálne cez formulár",
-                "import": "Importovať z CSV"
+                "import": "Importovať"
             }
         },
         "modal": {
-            "edit": "Úprava úživateľa",
-            "password.generated": "Heslo je automatický generované a odoslaný mailom úživateľovi.",
-            "new": "Vytvorenie nových úživateľov",
+            "edit": "Úprava používateľa",
+            "password.generated": "Heslo je automatický generované a odoslaný mailom používateľovi.",
+            "new": "Vytvorenie nových používateľov",
+            "import": "Importovanie nových používateľov",
             "bulk.edit": {
-                "label": "Úprava úživateľov",
-                "selected": "Označeni poúživatelia",
+                "label": "Úprava používateľov",
+                "selected": "Označeni používatelia",
                 "info": "Nové oprávnenia sa vytvoria alebo aktualizuju existujúce oprávnenie pre daný kurz. Oprávnenia na odstránenie sa odstránia používateľom ktorí ho majú.",
-                "role": "Zmena typu úživateľov",
+                "role": "Zmena typu používateľov",
                 "permissions.new": "Nové oprávnenia",
                 "permissions.remove": "Oprávnenia na odstránenie"
             }
@@ -204,7 +227,7 @@
         "itemsPerPage": "Záznamov"
     },
     "role": {
-        "label": "Typ úživateľa s oprávnením",
+        "label": "Typ používateľa s oprávnením",
         "student": {
             "label": "Študent",
             "description": "Účastník kurzov ako študent alebo opravujúci"
@@ -220,5 +243,75 @@
     },
     "permission": {
         "period": "Oprávnenia ku kurzu v období"
+    },
+    "other": {
+        "periods" : {
+            "title": "Obdobia",
+            "active": "Aktívny",
+            "modal": {
+                "delete": "Naozaj chcete odstrániť obdobie ",
+                "active": "Naozaj chcete označiť obdobie ako aktívne",
+                "inactive": "Naozaj chcete označiť aktívne obdobie ako neaktívne",
+                "create": "Vytvorenie nového obdobia",
+                "edit": "Úprava obdobia"
+            },
+            "action": {
+                "active": "Označiť ako aktívny",
+                "inactive": "Označiť ako neaktívny"
+            }
+        },
+        "rooms": {
+            "title": "Miestnosti",
+            "capacity": "Ceľková kapacita",
+            "modal": {
+                "delete": "Naozaj chcete odstrániť miestnosť ",
+                "create": "Vytvorenie novej miestnosti",
+                "edit": "Úprava miestnosti"
+            }
+        }
+    },
+    "date": {
+        "start": "Začína",
+        "end": "Končí"
+    },
+    "multi": {
+        "name.SK": "Názov (SK)",
+        "name.EN": "Názov (EN)"
+    },
+    "courses": {
+        "label": {
+            "name": "Názov",
+            "abbreviation": "Skratka",
+            "period": "Obdobie",
+            "groups": "Skupiny"
+        },
+        "group": {
+            "count": "Počet skupín",
+            "default": "Predvolená skupina",
+            "capacity": "Kapacita"
+        },
+        "modal": {
+            "delete": "Naozaj chcete odstrániť kurz ",
+            "delete.bulk": "Naozaj chcete odstrániť vybrané kurzy",
+            "create": "Vytvorenie nového kurzu",
+            "edit": "Úprava kurzu",
+            "copy": "Kopírovanie kurzu",
+            "copy.bulk": "Kopírovanie kurzov",
+            "copy.info": "Zvoľte cieľové obdobie."
+        }
+    },
+    "file": {
+        "choose": "Vybrať súbor",
+        "sheet": {
+            "number": "č. hárku:",
+            "header.number": "č. riadku hlavičky:",
+            "row": "Riadok",
+            "row.from": "od riadku:",
+            "row.to": "po riadok:",
+            "column": "Stĺpec",
+            "config": "Konfigurácia stĺpcov",
+            "column.config.hint": "Označte políčko a zvoľte prisluchajúcu možnosť získane zo importovaného súboru. Systém sa pokúsi automaticky priradiť stĺpce. Je nutné priradiť emailovú adresu, meno a priezvisko alebo celé meno.",
+            "row.config.hint": "Číslo prvého a posledného riadku s údajmi používateľov."
+        }
     }
 }

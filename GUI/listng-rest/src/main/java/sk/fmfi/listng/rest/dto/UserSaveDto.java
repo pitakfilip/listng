@@ -29,7 +29,7 @@ public class UserSaveDto {
         dto.id = this.user.id;
         dto.name = this.user.name;
         dto.email = this.user.email;
-        dto.role = SystemRole.valueOf(this.user.role);
+        dto.role = this.user.role;
         dto.permissions = this.permissions;
         return dto;
     }

@@ -42,13 +42,9 @@ public class ClassController implements ClassApi {
             throw new EntityNotFoundException("error.course.not.found");
         }
         
-        List<Group> groups = course.get().getGroups();
+        Set<Group> groups = course.get().getGroups();
         Set<ClassDto> classes = new HashSet<>();
-        
-        for (Group group : groups) {
-            classes.addAll(ClassAssembler.toDto(group.getClasses().stream().toList()));
-        }
-        
+
         return new ArrayList<>(classes);
     }
 
@@ -57,7 +53,7 @@ public class ClassController implements ClassApi {
         List<Class> classes = repository.getClassesByGroupId(groupId);
         return classes.stream()
                 .map(ClassAssembler::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -65,7 +61,7 @@ public class ClassController implements ClassApi {
         List<Class> classes = repository.getClassesByRoom_Id(roomId);
         return classes.stream()
                 .map(ClassAssembler::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

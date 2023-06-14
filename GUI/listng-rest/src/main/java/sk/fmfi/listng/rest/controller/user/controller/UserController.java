@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sk.fmfi.listng.infrastructure.common.Response;
 import sk.fmfi.listng.rest.common.ListController;
+import sk.fmfi.listng.rest.common.menu.HeaderItems;
 import sk.fmfi.listng.rest.controller.user.service.PermissionService;
 import sk.fmfi.listng.rest.controller.user.service.UserService;
 import sk.fmfi.listng.user.dto.PermissionDto;
@@ -18,9 +19,6 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController extends ListController {
 
-    @Autowired
-    private UserService userService;
-    
     @Autowired
     private PermissionService permissionService;
     
@@ -51,6 +49,19 @@ public class UserController extends ListController {
             return error();
         }
         
-        return success(userService.isAdmin(userId));
+        return success(isRoot());
+    }
+    
+    @GetMapping("/header")
+    public Response<List<HeaderItems>> getHeaderItems() {
+        if (isStudent()) {
+            return success();
+        }
+        if (isTeacher()) {
+            return success(List.of(HeaderItems.USERS, HeaderItems.COURSES, HeaderItems.TASKS, HeaderItems.TASKSETS,
+                    HeaderItems.OTHER, HeaderItems.MOSS, HeaderItems.LOGS));
+        }
+        return success(List.of(HeaderItems.USERS, HeaderItems.COURSES, HeaderItems.TASKS, HeaderItems.TASKSETS,
+                HeaderItems.OTHER, HeaderItems.MOSS, HeaderItems.LOGS, HeaderItems.CONFIG));
     }
 }

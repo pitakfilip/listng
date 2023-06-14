@@ -1,0 +1,74 @@
+<!--<div class="row row-auto row-centered">-->
+<!--    <section class="list-input-wrapper">-->
+<!--        <mat-radio-group [(ngModel)]="fileType">-->
+<!--            <mat-radio-button value="XLSX">XLSX</mat-radio-button>-->
+<!--            <mat-radio-button value="CSV" disabled>CSV</mat-radio-button>-->
+<!--        </mat-radio-group>-->
+<!--    </section>-->
+
+
+<!--</div>-->
+<app-collapse-panel
+    [title]="'file.sheet.config' | translation"
+    [collapsed]="collapsedConfig"
+    (toggle)="onCollapseToggle($event)"
+>
+    <ng-template let-expanded>
+        <div class="column-config" *ngIf="expanded">
+
+            <mat-button-toggle-group name="selectType" [(ngModel)]="columnType">
+                <mat-button-toggle class="toggle-confirm-button" value="firstName">(1) {{ 'label.name' | translation }}</mat-button-toggle>
+                <mat-button-toggle class="toggle-confirm-button" value="lastName">(2) {{ 'label.surname' | translation }}</mat-button-toggle>
+                <mat-button-toggle class="toggle-confirm-button" value="fullName">(3) {{ 'label.fullname' | translation }}</mat-button-toggle>
+                <mat-button-toggle class="toggle-confirm-button" value="email">(4) {{ 'label.email' | translation }}</mat-button-toggle>
+            </mat-button-toggle-group>
+
+
+            <div class="my-2">
+                <mat-hint>{{ 'file.sheet.column.config.hint' | translation }}</mat-hint>
+            </div>
+
+            <mat-chip-listbox>
+                <span *ngFor="let column of header">
+                    <mat-chip [ngClass]="{'btn-primary': isSelected(column.num)}"
+                              (click)="select(column.num)">
+                        {{ getSelectedPrefix(column.num) + column.value }}
+                    </mat-chip>
+                </span>
+
+            </mat-chip-listbox>
+        </div>
+    </ng-template>
+</app-collapse-panel>
+
+<div class="my-3">
+    <mat-divider></mat-divider>
+</div>
+
+<div class="row my-1">
+    <span class="btn-group">{{ 'role.label' | translation }}:
+        <button mat-flat-button class="ml-2" [ngClass]="isSysRole(STUDENT) ? 'btn-secondary' : 'btn-clear'" (click)="setSysRole(STUDENT)" matTooltip="{{ 'role.student.description' | translation }}">
+            <mat-icon>person</mat-icon>{{ 'role.student.label' | translation }}
+        </button>
+        <button mat-flat-button [ngClass]="isSysRole(TEACHER) ? 'btn-secondary' : 'btn-clear'" (click)="setSysRole(TEACHER)" matTooltip="{{ 'role.teacher.description' | translation }}">
+            <mat-icon>school</mat-icon>{{ 'role.teacher.label' | translation }}
+        </button>
+        <button [disabled]="!isRoot" mat-flat-button [ngClass]="isSysRole(ROOT) ? 'btn-secondary' : 'btn-clear'" (click)="setSysRole(ROOT)" matTooltip="{{ 'role.root.description' | translation }}">
+            <mat-icon>settings</mat-icon>{{ 'role.root.label' | translation }}
+        </button>
+    </span>
+</div>
+
+<div class="my-3">
+    <app-permission-select  [role]="sysRole" (onChange)="onPermissionsChange($event)"></app-permission-select>
+</div>
+
+<div class="list-btn-group">
+    <button mat-raised-button color="primary" class="col list-btn list-input" (click)="confirm()">
+        {{ 'label.import' | translation }}
+    </button>
+
+    <button mat-raised-button color="accent" class="col list-btn list-input" (click)="return()">
+        {{ 'label.return' | translation }}
+    </button>
+</div>

@@ -19,6 +19,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import {ListPaginator} from './core/custom/list-paginator';
+import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
     declarations: [
@@ -50,7 +51,8 @@ import {ListPaginator} from './core/custom/list-paginator';
         MatDialogModule,
         MatMenuModule,
         BackgroundComponent,
-        MatPaginatorModule
+        MatPaginatorModule,
+        SweetAlert2Module.forRoot()
     ],
     providers: [
         {

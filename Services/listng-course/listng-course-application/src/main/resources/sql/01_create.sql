@@ -30,9 +30,11 @@ CREATE TABLE ROOM (
 
 CREATE TABLE COURSE_GROUP (
         group_id BIGSERIAL PRIMARY KEY,
+        course_id INTEGER NOT NULL REFERENCES COURSE(course_id) ON DELETE CASCADE,
         name_sk VARCHAR(32),
         name_en VARCHAR(32),
-        course_id INTEGER NOT NULL REFERENCES COURSE(course_id) ON DELETE CASCADE
+        capacity INTEGER,
+        is_default bool default false
 );
 
 CREATE TABLE CLASS (

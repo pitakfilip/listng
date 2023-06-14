@@ -1,20 +1,22 @@
 package sk.fmfi.listng.course.application.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import sk.fmfi.listng.course.application.assembler.CourseAssembler;
-import sk.fmfi.listng.course.application.assembler.PeriodAssembler;
 import sk.fmfi.listng.course.application.repository.CourseRepository;
 import sk.fmfi.listng.course.application.repository.GroupRepository;
 import sk.fmfi.listng.course.domain.Course;
 import sk.fmfi.listng.course.domain.Group;
-import sk.fmfi.listng.course.domain.Period;
 import sk.fmfi.listng.course.dto.CourseDto;
-import sk.fmfi.listng.course.dto.PeriodDto;
-import sk.fmfi.listng.infrastructure.common.dto.MultiLangText;
+import sk.fmfi.listng.course.dto.GroupDto;
+import sk.fmfi.listng.infrastructure.common.dto.PageResponse;
+import sk.fmfi.listng.infrastructure.common.dto.PagingParams;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CourseService {
@@ -32,9 +34,21 @@ public class CourseService {
         return courseRepository.existsById(courseId);
     }
     
-    public Long saveCourse(CourseDto dto) {
-        Course saved = courseRepository.save(CourseAssembler.fromDto(dto));
-        return saved.getId();
+    public void saveCourse(CourseDto dto) {
+        Course course = CourseAssembler.fromDto(dto);
+        if (course.getId() == 0) {
+            course.setId(null);
+        }
+        
+        for(Group group: course.getGroups()) {
+            group.setCourseId(course.getId());
+            
+            if (group.getId() < 1) {
+                group.setId(null);
+            }
+        }
+        
+        courseRepository.save(course);
     }
 
     /**
@@ -42,35 +56,30 @@ public class CourseService {
      * excluding classes, as there may be a collision with existing classes in the given period.
      * <pre><strong>
      * TODO</strong> copy tasksets of the given existing course with their configurations,
-     *  but without Date/Time related data (e.g. deadline) -> Need a TaskSetApi proxy once implemented.
+     *  but without Date/Time related data (e.g. deadline) -> Need a TaskSetApi proxy in REST once implemented.
      * </pre>
-     * @param courseId id of existing course.
+     * @param courseIds ids of existing courses.
      * @param periodId id of period to which we copy the course.
      */
-    public void copyCourse(Long courseId, Long periodId) {
-        Course from = courseRepository.getReferenceById(courseId);       
+    public void copyCourses(List<Long> courseIds, Long periodId) {
+        List<Course> courses = courseRepository.findAllById(courseIds);
         
-        if (!periodService.exists(periodId)) {
-            return;
-        }
+        List<Course> copies = courses.stream()
+                .map(course -> new Course(course, periodId))
+                .toList();
         
-        Course newCourse = Course.copy(from, periodId);
-        Course course = courseRepository.save(newCourse);
-
-        List<Group> oldGroups = groupRepository.getGroupsByCourseId(from.getId());
-        if (oldGroups.isEmpty()) {
-            return;
-        }
-
-        for (Group oldGroup : oldGroups) {
-            groupRepository.save(new Group(course.getId(), new MultiLangText(oldGroup.getName())));
-        }
+        courseRepository.saveAll(copies);
     }
 
     public Optional<Course> getById(Long courseId) {
         return courseRepository.findById(courseId);
     }
 
+    public PageResponse<CourseDto> getCoursePage(PagingParams params) {
+        Page<Course> page = courseRepository.findAll(params.compile());
+        return new PageResponse<>(page, CourseAssembler.toDto(page.getContent()));
+    }
+    
     public List<Course> getAll() {
         return courseRepository.findAll();
     }
@@ -89,7 +98,7 @@ public class CourseService {
         return courseRepository.findByPeriodId(periodId);
     }
 
-    public void delete(Long courseId) {
-        courseRepository.deleteById(courseId);
+    public void delete(List<Long> courseIds) {
+        courseRepository.deleteAllById(courseIds);
     }
 }

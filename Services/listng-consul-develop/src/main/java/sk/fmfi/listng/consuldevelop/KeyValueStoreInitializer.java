@@ -60,7 +60,7 @@ public class KeyValueStoreInitializer {
                     .filter(Files::isDirectory)
                     .map(Path::getFileName)
                     .map(microserviceDirectory -> rootDirectory.resolve(microserviceDirectory))
-                    .collect(Collectors.toList());
+                    .toList();
         }
     }
 }

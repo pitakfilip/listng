@@ -41,7 +41,7 @@
         <set
                 name="permissions"
                 table="USER_COURSE_PERMISSION"
-                cascade="all-delete-orphan"
+                cascade="all"
                 fetch="join"
                 lazy="false">
             <cache usage="read-write"/>

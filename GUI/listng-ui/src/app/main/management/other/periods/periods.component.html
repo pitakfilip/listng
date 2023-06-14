@@ -1,0 +1,103 @@
+<div *ngIf="$page as page">
+    <div class="row">
+        <div class="action-menu col-6">
+            <button mat-flat-button color="primary" (click)="onCreate()">
+                <mat-icon>add</mat-icon>
+                {{ 'table.action.create' | translation }}
+            </button>
+        </div>
+
+        <mat-paginator class="col-6"
+                       (page)="onPagingChange($event)"
+                       [length]="page.totalEntries"
+                       [pageSize]="paging.size"
+                       [showFirstLastButtons]="true"
+                       [pageSizeOptions]="pageSizes"
+                       [pageIndex]="paging.page">
+        </mat-paginator>
+    </div>
+
+
+    <table mat-table [dataSource]="page.data" multiTemplateDataRows class="mat-elevation-z4 list-table">
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef class="clickable" (click)="sortByColumn('name')">
+                <div class="row sort-header">
+                    <span class="col-9 th-label">{{ 'table.label.name' | translation }}</span>
+                    <span class="col-3 th-sort" [ngClass]="{'text-suppressed': !isSortedBy('name')}">
+                        <mat-icon>{{ getSortIcon('name') }}</mat-icon></span>
+                </div>
+            </th>
+            <td mat-cell class="row-column" *matCellDef="let period">
+                <span>{{period.name | translation}}</span>
+            </td>
+        </ng-container>
+
+        <!-- Start Column -->
+        <ng-container matColumnDef="start">
+            <th mat-header-cell *matHeaderCellDef class="clickable" (click)="sortByColumn('start')">
+                <div class="row sort-header">
+                    <span class="col-9 th-label">{{ 'date.start' | translation }}</span>
+                    <span class="col-3 th-sort" [ngClass]="{'text-suppressed': !isSortedBy('start')}">
+                        <mat-icon>{{ getSortIcon('start') }}</mat-icon></span>
+                </div>
+            </th>
+            <td mat-cell class="row-column" *matCellDef="let period">
+                <span>{{period.start}}</span>
+            </td>
+        </ng-container>
+
+        <!-- End Column -->
+        <ng-container matColumnDef="end">
+            <th mat-header-cell *matHeaderCellDef class="clickable" (click)="sortByColumn('end')">
+                <div class="row sort-header">
+                    <span class="col-9 th-label">{{ 'date.end' | translation }}</span>
+                    <span class="col-3 th-sort" [ngClass]="{'text-suppressed': !isSortedBy('end')}">
+                        <mat-icon>{{ getSortIcon('end') }}</mat-icon></span>
+                </div>
+            </th>
+            <td mat-cell class="row-column" *matCellDef="let period">
+                <span>{{period.end}}</span>
+            </td>
+        </ng-container>
+
+        <!-- Active Column -->
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef class="clickable" (click)="sortByColumn('active')">
+                <div class="row sort-header">
+                    <span class="col-9 th-label">{{ 'other.periods.active' | translation }}</span>
+                    <span class="col-3 th-sort" [ngClass]="{'text-suppressed': !isSortedBy('active')}">
+                        <mat-icon>{{ getSortIcon('active') }}</mat-icon></span>
+                </div>
+            </th>
+            <td mat-cell class="row-column" *matCellDef="let period">
+                <span *ngIf="period.active"><mat-icon class="mat-primary">check</mat-icon></span>
+            </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell class="cell-end" *matHeaderCellDef>{{ 'table.action.label' | translation }}</th>
+            <td mat-cell class="cell-end" *matCellDef="let period">
+                <span class="btn-icon-group">
+                    <button *ngIf="!period.active" type="button" class="btn btn-primary btn-icon"
+                            (click)="onSetActive(period.id)" matTooltip="{{ 'other.periods.action.active' | translation }}">
+                        <mat-icon>check</mat-icon></button>
+
+                    <button *ngIf="period.active" type="button" class="btn btn-warn btn-icon"
+                            (click)="onSetInactive(period.id)" matTooltip="{{ 'other.periods.action.inactive' | translation }}">
+                        <mat-icon>clear</mat-icon></button>
+
+                    <button type="button" class="btn btn-accent btn-icon" (click)="onEdit(period.id)">
+                        <mat-icon>edit</mat-icon></button>
+
+                    <button type="button" class="btn btn-warn btn-icon" (click)="onDelete(period.id)">
+                        <mat-icon>delete</mat-icon></button>
+                </span>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row class="table-row" *matRowDef="let row; columns: columns;"></tr>
+    </table>
+</div>

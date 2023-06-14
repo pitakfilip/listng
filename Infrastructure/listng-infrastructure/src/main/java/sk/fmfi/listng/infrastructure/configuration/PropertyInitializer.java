@@ -32,7 +32,7 @@ public final class PropertyInitializer {
 
         List<String> hbmMappings = Stream.of(new File(path).listFiles())
                 .map(file -> "hibernate/" + file.getName())
-                .collect(Collectors.toList());
+                .toList();
 
         String mappingResources = String.join(",", hbmMappings);
 

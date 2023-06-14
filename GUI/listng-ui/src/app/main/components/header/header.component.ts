@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
-import {MENU_ITEMS} from '../../../core/consts/menu.consts';
-import {AuthenticationService} from '../../../core/service/authentication.service';
+import {MENU_ITEMS, MenuItem} from '../../../core/consts/menu.consts';
 import {UserApiService} from '../../../core/api/user-api.service';
 
 @Component({
@@ -9,12 +8,17 @@ import {UserApiService} from '../../../core/api/user-api.service';
 })
 export class HeaderComponent {
 
-    showMenu = false;
-    menuItems = MENU_ITEMS;
+    menuItems: MenuItem[] = [];
 
     constructor(private userApi: UserApiService) {
-        userApi.isAdmin().subscribe(response => {
-            this.showMenu = (response.success && response.payload === true);
+        userApi.getHeaderMenuItems().subscribe(response => {
+            if (response.success) {
+                for (let permitted of response.payload) {
+                    this.menuItems.push(MENU_ITEMS[permitted]);
+                }
+            }
         });
     }
+
+
 }

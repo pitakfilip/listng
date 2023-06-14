@@ -1,0 +1,45 @@
+<div class="row">
+    <span class="col-8">{{ 'courses.label.groups' | translation }}</span>
+    <span class=" col-4 pull-right">
+        <button type="button" class="btn btn-blank btn-icon"
+                matTooltip="{{ 'label.add' | translation }}" (click)="newGroup()"><mat-icon>add</mat-icon></button>
+    </span>
+</div>
+
+<div class="row" *ngFor="let group of groups">
+    <app-collapse-panel
+        [title]="(group.name.SK !== '') ? group.name.SK + ' / ' + group.name.EN : 'SKUPINA'"
+    >
+        <ng-template let-expanded>
+            <section *ngIf="expanded">
+                <div class="row" style="align-items: center;">
+                    <app-multi-lang-input class="col-6"
+                                          [(ngModel)]="group.name"
+                                          [title]="'courses.label.name'">
+                    </app-multi-lang-input>
+
+                    <mat-form-field class="col-2">
+                        <mat-label>{{ 'courses.group.capacity' | translation }}</mat-label>
+                        <input matInput type="number" [(ngModel)]="group.capacity">
+                    </mat-form-field>
+
+                    <div class="col-4">
+                        <span>{{'courses.group.default' | translation}}</span>
+                        <mat-checkbox
+                            color="primary"
+                            (change)="toggleGroup(group)"
+                            [checked]="group.isDefault">
+                        </mat-checkbox>
+                    </div>
+                </div>
+
+                <button class="my-1" mat-flat-button color="warn" (click)="removeGroup(group)">
+                    <mat-icon>delete</mat-icon>
+                    {{ 'table.action.delete' | translation }}
+                </button>
+            </section>
+        </ng-template>
+    </app-collapse-panel>
+
+
+</div>

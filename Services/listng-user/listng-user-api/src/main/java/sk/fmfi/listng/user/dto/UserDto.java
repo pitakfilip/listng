@@ -13,7 +13,7 @@ public class UserDto implements BaseDto {
 
     public String email;
 
-    public SystemRole role;
+    public String role;
 
     public List<PermissionDto> permissions;
 }

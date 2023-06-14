@@ -19,14 +19,13 @@ public class Permission implements Serializable {
     private CourseStatus status;
     
     private Long groupId = null;
-    
-    public Permission(long userId, long courseId, CourseRole role) {
-        this.userId = userId;
-        this.courseId = courseId;
-        this.role = role;
-        this.status = CourseStatus.PENDING;
-        this.groupId = -1L;
-    }
+
+    /**
+     * @deprecated use implicit constructor instead.
+     * This constructor shall be used only by ORM.
+     */
+    @Deprecated
+    public Permission(){}
     
     public Permission(long userId, long courseId, CourseRole role, CourseStatus status) {
         this.userId = userId;
@@ -43,8 +42,6 @@ public class Permission implements Serializable {
         this.status = status;
         this.groupId = groupId;
     }
-
-    public Permission(){}
 
     public Long getId() {
         return id;

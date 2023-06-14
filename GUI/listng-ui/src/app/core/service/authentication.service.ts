@@ -5,7 +5,6 @@ import {JwtUtilsService} from './jwt-utils.service';
 import {Router} from '@angular/router';
 import {AuthApiService} from '../api/auth-api.service';
 import {User} from '../model/user.model';
-import {UserApiService} from '../api/user-api.service';
 
 @Injectable({
     providedIn: 'root'

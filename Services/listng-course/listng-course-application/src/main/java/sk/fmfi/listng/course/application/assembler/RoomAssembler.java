@@ -20,7 +20,7 @@ public class RoomAssembler {
     public static List<RoomDto> toDto(List<Room> rooms) {
         return rooms.stream()
                 .map(RoomAssembler::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
     
     public static Room fromDto(RoomDto dto) {

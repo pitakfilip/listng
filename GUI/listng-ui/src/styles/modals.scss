@@ -124,6 +124,10 @@ div.form-modal {
     }
 }
 
+div.form-modal.minimal-modal {
+    width: fit-content;
+}
+
 div.error-modal {
     width: 40vw;
     div.error-close {

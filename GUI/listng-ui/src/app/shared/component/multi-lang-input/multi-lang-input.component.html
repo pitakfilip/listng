@@ -1,0 +1,23 @@
+
+<style>
+    .multiLang-input {
+        position: relative;
+    }
+    .lang-btn {
+        position: absolute;
+        right: 1em;
+        top: 0;
+        transform: translateY(25%);
+        border: none;
+    }
+</style>
+
+<div class="multiLang-input full-width">
+    <mat-form-field class="full-width">
+        <mat-label>{{ title | translation }}</mat-label>
+        <input matInput [(ngModel)]="text" (ngModelChange)="onTextChange()">
+    </mat-form-field>
+
+    <button class="btn btn-primary lang-btn" (click)="toggleLang()">{{ isSlovak()? 'SK' : 'EN' }}</button>
+</div>
+

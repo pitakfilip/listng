@@ -1,4 +1,3 @@
-@import 'variables';
 
 .login-form {
     position: absolute;
@@ -99,13 +98,14 @@ span.form-detail {
     font-size: 0.75em;
 }
 
-div.save-buttons {
-    margin-top: 2em;
-    > button {
-        width: 13em;
-    }
 
-    > button:not(:first-child) {
-        margin-left: 0.5em;
-    }
+
+.slim-number-field {
+    width: 5em;
+
+}
+
+
+.list-input-wrapper {
+    padding-bottom: 1em;
 }

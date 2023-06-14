@@ -1,0 +1,120 @@
+<div *ngIf="$page as page">
+
+    <div class="page-tabs">
+        <button mat-flat-button class="btn-tab" color="primary" [ngClass]="{ 'mat-dark-primary': isStudentTab()}"
+                (click)="openTab(student)">
+            {{ 'label.students' | translation }}
+        </button>
+        <button mat-flat-button class="btn-tab" color="primary" [ngClass]="{ 'mat-dark-primary': !isStudentTab()}"
+                (click)="openTab(teacher)">
+            {{ 'label.teachers' | translation }}
+        </button>
+    </div>
+
+    <div class="list-body">
+        <div class="row">
+            <div class="action-menu col-6">
+                <button mat-flat-button color="primary" (click)="openFilter()" matTooltip="{{ 'table.tooltip.filter' | translation }}">
+                    <mat-icon>filter_list</mat-icon>
+                    {{ 'table.action.filter' | translation }}
+                </button>
+
+                <button mat-flat-button color="primary" [matMenuTriggerFor]="newMenu">
+                    <mat-icon>add</mat-icon>
+                    {{ 'table.action.create' | translation }}
+                </button>
+                <mat-menu #newMenu="matMenu">
+                    <button mat-menu-item (click)="openNewForm()">{{ 'users.action.new.form' | translation }}</button>
+                    <button mat-menu-item (click)="openImport()">{{ 'users.action.new.import' | translation }}</button>
+                </mat-menu>
+
+                <button mat-flat-button color="accent" matTooltip="{{ 'table.tooltip.bulk.edit' | translation }}"
+                        *ngIf="isStudentTab()"
+                        (click)="openBulkEdit()">
+                    <mat-icon>edit</mat-icon>
+                    {{ 'table.action.edit' | translation }}
+                </button>
+                <button mat-flat-button color="warn" matTooltip="{{ 'table.tooltip.bulk.delete' | translation }}"
+                        (click)="onBulkDelete()">
+                    <mat-icon>delete</mat-icon>
+                    {{ 'table.action.delete' | translation }}
+                </button>
+            </div>
+
+            <mat-paginator class="col-6"
+                           (page)="onPagingChange($event)"
+                           [length]="page.totalEntries"
+                           [pageSize]="paging.size"
+                           [showFirstLastButtons]="true"
+                           [pageSizeOptions]="pageSizes"
+                           [pageIndex]="paging.page">
+            </mat-paginator>
+
+        </div>
+
+        <table mat-table [dataSource]="page.data" multiTemplateDataRows class="mat-elevation-z4 list-table">
+
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox color="primary"
+                                  (change)="$event ? toggleAllRows() : null"
+                                  [checked]="selection.hasValue() && isAllSelected()"
+                                  [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    </mat-checkbox>
+                    ({{ getSelectedCount() }})
+                    <button type="button" class="btn btn-blank btn-icon" (click)="clearSelection()"
+                            matTooltip="{{ 'label.reset' | translation }}"><mat-icon>clear</mat-icon></button>
+                </th>
+                <td mat-cell *matCellDef="let user">
+                    <span class="row-column">
+                        <mat-checkbox color="primary"
+                                      (click)="$event.stopPropagation()"
+                                      (change)="$event ? toggleRow(user) : null"
+                                      [checked]="selection.isSelected(user.id)">
+                        </mat-checkbox>
+                    </span>
+                </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef class="clickable" (click)="sortByColumn('name')">
+                    <div class="row sort-header" matTooltip="{{ 'table.tooltip.sort' | translation }}">
+                        <span class="col-9 th-label">{{ 'user.name' | translation }}</span>
+                        <span class="col-3 th-sort"><mat-icon>{{ getSortIcon('name') }}</mat-icon></span>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let user">
+                    <span class="row-column">{{user.name}} </span>
+                </td>
+            </ng-container>
+
+            <!-- Email Column -->
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef class="clickable" (click)="sortByColumn('email')">
+                    <div class="row sort-header" matTooltip="{{ 'table.tooltip.sort' | translation }}">
+                        <span class="col-9 th-label">{{ 'user.email' | translation }}</span>
+                        <span class="col-3 th-sort"><mat-icon>{{ getSortIcon('email') }}</mat-icon></span>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let user">
+                    <span class="row-column">{{user.email}}</span>
+                </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell class="cell-end" *matHeaderCellDef>{{ 'user.actions' | translation }}</th>
+                <td mat-cell class="cell-end" *matCellDef="let user">
+                    <span class="btn-icon-group">
+                        <button type="button" class="btn btn-accent btn-icon" (click)="onEdit(user.id)"><mat-icon>edit</mat-icon></button>
+                        <button type="button" class="btn btn-warn btn-icon" (click)="onDelete(user.id)"><mat-icon>delete</mat-icon></button>
+                    </span>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columns"></tr>
+            <tr mat-row class="table-row" *matRowDef="let row; columns: columns;"></tr>
+        </table>
+    </div>
+</div>

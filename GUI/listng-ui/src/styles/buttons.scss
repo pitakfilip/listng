@@ -50,13 +50,16 @@ mat-button-toggle.users-type {
     }
 }
 
-.mat-button-toggle-checked.toggle-icon-button.confirm {
+.mat-button-toggle-checked.confirm {
     background-color: $mat-btn-primary;
 }
-.mat-button-toggle-checked.toggle-icon-button.decline {
+.mat-button-toggle-checked.toggle-confirm-button {
+    background-color: $mat-btn-primary;
+}
+.mat-button-toggle-checked.decline {
     background-color: $mat-btn-warn;
 }
-.mat-button-toggle-checked.toggle-icon-button.warning {
+.mat-button-toggle-checked.warning {
     background-color: $mat-btn-accent;
 }
 
@@ -142,7 +145,7 @@ button.btn-tab {
 
 button.btn-icon {
     padding: 0.1em 0.3em;
-
+    border: none;
     mat-icon {
         display: flex;
         justify-content: center;
@@ -201,5 +204,21 @@ span.btn-group {
 
     > button:not(:first-child) {
         margin-left: 0.3em;
+    }
+}
+
+.list-btn-group {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 0.5em;
+    align-items: center;
+
+    > button.list-btn {
+        width: 13em !important;
+        max-width: 13em;
+        flex-basis: unset;
     }
 }

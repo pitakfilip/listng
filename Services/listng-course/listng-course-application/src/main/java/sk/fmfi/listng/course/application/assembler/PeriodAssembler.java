@@ -22,7 +22,7 @@ public class PeriodAssembler {
     public static List<PeriodDto> toDto(List<Period> periods) {
         return periods.stream()
                 .map(PeriodAssembler::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
     
     public static Period fromDto(PeriodDto dto) {
@@ -31,7 +31,7 @@ public class PeriodAssembler {
         period.setName(MultiLangTextDto.fromDto(dto.name));
         period.setStart(dto.start);
         period.setEnd(dto.end);
-        
+        period.setActive(dto.active);
         return period;
     }
 }

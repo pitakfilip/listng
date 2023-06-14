@@ -83,6 +83,10 @@ $mat-btn-warn: mat.get-color-from-palette($btn-warn, default);
     color: white;
 }
 
+.btn-primary {
+    background-color: $mat-btn-primary !important;
+}
+
 .btn-accent {
     background-color: $mat-btn-accent !important;
 }

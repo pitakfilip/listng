@@ -1,12 +1,10 @@
 package sk.fmfi.listng.course.domain;
 
-import sk.fmfi.listng.infrastructure.common.dto.MultiLangText;
+import sk.fmfi.listng.infrastructure.common.MultiLangText;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.sql.Array;
+import java.util.*;
 
 /**
  * Trieda reprezentujúca kurz v určenom období.
@@ -21,7 +19,7 @@ public class Course implements Serializable {
 
     private long periodId;
     
-    private List<Group> groups = new ArrayList<>();
+    private Set<Group> groups = new HashSet<>();
     
     public long getPeriodId() {
         return periodId;
@@ -41,11 +39,15 @@ public class Course implements Serializable {
         this.periodId = periodId;
     }
 
-    public static Course copy(Course from, long periodId) {
-        Course course = new Course(new MultiLangText(from.name.getSK(), from.name.getEN()), periodId);
-        course.abbreviation = new MultiLangText(from.abbreviation.getSK(), from.abbreviation.getEN());
-        
-        return course;
+    public Course(Course from, long periodId) {
+        this.name = new MultiLangText(from.name.getSK(), from.name.getEN());
+        this.abbreviation = new MultiLangText(from.abbreviation.getSK(), from.abbreviation.getEN());
+        this.periodId = periodId;
+        Set<Group> groupCopies = new HashSet<>();
+        for (Group group : from.getGroups()){
+            groupCopies.add(group.copy());
+        }
+        this.groups = groupCopies;
     }
 
     public Long getId() {
@@ -80,22 +82,24 @@ public class Course implements Serializable {
         this.periodId = periodId;
     }
 
-    public List<Group> getGroups() {
+    public Set<Group> getGroups() {
         return groups;
     }
 
     public void setGroups(Set<Group> groups) {
-        this.groups = new ArrayList<>(groups);
+        this.groups = groups;
     }
 
     public void addGroup(Group group) {
         this.groups.add(group);
     }
     
-    public void addGroups(List<Group> groups){
+    public void addGroups(Set<Group> groups){
         this.groups.addAll(groups);
     }
 
+    public void clearGroups() {this.groups.clear();}
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

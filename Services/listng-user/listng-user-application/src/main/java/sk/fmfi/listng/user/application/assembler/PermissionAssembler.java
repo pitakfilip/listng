@@ -17,7 +17,7 @@ public class PermissionAssembler {
 
     public static PermissionDto toDto(Permission permission) {
         PermissionDto dto = new PermissionDto();
-        dto.id = permission.getCourseId();
+        dto.id = permission.getId();
         dto.userId = permission.getUserId();
         dto.courseId = permission.getCourseId();
         if (permission.getRole() != null)
@@ -32,7 +32,7 @@ public class PermissionAssembler {
     public static List<PermissionDto> toDto(Set<Permission> permissions) {
         return permissions.stream()
                 .map(PermissionAssembler::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public static Permission fromDto(PermissionDto dto) {

@@ -1,5 +1,7 @@
 package sk.fmfi.listng.infrastructure.common.dto;
 
+import sk.fmfi.listng.infrastructure.common.MultiLangText;
+
 public class MultiLangTextDto implements BaseDto {
     public String SK = "";
     public String EN = "";

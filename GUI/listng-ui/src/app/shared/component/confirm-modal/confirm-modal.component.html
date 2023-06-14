@@ -3,8 +3,11 @@
         <p *ngIf="!data.specify">{{ data.message | translation }}?</p>
         <p *ngIf="data.specify">{{ data.message | translation }}<strong>{{ data.specify | translation }}</strong>?</p>
 
-        <div *ngIf="data.detail">
-            <p *ngFor="let line of data.detail"><strong>{{line}}</strong></p>
+        <div *ngIf="data.simpleList">
+            <p *ngFor="let line of data.simpleList"><strong>{{line}}</strong></p>
+        </div>
+        <div *ngIf="data.list">
+            <p *ngFor="let line of data.list"><strong>{{line | translation}}</strong></p>
         </div>
 
     </div>

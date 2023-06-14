@@ -2,7 +2,7 @@
 
 /* Importing Bootstrap SCSS file. */
 @import 'node_modules/bootstrap/scss/bootstrap';
-@import "~bootstrap-icons/font/bootstrap-icons.css";
+//@import "~bootstrap-icons/font/bootstrap-icons.css";
 @import 'variables';
 @import 'custom_material';
 @import 'tables';
@@ -13,6 +13,7 @@
 @import 'home';
 @import 'filters';
 @import 'modals';
+@import 'panels';
 
 .login-body {
     position: relative;
@@ -36,14 +37,6 @@
     padding: 1em;
     border: 1px solid $green2; // FIXME ???
     border-radius: 0.5em;
-}
-
-button.list-btn {
-    border-color: $green2;
-
-    &:hover {
-        border-color: $green3;
-    }
 }
 
 .pull-middle {
@@ -126,4 +119,17 @@ button.list-btn {
 .row-centered {
     display: flex;
     align-items: center;
+}
+
+.text-suppressed {
+    color: $c-gray-light;
+    > {
+        color: $c-gray-light;
+    }
+}
+
+.row.row-auto {
+    > * {
+        width: auto !important;
+    }
 }

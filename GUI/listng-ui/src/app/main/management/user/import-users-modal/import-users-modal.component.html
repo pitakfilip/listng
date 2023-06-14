@@ -1,0 +1,30 @@
+<div class="form-modal">
+    <div mat-dialog-content class="form-modal-content">
+
+        <div class="row row-centered">
+            <span class="col-10 form-title">{{ 'users.modal.import' | translation }}</span>
+            <span class="col-2 form-close">
+                <button type="button" class="btn btn-blank btn-icon" (click)="close()">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </span>
+        </div>
+
+        <div class="my-3">
+            <mat-divider></mat-divider>
+        </div>
+
+        <app-file-select-section (onContinue)="onFileSelectContinue($event)"
+                                 [hidden]="!showSection('init')">
+        </app-file-select-section>
+
+        <app-import-configuration-section [header]="headerMap"
+                                          [columns]="columns"
+                                          [isRoot]="currentUserIsRoot"
+                                          (onReturn)="onReturn($event)"
+                                          (onConfirm)="submit($event)"
+                                          [hidden]="!showSection('config')">
+        </app-import-configuration-section>
+
+    </div>
+</div>

@@ -23,10 +23,10 @@
             </section>
         </div>
 
-        <div class="row save-buttons">
-            <button mat-raised-button color="primary" (click)="submit()">{{ 'label.save' | translation }}</button>
-            <button mat-raised-button color="accent" (click)="clear()">{{ 'label.reset' | translation }}</button>
-            <button mat-raised-button color="warn" (click)="close()">{{ 'label.cancel' | translation }}</button>
+        <div class="list-btn-group">
+            <button class="list-btn" mat-raised-button color="primary" (click)="submit()">{{ 'label.save' | translation }}</button>
+            <button class="list-btn" mat-raised-button color="accent" (click)="clear()">{{ 'label.reset' | translation }}</button>
+            <button class="list-btn" mat-raised-button color="warn" (click)="close()">{{ 'label.cancel' | translation }}</button>
         </div>
 
     </div>

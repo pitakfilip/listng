@@ -27,10 +27,10 @@ export class ErrorInterceptor implements HttpInterceptor {
             this.errorService.noLogin()
         } else if (status === 403) {
             this.errorService.insufficientPermissions(false);
-        } else if (status === 500) {
+        } else if (500 <= status && status <= 599) {
             this.errorService.failedRequest();
         } else {
-            this.errorService.errorMessage(response.message)
+            this.errorService.errorMessage(response.message);
         }
 
         const error = response.error;

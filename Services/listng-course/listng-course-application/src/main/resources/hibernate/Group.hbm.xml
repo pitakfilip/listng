@@ -13,28 +13,42 @@
             type="long">
             <generator class="increment"/>
         </id>
+
+        <property
+                name="courseId"
+                column="COURSE_ID"
+        />
         
-        <property name="courseId" column="COURSE_ID" type="java.lang.Long"/>
+        <property 
+                name="defaultGroup" 
+                column="IS_DEFAULT"
+        />
+        
+        <property
+                name="capacity"
+                column="CAPACITY"
+        />
         
         <component
                 name="name"
-                class="sk.fmfi.listng.infrastructure.common.dto.MultiLangText">
+                class="sk.fmfi.listng.infrastructure.common.MultiLangText">
             <property name="SK" column="NAME_SK" type="java.lang.String"/>
             <property name="EN" column="NAME_EN" type="java.lang.String"/>
         </component>
 
-        <set
-                name="classes"
-                table="CLASS"
-                fetch="join"
-                lazy="false"
-        >
-            <key>
-                <column name="GROUP_ID" not-null="true" />
-            </key>
-            <one-to-many class="sk.fmfi.listng.course.domain.Class" />
-        </set>
-        
+<!--        <set-->
+<!--                name="classes"-->
+<!--                table="CLASS"-->
+<!--                cascade="all"-->
+<!--                fetch="join"-->
+<!--                lazy="false"-->
+<!--        >-->
+<!--            <cache usage="read-write"/>-->
+<!--            <key>-->
+<!--                <column name="GROUP_ID" not-null="true" />-->
+<!--            </key>-->
+<!--            <one-to-many class="sk.fmfi.listng.course.domain.Class" />-->
+<!--        </set>-->
     </class>
 
 </hibernate-mapping>

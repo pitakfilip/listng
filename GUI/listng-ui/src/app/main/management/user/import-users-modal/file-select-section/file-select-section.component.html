@@ -1,0 +1,44 @@
+<div class="row row-auto row-centered">
+    <section class="list-input-wrapper">
+        <mat-radio-group [(ngModel)]="fileType">
+            <mat-radio-button value="XLSX">XLSX</mat-radio-button>
+            <mat-radio-button value="CSV" disabled>CSV</mat-radio-button>
+        </mat-radio-group>
+    </section>
+
+    <section class="list-input-wrapper">
+        <label class="mx-1 list-input-label">{{ 'file.sheet.number' | translation }}</label>
+        <input class="slim-number-field" matInput type="number" [(ngModel)]="sheet">
+    </section>
+
+    <section class="list-input-wrapper">
+        <label class="mx-1 list-input-label">{{ 'file.sheet.header.number' | translation }}</label>
+        <input class="slim-number-field" matInput type="number" [(ngModel)]="headerRow">
+    </section>
+</div>
+
+<mat-hint>{{ 'file.sheet.row.config.hint' | translation }}</mat-hint>
+<div class="row row-auto row-centered">
+    <section class="list-input-wrapper">
+        <label class="mx-1 list-input-label">{{ 'label.from' | translation }}</label>
+        <input class="slim-number-field" matInput type="number" [(ngModel)]="from">
+    </section>
+
+    <section class="list-input-wrapper">
+        <label class="mx-1 list-input-label">{{ 'label.to' | translation }}</label>
+        <input class="slim-number-field" matInput type="number" [(ngModel)]="to">
+    </section>
+</div>
+
+
+<input type='file' #getFile hidden [multiple]="false" (change)="selectFile($event)">
+<div class="list-btn-group">
+    <button mat-raised-button color="accent" id="chooseFile" class="col list-btn list-input" (click)="getFile.click()">
+        {{ 'file.choose' | translation }}
+    </button>
+    <label for="chooseFile" class="mx-1">{{ fileName }}</label>
+
+    <button mat-raised-button color="primary" class="col list-btn list-input" (click)="continue()">
+        {{ 'label.continue' | translation }}
+    </button>
+</div>

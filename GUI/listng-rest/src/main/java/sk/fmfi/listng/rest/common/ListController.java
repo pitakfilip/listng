@@ -20,6 +20,30 @@ public class ListController {
         return userDetails.getId();
     }
     
+    public boolean isStudent() {
+        AppUser userDetails = (AppUser) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
+        
+        return userDetails.getSysRole().equals("STUDENT");
+    }
+    
+    public boolean isTeacher() {
+        AppUser userDetails = (AppUser) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
+        
+        return userDetails.getSysRole().equals("TEACHER");
+    }
+        
+    public boolean isRoot() {
+        AppUser userDetails = (AppUser) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
+        
+        return userDetails.getSysRole().equals("ROOT");
+    }
+    
     @ExceptionHandler(BindException.class)
     @ResponseBody
     public ResponseEntity<Response> handleException(BindException ex) {
@@ -65,8 +89,8 @@ public class ListController {
         return new ResponseEntity<>(error(message), HttpStatus.OK);
     }
 
-    protected Response<String> error(String message) {
-        return new Response<String>().withErrorMessage(message);
+    protected Response error(String message) {
+        return new Response().withErrorMessage(message);
     }
 
     /**

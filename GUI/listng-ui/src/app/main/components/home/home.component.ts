@@ -71,7 +71,10 @@ export class HomeComponent {
             .subscribe(response => {
                 if (response.success) {
                     for (let course of this.$courses) {
-                        this.$permissions.set(course.id, response.payload[course.id]);
+                        const index = response.payload.findIndex(entry => entry.courseId === course.id);
+                        if (index >= 0) {
+                            this.$permissions.set(course.id, response.payload[index]);
+                        }
                     }
                 }
             })

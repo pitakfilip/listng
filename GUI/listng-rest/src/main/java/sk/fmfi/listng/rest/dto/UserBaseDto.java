@@ -37,7 +37,7 @@ public class UserBaseDto implements BaseDto {
         dto.id = user.id;
         dto.name = user.name;
         dto.email = user.email;
-        dto.role = user.role.name();
+        dto.role = user.role;
         
         return dto;
     }

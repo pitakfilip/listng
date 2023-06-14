@@ -51,7 +51,7 @@ public class PermissionService {
             }
         });
 
-        if (user.role.equals(SystemRole.STUDENT)) {
+        if (!user.role.equals(SystemRole.STUDENT.name())) {
             for (Long courseId : courseIds) {
                 PermissionDto dto = new PermissionDto();
                 dto.userId = userId;
