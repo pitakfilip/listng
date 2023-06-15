@@ -58,7 +58,7 @@ public class JwtUtils {
         Cookie cookie = new Cookie(jwtCookieName, jwt);
         cookie.setPath("/");
         cookie.setMaxAge((int) ONE_HOUR_SECONDS);
-        cookie.setSecure(true);
+//        cookie.setSecure(true); FIXME ODKOMENTOVAT KED BUDE HTTPS
         cookie.setHttpOnly(true);
         
         return cookie;
@@ -68,7 +68,7 @@ public class JwtUtils {
         Cookie cookie = new Cookie(jwtCookieName, jwt);
         cookie.setPath("/");
         cookie.setMaxAge((int) ONE_HOUR_SECONDS);
-        cookie.setSecure(true); 
+//        cookie.setSecure(true); FIXME ODKOMENTOVAT KED BUDE HTTPS
         cookie.setHttpOnly(true);
 
         return cookie;
@@ -78,7 +78,7 @@ public class JwtUtils {
         Cookie cookie = new Cookie(jwtCookieName, "");
         cookie.setPath("/");
         cookie.setMaxAge((int) ONE_HOUR_SECONDS);
-        cookie.setSecure(true); 
+//        cookie.setSecure(true); FIXME ODKOMENTOVAT KED BUDE HTTPS
         cookie.setHttpOnly(true);
 
         return cookie;

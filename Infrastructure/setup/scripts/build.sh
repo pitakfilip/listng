@@ -32,8 +32,7 @@ cd $HOME_DIR/GUI/listng-rest/target
 cp listng-rest-1.0.0-SNAPSHOT.jar /opt/listng/listng-rest.jar
 
 cd $HOME_DIR/GUI/listng-ui
-npm install
-npm run build
-cd $HOME_DIR/GUI
 cp -r listng-ui /opt/listng/listng-ui
-
+cd /opt/listng/listng-ui
+sudo npm ci
+npm run build
