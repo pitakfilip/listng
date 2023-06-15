@@ -4,7 +4,7 @@ Description="LIST-NG Users Module (PORT 8086)"
 [Service]
 User=listng
 WorkingDirectory=/opt/listng
-ExecStart=java -Xms256m -Xmx256m -Dserver.port=8086 -jar /opt/listng/listng-user.jar
+ExecStart=java -Xms1024m -Xmx2000m -Dserver.port=8086 -jar /opt/listng/listng-user.jar
 
 [Install]
 WantedBy=multi-user.target

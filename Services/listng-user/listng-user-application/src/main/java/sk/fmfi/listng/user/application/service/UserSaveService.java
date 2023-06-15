@@ -43,25 +43,27 @@ public class UserSaveService {
                     user.setId(null);
                     String password = PasswordGenerator.create();
 //                    generatedPasswords.put(user.getEmail(), password);
-                    generatedPasswords.put(user.getEmail(), "$2a$10$OjfNkMFiwVwYiKV8Oj59fe/3BSnxyTyTpzaI.3JOxRWkeWuARgfEW"); // temporary heslo 'a'
+                    generatedPasswords.put(user.getEmail(), "a"); // temporary heslo 'a'
                     user.setPassword(passwordEncoder.encode(password));
                     return user;
                 }).toList();
 
         List<User> createdUsers = userRepository.saveAll(newUsers);
+        
+        if (usersOperationDto.permissions != null || usersOperationDto.permissions.size() > 0) {
+            List<Permission> newPermissions = new ArrayList<>();
+            for (User user : createdUsers) {
+                Set<Permission> rawPermissions = PermissionAssembler.fromDto(usersOperationDto.permissions);
+                rawPermissions.forEach(permission -> {
+                    permission.setId(null);
+                    permission.setUserId(user.getId());
 
-        List<Permission> newPermissions = new ArrayList<>();
-        for (User user : createdUsers) {
-            Set<Permission> rawPermissions = PermissionAssembler.fromDto(usersOperationDto.permissions);
-            rawPermissions.forEach(permission -> {
-                permission.setId(null);
-                permission.setUserId(user.getId());
+                });
+                newPermissions.addAll(rawPermissions);
+            }
 
-            });
-            newPermissions.addAll(rawPermissions);
+            permissionRepository.saveAll(newPermissions);
         }
-
-        permissionRepository.saveAll(newPermissions);
 
         for (User user : createdUsers) {
             adminService.sendNewAccountNotification(user.getEmail(), generatedPasswords.get(user.getEmail()));
