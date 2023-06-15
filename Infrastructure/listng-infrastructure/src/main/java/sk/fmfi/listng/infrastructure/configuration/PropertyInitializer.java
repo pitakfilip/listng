@@ -13,7 +13,6 @@ public final class PropertyInitializer {
 
     public PropertyInitializer() {}
 
-    //TODO dalsie zaujimave common properties
     public static void beforeSpringApplicationRun() {
         loadConsulProperties();
     }

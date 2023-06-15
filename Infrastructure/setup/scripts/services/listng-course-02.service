@@ -1,0 +1,10 @@
+[Unit]
+Description="LIST-NG Courses Module (PORT 8091)"
+
+[Service]
+User=listng
+WorkingDirectory=/opt/listng
+ExecStart=java -Xms256m -Xmx256m -Dserver.port=8091 -jar /opt/listng/listng-course.jar
+
+[Install]
+WantedBy=multi-user.target

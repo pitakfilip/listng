@@ -14,6 +14,8 @@ cp listng-user-application-1.0.0-SNAPSHOT.jar /opt/listng/listng-user.jar
 
 cd $SERVICES_DIR/listng-course
 mvn clean install
+cd $SERVICES_DIR/listng-course/listng-course-application/target
+cp listng-course-application-1.0.0-SNAPSHOT.jar /opt/listng/listng-course.jar
 
 #cd $SERVICES_DIR/listng-solution
 #mvn clean install
@@ -26,8 +28,12 @@ mvn clean install
 
 cd $HOME_DIR/GUI/listng-rest
 mvn clean install
+cd $HOME_DIR/GUI/listng-rest/target
+cp listng-rest-1.0.0-SNAPSHOT.jar /opt/listng/listng-rest.jar
 
 cd $HOME_DIR/GUI/listng-ui
 npm install
 npm run build
+cd $HOME_DIR/GUI
+cp listng-ui /opt/listng/listng-ui
 

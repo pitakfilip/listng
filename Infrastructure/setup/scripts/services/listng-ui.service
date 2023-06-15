@@ -1,0 +1,11 @@
+[Unit]
+Description="LIST-NG UI (PORT 4200)"
+
+[Service]
+User=listng
+Environment=NODE_PORT=4200
+WorkingDirectory=/opt/listng/listng-ui
+ExecStart=npm start
+
+[Install]
+WantedBy=multi-user.target

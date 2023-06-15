@@ -1,0 +1,10 @@
+[Unit]
+Description="LIST-NG REST API Gateway (8081)"
+
+[Service]
+User=listng
+WorkingDirectory=/opt/listng
+ExecStart=java -Xms700m -Xmx1000m -Dserver.port=8081 -jar /opt/listng/listng-rest.jar
+
+[Install]
+WantedBy=multi-user.target
