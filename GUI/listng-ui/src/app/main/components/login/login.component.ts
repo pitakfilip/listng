@@ -27,10 +27,10 @@ import {CoreModule} from '../../../core/core.module';
 export class LoginComponent {
 
     loginForm : FormGroup;
-    emailControl = new FormControl('frantik1@uniba.sk', {
+    emailControl = new FormControl('', {
         validators: [Validators.required, Validators.email]
     });
-    passwordControl = new FormControl('a', {
+    passwordControl = new FormControl('', {
         validators: [Validators.required]
     });
 
