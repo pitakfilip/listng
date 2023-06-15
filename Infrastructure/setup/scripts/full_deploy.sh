@@ -2,7 +2,7 @@
 HOME_DIR=$PWD
 SERVICES_DIR=$HOME_DIR/services
 
-TARGET=\etc\systemd\system
+TARGET=/etc/systemd/system
 
 ./build.sh
 
