@@ -35,5 +35,5 @@ cd $HOME_DIR/GUI/listng-ui
 npm install
 npm run build
 cd $HOME_DIR/GUI
-cp listng-ui /opt/listng/listng-ui
+cp -r listng-ui /opt/listng/listng-ui
 
