@@ -41,8 +41,6 @@ export class CourseModalComponent implements OnInit {
     ngOnInit() {
         if (Utils.exists(this.data.course)) {
             this.inner = this.data.course;
-            console.log('joj')
-            console.log(this.inner);
         } else {
             this.inner = courseFactory();
             this.isNewCourse = true;

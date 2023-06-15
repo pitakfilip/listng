@@ -120,6 +120,9 @@ export class NewUserModalComponent {
     }
 
     submit() {
+        if (!Utils.exists(this.permissions)) {
+            this.permissions = [];
+        }
         this.userApi.createUsers(this.role, this.users, this.permissions)
             .subscribe(response => {
                 if (response.success) {
@@ -131,11 +134,4 @@ export class NewUserModalComponent {
     protected readonly TEACHER = TEACHER;
     protected readonly STUDENT = STUDENT;
     protected readonly ROOT = ROOT;
-    protected readonly DENIED = DENIED;
-    protected readonly ATTENDEE = ATTENDEE;
-    protected readonly VIEWER = VIEWER;
-    protected readonly ACTIVE = ACTIVE;
-    protected readonly EVALUATOR = EVALUATOR;
-    protected readonly OWNER = OWNER;
-    protected readonly PENDING = PENDING;
 }
