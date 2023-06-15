@@ -180,7 +180,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>sk.fmfi.listng.user.application.UserApplication</mainClass>
+                    <mainClass>sk.fmfi.listng.rest.RestApplication</mainClass>
                     <layout>JAR</layout>
                 </configuration>
                 <executions>

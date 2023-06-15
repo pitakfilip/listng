@@ -69,7 +69,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>sk.fmfi.listng.user.application.UserApplication</mainClass>
+                    <mainClass>sk.fmfi.listng.course.application.CourseApplication</mainClass>
                     <layout>JAR</layout>
                 </configuration>
                 <executions>
