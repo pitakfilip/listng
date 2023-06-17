@@ -80,7 +80,7 @@
         "password.new": "Nové heslo",
         "password.confirm": "Potvrďte heslo",
         "password.reset": "Zabudol som heslo",
-        "password.reset.email": "Zadajte emailovú adresu k študentskému kontu",
+        "password.reset.email": "Zadajte emailovú adresu",
         "password.reset.pass": "Zadajte nové heslo",
         "email": "Emailová adresa",
         "name": "Meno",
@@ -151,7 +151,7 @@
             "pending": "Čakajúci na potvrdenie"
         },
         "role": {
-            "viewer": "Sledovateľ: prístup k študentskému rozhraniu bez možnosti interakcie a odovzdávani.",
+            "viewer": "Sledovateľ: prístup k študentskému rozhraniu bez možnosti interakcie a odovzdávani",
             "attendee": "Študent",
             "evaluator": "Hodnotiaci: opravnený používateľ na hodnotenie študentov, tvorbe úloh a zostáv v danom kurze",
             "owner": "Vlastník: opravnený používateľ s plnou kontrolou nad kurzom"
@@ -297,7 +297,7 @@
             "edit": "Úprava kurzu",
             "copy": "Kopírovanie kurzu",
             "copy.bulk": "Kopírovanie kurzov",
-            "copy.info": "Zvoľte cieľové obdobie."
+            "copy.info": "Zvoľte cieľové obdobie"
         }
     },
     "file": {

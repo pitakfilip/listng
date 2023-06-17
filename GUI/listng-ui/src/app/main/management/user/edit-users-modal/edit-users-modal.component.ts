@@ -12,14 +12,10 @@ import {PermissionSelectComponent} from '../../../../shared/component/permission
 import {ReactiveFormsModule} from '@angular/forms';
 import {Utils} from '../../../../core/util/utils';
 import {
-    ACTIVE,
-    ATTENDEE,
     CoursePermission,
-    DENIED, EVALUATOR, OWNER, PENDING,
     ROOT,
     STUDENT,
-    TEACHER,
-    VIEWER
+    TEACHER
 } from '../../../../core/model/course-permission';
 import {SystemRole, User} from '../../../../core/model/user.model';
 import {MatChipsModule} from '@angular/material/chips';
@@ -100,7 +96,7 @@ export class EditUsersModalComponent {
             }
         }
 
-        this.userApi.bulkUpdateUsers(this.role, this.$users, perms)
+        this.userApi.bulkUpdateUsers(this.role, this.data.userIds, perms)
             .subscribe(response => {
                 if (response.success) {
                     this.dialogRef.close('submit');
@@ -111,11 +107,4 @@ export class EditUsersModalComponent {
     protected readonly TEACHER = TEACHER;
     protected readonly STUDENT = STUDENT;
     protected readonly ROOT = ROOT;
-    protected readonly DENIED = DENIED;
-    protected readonly ATTENDEE = ATTENDEE;
-    protected readonly VIEWER = VIEWER;
-    protected readonly ACTIVE = ACTIVE;
-    protected readonly EVALUATOR = EVALUATOR;
-    protected readonly OWNER = OWNER;
-    protected readonly PENDING = PENDING;
 }

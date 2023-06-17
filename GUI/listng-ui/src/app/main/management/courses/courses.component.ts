@@ -63,10 +63,11 @@ export class CoursesComponent {
         this.paging = pagingFactory(this.defaultSize);
         this.sort = sortFactory();
         this.selection = new SelectionModel<number>(true, this.initSelect);
-        this.sort.field = 'periodStart';
+        this.sort.field = 'id';
     }
 
     loadData() {
+        this.paging.sort = [this.sort];
         this.courseApi.getCoursePage(this.paging).subscribe(response => {
             if (response.success) {
                 this.$page = response.payload;
@@ -153,7 +154,9 @@ export class CoursesComponent {
     }
 
     sortByColumn(field: string) {
+        console.log(this.sort);
         this.sort = Utils.updateSort(this.sort, field);
+        console.log(this.sort);
         this.loadData();
     }
 

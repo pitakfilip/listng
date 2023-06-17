@@ -7,9 +7,9 @@ import sk.fmfi.listng.infrastructure.common.dto.PagingParams;
 import sk.fmfi.listng.rest.dto.UserBaseDto;
 import sk.fmfi.listng.rest.dto.UserSaveDto;
 import sk.fmfi.listng.rest.proxy.user.UserApiProxy;
+import sk.fmfi.listng.user.dto.BulkOperationDto;
 import sk.fmfi.listng.user.dto.UsersOperationDto;
 import sk.fmfi.listng.user.dto.UserDto;
-import sk.fmfi.listng.user.enums.SystemRole;
 
 import java.util.*;
 
@@ -44,8 +44,8 @@ public class UserService {
         userApi.updateUser(dto.toUserDto());
     }
 
-    public void updateUsers(UsersOperationDto usersOperationDto) {
-        userApi.updateUsers(usersOperationDto);
+    public void updateUsers(BulkOperationDto bulkOperationDto) {
+        userApi.updateUsers(bulkOperationDto);
     }
     
     public boolean deleteUsers(List<Long> userIds) {

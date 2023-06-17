@@ -1,7 +1,4 @@
 {
-    "header": {
-        "filter": "Filtrovanie tabuľky"
-    },
     "menu": {
         "label": {
             "courses": "Courses",
@@ -9,118 +6,308 @@
             "tasksets": "Task sets",
             "users": "Users",
             "moss": "MOSS",
-            "general": "General"
+            "other": "Other",
+            "logs": "Logs",
+            "system": "System"
+        },
+        "account":  {
+            "logout": "Log out",
+            "overview": "Show profile",
+            "change": {
+                "password": "Change password"
+            }
         }
     },
     "invalid": {
-        "email": "Nesprávny formát emailovej adresy",
+        "email": "Incorrect email format",
         "password": {
-            "new": "Zadané hesla sa nezhodujú",
-            "format": "Heslo musí obsahovať aspoň 6 znakov"
+            "new": "Passwords do not match",
+            "format": "Password needs to have atleast 6 characters"
         },
-        "credentials": "Nesprávne prihlasovacie údaje"
+        "credentials": "Incorrect login credentials"
     },
     "error": {
-        "action": "Chyba pri akcii",
         "expire": {
-            "reset": "Vypršala platnosť URL adresy pre obnovenie hesla.",
-            "jwt": "Uplynula doba platnosti prihlásenia od poslednej aktivity. Prosím, opäť sa prihláste"
+            "reset": "This URL for resetting the password has expired",
+            "jwt": "Login has expired. Please sign-in again."
         },
         "invalid": {
-            "resetHash": "Požadovaná URL cesta je neplatná. Skúste požiadať o zaslanie nového link na email alebo kontaktujte administrátora."
+            "resetHash": "Requested URL is invalid. Try requesting for a new URL or contact the administrator."
         },
         "field": {
-            "required": "Pole je povinné"
-        }
-    },
-    "labels": {
-        "students": "Študenti",
-        "teachers": "Učitelia",
-        "submit": "Uložiť",
-        "confirm": "Potvrdiť",
-        "return": "Vrátiť sa",
-        "cancel": "Zrušiť",
-        "clear": "Vymazať",
-        "close": "Zatvoriť",
-        "continue": "Pokračovať",
-        "courses": "Kurzy",
-        "account": "Účet",
-        "period": "Obdobie",
-        "toggle": {
-            "animation": "Animácie"
+            "required": "Field is required"
         },
-        "welcome": "Vitajte v LIST-e",
-        "password": "Heslo",
-        "password.new": "Nové heslo",
-        "password.confirm": "Potvrďte heslo",
-        "password.reset": "Zabudol som heslo",
-        "password.reset.email": "Zadajte emailovú adresu k študentskému kontu",
-        "password.reset.pass": "Zadajte nové heslo",
-        "email": "Emailová adresa",
+        "404": {
+            "title": "Houston we got a problem",
+            "info": "Requested page does not exist or you are not eligible to access it.",
+            "redirect": "Go to home page"
+        },
+        "500": {
+            "title": "Server error!",
+            "info": "Please try repeating your action.\nIf the problem persists, please contact the administrators."
+        },
         "login": {
-            "title": "Prihláste sa",
-            "submit": "Prihlásiť"
+            "expired": {
+                "title": "Authentication has expired"
+            },
+            "access": {
+                "title": "Access denied",
+                "info": ""
+            }
         }
     },
-    "pagination": {
-        "showing": "Zobrazené",
-        "page": "Strana",
-        "recordsPerPage": "záznamov / strana",
-        "of": "z"
+    "label": {
+        "in": "in",
+        "students": "Students",
+        "teachers": "Teachers",
+        "submit": "Save",
+        "confirm": "Confirm",
+        "return": "Return",
+        "cancel": "Cancel",
+        "clear": "Clear",
+        "close": "Close",
+        "continue": "Continue",
+        "import": "Import",
+        "courses": "Courses",
+        "account": "Account",
+        "period": "Period",
+        "welcome": "Welcome to LIST",
+        "password": "Password",
+        "password.new": "New password",
+        "password.confirm": "Confirm password",
+        "password.reset": "Forgot password",
+        "password.reset.email": "Enter your email address",
+        "password.reset.pass": "Enter new password",
+        "email": "Email address",
+        "name": "Name",
+        "surname": "Surname",
+        "fullname": "Full name",
+        "login": {
+            "title": "Log in",
+            "submit": "Log in"
+        },
+        "reset": "Reset",
+        "edit": "Edit",
+        "add": "Add",
+        "remove": "Remove",
+        "save": "Save changes",
+        "show": "Show",
+        "from": "from",
+        "to": "to",
+        "hide": "Hide"
     },
     "user": {
-        "name": "Meno",
-        "email": "Emailová adresa",
-        "active": "Aktívny",
+        "name": "Name",
+        "email": "Email address",
+        "active": "Actove",
+        "isActive": "Is active",
+        "permission.count": "Amount of permissions",
+        "actions": "User actions",
         "course": {
-            "count": "Počet kurzov",
-            "active": "Aktuálne kurzy",
-            "permissions": "Oprávnenia v kurze"
+            "count": "Amount of courses",
+            "active": "Current courses",
+            "permissions": "Course permissions",
+            "belongs": "Is in course"
         }
     },
     "table": {
-        "no": {
-            "record": "Žiaden záznam nebol nájdený."
+        "label": {
+            "name": "Name"
+        },
+        "no.record": "No content found",
+        "action": {
+            "label": "Actions",
+            "filter": "Filter",
+            "create": "Create",
+            "delete": "Remove",
+            "copy": "Copy",
+            "edit": "Edit"
+        },
+        "tooltip": {
+            "filter": "Show filter",
+            "create": "Create new",
+            "copy": "Copy",
+            "bulk": {
+                "edit": "Edit selected",
+                "copy": "Copy selected",
+                "delete": "Remove selected"
+            },
+            "sort": "Sort by column"
+        }
+    },
+    "modal": {
+        "filter": {
+            "title": "Filter setting"
         }
     },
     "users": {
         "state": {
-            "active": "Potvrdený",
-            "denied": "Odmietnutý",
-            "pending": "Čakajúci na potvrdenie"
+            "active": "Confirmed",
+            "denied": "Denied",
+            "pending": "Pending"
         },
         "role": {
-            "viewer": "Sledovateľ: prístup k študentskému rozhraniu bez možnosti interakcie a odovzdávani.",
-            "attendee": "Študent",
-            "evaluator": "Hodnotiaci: opravnený úživateľ na hodnotenie študentov, tvorbe úloh a zostáv v danom kurze",
-            "owner": "Vlastník: opravnený úživateľ s plnou kontrolou nad kurzom"
+            "viewer": "Viewer: access to student course content without the ability to interact",
+            "attendee": "Student",
+            "evaluator": "Evaluator: user permitted to evaluate solutions and coordinate a course",
+            "owner": "Owner: user with full control over a course"
+        },
+        "action": {
+            "modal": {
+                "delete": "Are you sure you want to delete user ",
+                "delete.bulk": "Are you sure you want to delete the selected users"
+            },
+            "tooltip": {
+                "new": "Create new user"
+            },
+            "delete": "Remove user",
+            "permission": {
+                "new": "New permission"
+            },
+            "new": {
+                "form": "Manual via form",
+                "import": "Import"
+            }
+        },
+        "modal": {
+            "edit": "User edit",
+            "password.generated": "Password is generated and sent via mail to the user",
+            "new": "Create new users",
+            "import": "Import new users",
+            "bulk.edit": {
+                "label": "Edit users",
+                "selected": "Selected users",
+                "info": "New permissions are created or is applicable existing ones are modified. Remove permissions to users, which have the given permission.",
+                "role": "Change role of userss",
+                "permissions.new": "New permissions",
+                "permissions.remove": "Permissions for removal"
+            }
         }
     },
     "course": {
         "role": {
-            "OWNER": "Vlastník",
-            "EVALUATOR": "Hodnotiaci",
-            "ATTENDEE": "Študent",
-            "VIEWER": "Sledovateľ",
-            "NOT_ASSIGNED": "Nezaradený"
+            "OWNER": "Owner",
+            "EVALUATOR": "Evaluator",
+            "ATTENDEE": "Student",
+            "VIEWER": "Viewer",
+            "NOT_ASSIGNED": "Not assigned"
         },
         "state": {
-            "PENDING": "Čaká sa na prijatie",
-            "ACTIVE": "Prijatý",
-            "DENIED": "Prístup bol odmietnutý"
+            "PENDING": "Waiting for accept",
+            "ACTIVE": "Accepted",
+            "DENIED": "Access denied"
         },
         "action": {
-            "enter": "Otvoriť obsah kurzu",
-            "request": "Požiadať o prístup"
+            "enter": "Open course content",
+            "request": "Request access"
         },
         "label": {
-            "denied": "Prístup do kurzu bol zamietnutý alebo odobratý správcom. Prosím, kontaktujte priamo správcov kurzu.",
-            "pending": "Vaša žiadosť o prístup do kurzu čaká na spracovanie. Prosím, počkajte na spracovanie správcom kurzu.",
-            "request.entry": "Naozaj chcete požiadať o prístup do kurzu "
+            "denied": "Access to this course hase been denied or removed. Please contact the course owners.",
+            "pending": "Your request is waiting to be processed. Please wait for the course owners to process your request.",
+            "request.entry": "Make a request for access to course "
         }
     },
     "localization": {
         "sk": "SK",
         "en": "EN"
+    },
+    "paging": {
+        "page": {
+            "label": "page",
+            "first": "First page",
+            "last": "Last page",
+            "next": "Next page",
+            "previous": "Previous page"
+        },
+        "of": "of",
+        "itemsPerPage": "Records"
+    },
+    "role": {
+        "label": "User role in system",
+        "student": {
+            "label": "Student",
+            "description": "Attendee of courses as a student or evaluator"
+        },
+        "teacher": {
+            "label": "Teacher",
+            "description": "Owner of courses and view of other courses"
+        },
+        "root": {
+            "label": "Administrator",
+            "description": "Administrator without any restrictions"
+        }
+    },
+    "permission": {
+        "period": "Course permissions in period"
+    },
+    "other": {
+        "periods" : {
+            "title": "Peirod",
+            "active": "Active",
+            "modal": {
+                "delete": "Remove period ",
+                "active": "Mark period as active",
+                "inactive": "Mark period as inactive",
+                "create": "Create period",
+                "edit": "Edit period"
+            },
+            "action": {
+                "active": "Mark as active",
+                "inactive": "Mark as inactive"
+            }
+        },
+        "rooms": {
+            "title": "Rooms",
+            "capacity": "Capacity",
+            "modal": {
+                "delete": "Remove room ",
+                "create": "Create new room",
+                "edit": "Room edit"
+            }
+        }
+    },
+    "date": {
+        "start": "Starts",
+        "end": "Ends"
+    },
+    "multi": {
+        "name.SK": "Name (SK)",
+        "name.EN": "Name (EN)"
+    },
+    "courses": {
+        "label": {
+            "name": "Name",
+            "abbreviation": "Abbreviation",
+            "period": "Period",
+            "groups": "Groups"
+        },
+        "group": {
+            "count": "Amount of groups",
+            "default": "Default group",
+            "capacity": "Capacity"
+        },
+        "modal": {
+            "delete": "Remove course ",
+            "delete.bulk": "Remove selected courses",
+            "create": "Create new course",
+            "edit": "Edit course",
+            "copy": "Copy course",
+            "copy.bulk": "Copy courses",
+            "copy.info": "Select target period"
+        }
+    },
+    "file": {
+        "choose": "Select file",
+        "sheet": {
+            "number": "n. sheet:",
+            "header.number": "n. header row:",
+            "row": "Row",
+            "row.from": "from row:",
+            "row.to": "to row:",
+            "column": "Column",
+            "config": "Colum configuration",
+            "column.config.hint": "Check the box and select the corresponding option obtained from the imported file. The system will try to match the columns automatically. It is necessary to assign an email address, first and last name or full name.",
+            "row.config.hint": "Number of first and last row with user data."
+        }
     }
 }

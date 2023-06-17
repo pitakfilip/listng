@@ -231,6 +231,13 @@ export class UserComponent {
             const dialogRef = this.dialog.open(EditUsersModalComponent, {
                 data: { userIds: this.selection.selected }
             });
+
+            dialogRef.afterClosed().subscribe(result => {
+                if (result === 'submit') {
+                    this.loadData();
+                    this.selection.clear();
+                }
+            });
         }
     }
 
@@ -247,6 +254,7 @@ export class UserComponent {
                 this.userApi.deleteUsers(this.selection.selected).subscribe(response => {
                     if (response.success) {
                         this.loadData();
+                        this.selection.clear();
                     }
                 });
             }

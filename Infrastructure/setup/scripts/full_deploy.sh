@@ -17,9 +17,9 @@ cp $SERVICES_DIR/listng-ui.service $TARGET/listng-ui.service
 systemctl daemon-reload
 systemctl enable consul
 systemctl enable listng-course-01
-#systemctl enable listng-course-02
+systemctl enable listng-course-02 
 systemctl enable listng-user-01
-#systemctl enable listng-user-02
+systemctl enable listng-user-02
 systemctl enable listng-rest
 systemctl enable listng-ui
 

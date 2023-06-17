@@ -8,6 +8,7 @@ import sk.fmfi.listng.infrastructure.common.dto.PagingParams;
 import sk.fmfi.listng.infrastructure.common.dto.SortParams;
 import sk.fmfi.listng.user.api.UserApi;
 import sk.fmfi.listng.user.application.service.UserSaveService;
+import sk.fmfi.listng.user.dto.BulkOperationDto;
 import sk.fmfi.listng.user.dto.UsersOperationDto;
 import sk.fmfi.listng.user.dto.UserDto;
 import sk.fmfi.listng.user.application.assembler.UserAssembler;
@@ -77,8 +78,8 @@ public class BaseController implements UserApi {
     }
 
     @Override
-    public void updateUsers(UsersOperationDto usersOperationDto) {
-            userSaveService.updateUsers(usersOperationDto);
+    public void updateUsers(BulkOperationDto bulkOperationDto) {
+            userSaveService.updateUsers(bulkOperationDto);
     }
 
 

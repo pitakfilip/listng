@@ -16,6 +16,7 @@ import sk.fmfi.listng.rest.dto.ImportDto;
 import sk.fmfi.listng.rest.dto.UserBaseDto;
 import sk.fmfi.listng.rest.dto.UserSaveDto;
 import sk.fmfi.listng.rest.util.XlsxImportParser;
+import sk.fmfi.listng.user.dto.BulkOperationDto;
 import sk.fmfi.listng.user.dto.UsersOperationDto;
 import sk.fmfi.listng.user.dto.PermissionDto;
 import sk.fmfi.listng.user.dto.UserDto;
@@ -152,8 +153,8 @@ public class UserAdminController extends ListController {
      * @return                      Request handle successful or throw error
      */
     @PostMapping("/update/bulk")
-    public Response updateUsers(@RequestBody UsersOperationDto usersOperationDto) {
-        userService.updateUsers(usersOperationDto);
+    public Response updateUsers(@RequestBody BulkOperationDto bulkOperationDto) {
+        userService.updateUsers(bulkOperationDto);
         return success();
     }
     

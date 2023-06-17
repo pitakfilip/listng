@@ -75,10 +75,10 @@
 
         <!-- Period Column -->
         <ng-container matColumnDef="period">
-            <th mat-header-cell *matHeaderCellDef class="clickable" (click)="sortByColumn('period')">
+            <th mat-header-cell *matHeaderCellDef class="clickable" (click)="sortByColumn('periodId')">
                 <div class="row sort-header" matTooltip="{{ 'table.tooltip.sort' | translation }}">
                     <span class="col-9 th-label">{{ 'courses.label.period' | translation }}</span>
-                    <span class="col-3 th-sort" [ngClass]="{'text-suppressed': !isSortedBy('period')}">
+                    <span class="col-3 th-sort" [ngClass]="{'text-suppressed': !isSortedBy('periodId')}">
                         <mat-icon>{{ getSortIcon('period') }}</mat-icon></span>
                 </div>
             </th>

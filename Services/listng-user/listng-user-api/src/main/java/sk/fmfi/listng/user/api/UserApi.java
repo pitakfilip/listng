@@ -3,6 +3,7 @@ package sk.fmfi.listng.user.api;
 import org.springframework.web.bind.annotation.*;
 import sk.fmfi.listng.infrastructure.common.dto.PageResponse;
 import sk.fmfi.listng.infrastructure.common.dto.PagingParams;
+import sk.fmfi.listng.user.dto.BulkOperationDto;
 import sk.fmfi.listng.user.dto.UsersOperationDto;
 import sk.fmfi.listng.user.dto.UserDto;
 
@@ -29,7 +30,7 @@ public interface UserApi {
     void updateUser(@RequestBody UserDto userDto);
     
     @PostMapping("/base/update/bulk")
-    void updateUsers(@RequestBody UsersOperationDto usersOperationDto);
+    void updateUsers(@RequestBody BulkOperationDto bulkOperationDto);
 
     @PostMapping("/base/delete")
     void deleteUsers(@RequestBody List<Long> userIds);    

@@ -5,7 +5,7 @@ import {
     HttpEvent,
     HttpInterceptor, HttpErrorResponse
 } from '@angular/common/http';
-import {Observable, tap, throwError} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {AuthenticationService} from '../service/authentication.service';
 import {ErrorService} from '../service/error.service';
@@ -30,7 +30,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         } else if (500 <= status && status <= 599) {
             this.errorService.failedRequest();
         } else {
-            this.errorService.errorMessage(response.message);
+            this.errorService.errorMessage(response);
         }
 
         const error = response.error;

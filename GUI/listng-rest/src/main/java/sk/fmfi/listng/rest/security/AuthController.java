@@ -42,7 +42,7 @@ public class AuthController extends ListController {
             
             return ResponseEntity.ok(success(cookie.getValue()));
         } catch (Exception e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(error());
         }
     }
 

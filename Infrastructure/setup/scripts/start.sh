@@ -1,5 +1,4 @@
 
-systemctl start consul
 systemctl start listng-course-01
 systemctl start listng-course-02
 systemctl start listng-user-01

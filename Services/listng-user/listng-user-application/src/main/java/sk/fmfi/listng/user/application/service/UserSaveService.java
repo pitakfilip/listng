@@ -12,6 +12,7 @@ import sk.fmfi.listng.user.application.assembler.PermissionAssembler;
 import sk.fmfi.listng.user.application.assembler.UserAssembler;
 import sk.fmfi.listng.user.application.repository.PermissionRepository;
 import sk.fmfi.listng.user.application.repository.UserRepository;
+import sk.fmfi.listng.user.dto.BulkOperationDto;
 import sk.fmfi.listng.user.operations.PermissionOperations;
 import sk.fmfi.listng.user.util.PasswordGenerator;
 import sk.fmfi.listng.user.dto.UsersOperationDto;
@@ -88,7 +89,7 @@ public class UserSaveService {
     }
 
     @Transactional
-    public void updateUsers(UsersOperationDto dto) {
+    public void updateUsers(BulkOperationDto dto) {
         List<Permission> forRemoval = new ArrayList<>();
         List<Permission> forSave = new ArrayList<>();
         PermissionAssembler.fromDto(dto.permissions).forEach(permission -> {
@@ -98,11 +99,8 @@ public class UserSaveService {
                 forRemoval.add(permission);
             }
         });
-
-        List<Long> userIds = dto.users.stream()
-                .map(user -> user.id)
-                .toList();
-        List<User> users = userRepository.findAllByIdIn(userIds);
+        
+        List<User> users = userRepository.findAllByIdIn(dto.userIds);
         PermissionOperations.bulkUpdateUser(users, SystemRole.valueOf(dto.role), forSave, forRemoval);
         userRepository.saveAll(users);
     }

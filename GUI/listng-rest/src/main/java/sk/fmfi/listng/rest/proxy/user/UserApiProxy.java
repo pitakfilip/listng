@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import sk.fmfi.listng.infrastructure.common.dto.PageResponse;
 import sk.fmfi.listng.infrastructure.common.dto.PagingParams;
 import sk.fmfi.listng.user.api.UserApi;
+import sk.fmfi.listng.user.dto.BulkOperationDto;
 import sk.fmfi.listng.user.dto.UsersOperationDto;
 import sk.fmfi.listng.user.dto.UserDto;
 
@@ -35,7 +36,7 @@ public interface UserApiProxy extends UserApi {
     void updateUser(@RequestBody UserDto userDto);
     
     @PostMapping("/base/update/bulk")
-    void updateUsers(@RequestBody UsersOperationDto usersOperationDto);
+    void updateUsers(@RequestBody BulkOperationDto usersOperationDto);
 
     @PostMapping("/base/delete")
     void deleteUsers(@RequestBody List<Long> userIds);

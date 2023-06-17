@@ -40,11 +40,12 @@ export class ErrorService {
         })
     }
 
-    public errorMessage(message: string) {
+    public errorMessage(response) {
+        console.log(response);
         Swal.fire({
             icon: 'error',
             title: this.translate.instant('error.500.title'),
-            text: this.translate.instant(message),
+            // text: this.translate.instant(message),
             confirmButtonText: this.translate.instant('label.close'),
             confirmButtonColor: '#aed581'
         })

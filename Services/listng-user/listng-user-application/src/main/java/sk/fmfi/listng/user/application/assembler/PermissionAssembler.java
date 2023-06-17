@@ -44,8 +44,9 @@ public class PermissionAssembler {
         permission.setUserId(dto.userId);
         permission.setCourseId(dto.courseId);
         permission.setRole(sk.fmfi.listng.user.domain.CourseRole.valueOf(dto.role.name()));
-        permission.setStatus(sk.fmfi.listng.user.domain.CourseStatus.valueOf(dto.status.name()));
-
+        if (dto.status != null) {
+            permission.setStatus(sk.fmfi.listng.user.domain.CourseStatus.valueOf(dto.status.name()));
+        }
         if (dto.groupId != null) {
             permission.setGroupId(dto.groupId);
         }

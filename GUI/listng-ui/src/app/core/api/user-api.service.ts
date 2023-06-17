@@ -74,10 +74,10 @@ export class UserApiService {
         return this.http.post<RestReposnse>(USER_API + '/update', {user: user, permissions: permissions});
     }
 
-    bulkUpdateUsers(role: SystemRole, users: UserBase[], permissions: CoursePermission[]) {
+    bulkUpdateUsers(role: SystemRole, userIds: number[], permissions: CoursePermission[]) {
         return this.http.post<RestReposnse>(USER_API + '/update/bulk', {
             role: role,
-            users: users,
+            userIds: userIds,
             permissions: permissions
         });
     }

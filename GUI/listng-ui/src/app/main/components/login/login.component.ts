@@ -49,11 +49,14 @@ export class LoginComponent {
     }
 
     submit() {
+        if (this.loginForm.invalid) {
+            return;
+        }
         const username = this.loginForm.value['email'];
         const password = this.loginForm.value['password'];
-
         this.authApi.verifyLogin(username, password)
             .subscribe(response => {
+                console.log(response)
                 if (response.success){
                     this.authService.handleLogin(response.payload);
                 } else {
