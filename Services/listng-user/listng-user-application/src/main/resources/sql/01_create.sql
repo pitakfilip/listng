@@ -3,7 +3,7 @@ DROP TABLE  IF EXISTS LIST_USER;
 
 CREATE TABLE LIST_USER (
         user_id SERIAL PRIMARY KEY,
-        name VARCHAR(128),
+        name VARCHAR(128) UNIQUE,
         email VARCHAR(128),
         password VARCHAR(512),
         role VARCHAR(32)

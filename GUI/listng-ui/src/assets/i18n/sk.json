@@ -55,7 +55,8 @@
                 "title": "Ku žiadanému obsahu nemáte prístup",
                 "info": ""
             }
-        }
+        },
+        "period.delete.courses": "V obodbi sa nachadzaju kurzy s obsahom."
     },
     "label": {
         "in": "v",

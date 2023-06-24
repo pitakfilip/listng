@@ -2,3 +2,13 @@ spring.datasource.url=jdbc:postgresql://localhost:5432/listng
 spring.datasource.driver-class-name=org.postgresql.Driver
 spring.datasource.username=listng_course
 spring.datasource.password=a
+
+
+psql "postgresql://listng_course:listngCourseModuleBaran@localhost/listng"
+
+
+INSERT INTO list_user.list_user (user_id, name, email, password, role) VALUES (18, 'Janko Janovič', 'spravca1@uniba.sk', '$2a$10$OjfNkMFiwVwYiKV8Oj59fe/3BSnxyTyTpzaI.3JOxRWkeWuARgfEW', 'ROOT');
+INSERT INTO list_user.list_user (user_id, name, email, password, role) VALUES (19, 'Patrik Vrbovský', 'spravca2@uniba.sk', '$2a$10$OjfNkMFiwVwYiKV8Oj59fe/3BSnxyTyTpzaI.3JOxRWkeWuARgfEW', 'ROOT');
+INSERT INTO list_user.list_user (user_id, name, email, password, role) VALUES (20, 'Alfonz Krivý', 'teacher1@uniba.sk', '$2a$10$OjfNkMFiwVwYiKV8Oj59fe/3BSnxyTyTpzaI.3JOxRWkeWuARgfEW', 'TEACHER');
+INSERT INTO list_user.list_user (user_id, name, email, password, role) VALUES (21, 'Andrej Chabrý', 'teacher2@uniba.sk', '$2a$10$OjfNkMFiwVwYiKV8Oj59fe/3BSnxyTyTpzaI.3JOxRWkeWuARgfEW', 'TEACHER');
+INSERT INTO list_user.list_user (user_id, name, email, password, role) VALUES (2w, 'Andrej Chabrý', 'student@uniba.sk', '$2a$10$OjfNkMFiwVwYiKV8Oj59fe/3BSnxyTyTpzaI.3JOxRWkeWuARgfEW', 'TEACHER');

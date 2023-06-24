@@ -156,6 +156,8 @@ export class PeriodsComponent {
                 this.periodApi.deletePeriod(periodId).subscribe(response => {
                     if (response.success) {
                         this.loadData();
+                    } else {
+                        console.log(response);
                     }
                 })
             }

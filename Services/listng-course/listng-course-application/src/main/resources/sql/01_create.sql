@@ -19,7 +19,7 @@ CREATE TABLE COURSE (
         name_en VARCHAR(128),
         abbreviation_sk VARCHAR(128),
         abbreviation_en VARCHAR(128),
-        period_id INTEGER NOT NULL REFERENCES PERIOD(period_id) ON DELETE CASCADE 
+        period_id INTEGER REFERENCES PERIOD(period_id) ON DELETE SET NULL
 );
 
 CREATE TABLE ROOM (
@@ -39,8 +39,8 @@ CREATE TABLE COURSE_GROUP (
 
 CREATE TABLE CLASS (
         class_id BIGSERIAL PRIMARY KEY,
-        room_id INTEGER REFERENCES ROOM(room_id) ON DELETE CASCADE ,
-        group_id INTEGER REFERENCES COURSE_GROUP(group_id) ON DELETE CASCADE ,
+        room_id INTEGER REFERENCES ROOM(room_id),
+        group_id INTEGER REFERENCES COURSE_GROUP(group_id) ON DELETE CASCADE,
         day INTEGER NOT NULL,
         time TIME NOT NULL,
         duration INTEGER DEFAULT 45

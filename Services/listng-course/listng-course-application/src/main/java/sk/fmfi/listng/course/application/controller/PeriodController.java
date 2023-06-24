@@ -11,6 +11,7 @@ import sk.fmfi.listng.course.application.service.CourseService;
 import sk.fmfi.listng.course.application.service.PeriodService;
 import sk.fmfi.listng.course.domain.Period;
 import sk.fmfi.listng.course.dto.PeriodDto;
+import sk.fmfi.listng.infrastructure.common.Response;
 import sk.fmfi.listng.infrastructure.common.dto.PageResponse;
 import sk.fmfi.listng.infrastructure.common.dto.PagingParams;
 import sk.fmfi.listng.infrastructure.common.dto.SortParams;
@@ -60,15 +61,17 @@ public class PeriodController implements PeriodApi {
     }
 
     @Override
-    public void delete(Long id) {
+    public Response delete(Long id) {
         Optional<Period> period = periodService.getPeriod(id);
         if (period.isEmpty()){
             throw new EntityNotFoundException("error.period.not.found");
         }
+        Response response = new Response();
         if (!courseService.getAllInPeriod(id).isEmpty()){
-//            throw new CannotProceedException("error.period.delete");
+//            response = response.withErrorMessage("error.period.delete.courses");
+//            return response;
         }
         periodService.deletePeriod(id);
+        return response;
     }
-
 }

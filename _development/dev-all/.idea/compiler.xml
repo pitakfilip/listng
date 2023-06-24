@@ -31,7 +31,7 @@
       <module name="listng-core" options="" />
       <module name="listng-course" options="" />
       <module name="listng-course-api" options="" />
-      <module name="listng-course-application" options="" />
+      <module name="listng-course-application" options="-parameters" />
       <module name="listng-course-domain" options="" />
       <module name="listng-infrastructure" options="" />
       <module name="listng-rest" options="-parameters" />
@@ -40,7 +40,7 @@
       <module name="listng-task-application" options="" />
       <module name="listng-user" options="" />
       <module name="listng-user-api" options="" />
-      <module name="listng-user-application" options="" />
+      <module name="listng-user-application" options="-parameters" />
       <module name="listng-user-domain" options="" />
     </option>
   </component>

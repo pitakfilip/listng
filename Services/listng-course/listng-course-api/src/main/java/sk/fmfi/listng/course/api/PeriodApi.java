@@ -2,6 +2,7 @@ package sk.fmfi.listng.course.api;
 
 import org.springframework.web.bind.annotation.*;
 import sk.fmfi.listng.course.dto.PeriodDto;
+import sk.fmfi.listng.infrastructure.common.Response;
 import sk.fmfi.listng.infrastructure.common.dto.PageResponse;
 import sk.fmfi.listng.infrastructure.common.dto.PagingParams;
 
@@ -22,5 +23,5 @@ public interface PeriodApi {
     void setActive(@PathVariable Long periodId, @PathVariable boolean state);
 
     @DeleteMapping(value = "/delete")
-    void delete(@RequestParam Long id);
+    Response delete(@RequestParam Long id);
 }

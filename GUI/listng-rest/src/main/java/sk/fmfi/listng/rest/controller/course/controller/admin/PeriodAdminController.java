@@ -25,8 +25,7 @@ public class PeriodAdminController extends ListController {
     
     @GetMapping("/{periodId}/delete")
     public Response deletePeriod(@PathVariable Long periodId) {
-        periodApi.delete(periodId);
-        return success();
+        return periodApi.delete(periodId);
     }
 
     @GetMapping(value = "{periodId}/active/{state}")

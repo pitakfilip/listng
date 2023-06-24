@@ -267,17 +267,32 @@ export class UserComponent {
                 const dialogRef = this.dialog.open(EditUserModalComponent, {
                     data: { userId: id , isRoot: response.payload},
                 });
+                dialogRef.afterClosed().subscribe(response => {
+                    if (response === 'submit') {
+                        this.loadData();
+                    }
+                });
             }
         })
 
     }
 
     openNewForm() {
-        this.dialog.open(NewUserModalComponent);
+        const dialogRef = this.dialog.open(NewUserModalComponent);
+        dialogRef.afterClosed().subscribe(response => {
+            if (response === 'submit') {
+                this.loadData();
+            }
+        });
     }
 
     openImport() {
-        this.dialog.open(ImportUsersModalComponent);
+        const dialogRef = this.dialog.open(ImportUsersModalComponent);
+        dialogRef.afterClosed().subscribe(response => {
+            if (response === 'submit') {
+                this.loadData();
+            }
+        });
     }
 
     openFilter() {
@@ -286,7 +301,6 @@ export class UserComponent {
         });
 
         dialogRef.afterClosed().subscribe(response => {
-            console.log(response);
         })
     }
 }

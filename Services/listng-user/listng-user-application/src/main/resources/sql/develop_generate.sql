@@ -22,3 +22,6 @@ INSERT INTO list_user.user_course_permission (user_id, course_id, course_role, s
 INSERT INTO list_user.user_course_permission (user_id, course_id, course_role, status, group_id) VALUES (1, 6, 'ATTENDEE', 'PENDING', null);
 INSERT INTO list_user.user_course_permission (user_id, course_id, course_role, status, group_id) VALUES (4, 3, 'OWNER', null, null);
 INSERT INTO list_user.user_course_permission (user_id, course_id, course_role, status, group_id) VALUES (4, 5, 'OWNER', null, null);
+
+
+UPDATE list_user.list_user SET password = '$2a$10$OjfNkMFiwVwYiKV8Oj59fe/3BSnxyTyTpzaI.3JOxRWkeWuARgfEW';

@@ -18,6 +18,6 @@ export function multiLangOf(sk: string, en: string) {
 }
 
 export const EMPTY_MULTILANG = {
-    SK: '',
-    EN: ''
+    SK: '-',
+    EN: '-'
 } as MultiLang

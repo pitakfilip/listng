@@ -38,6 +38,13 @@ public class PageResponse<T> implements BaseDto {
         this.totalEntries = copy.totalEntries;
         this.totalPages = copy.totalPages;
     }
+    
+    public static PageResponse empty() {
+        PageResponse response = new PageResponse();
+        response.page = 0;
+        response.totalEntries = 0;
+        return response;
+    }
 
     public void setData(List<T> data) {
         this.data = data;

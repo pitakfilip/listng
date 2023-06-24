@@ -71,10 +71,6 @@ export class NewUserModalComponent {
     }
 
     editUser(id: number) {
-        if (this.isUnfulledRow(id)) {
-            this.deleteUser(id);
-        }
-
         if (this.isEditing(id)) {
             this.editId = -1;
         } else {

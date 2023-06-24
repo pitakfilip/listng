@@ -17,15 +17,15 @@ public class Course implements Serializable {
 
     private MultiLangText abbreviation;
 
-    private long periodId;
+    private Long periodId;
     
     private Set<Group> groups = new HashSet<>();
     
-    public long getPeriodId() {
+    public Long getPeriodId() {
         return periodId;
     }
 
-    public void setPeriodId(long periodId) {
+    public void setPeriodId(Long periodId) {
         this.periodId = periodId;
     }
 
@@ -90,15 +90,6 @@ public class Course implements Serializable {
         this.groups = groups;
     }
 
-    public void addGroup(Group group) {
-        this.groups.add(group);
-    }
-    
-    public void addGroups(Set<Group> groups){
-        this.groups.addAll(groups);
-    }
-
-    public void clearGroups() {this.groups.clear();}
     
     @Override
     public boolean equals(Object o) {
